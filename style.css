@@ -1,105 +1,64 @@
-/* NOSTRIX UNIFIED DESIGN v6.0
-    Theme: High-Contrast Minimalism 
-    Architect: Ashwin Karthikeyan
-*/
-
 :root {
     --bg: #000000;
     --card: #0a0a0c;
-    --blue: #2997ff;
     --accent: #2997ff;
     --text: #f5f5f7;
     --text-dim: #86868b;
     --border: rgba(255, 255, 255, 0.08);
-    --glass: rgba(0, 0, 0, 0.8);
     --nav-height: 85px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
-body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-/* FIX TOP CLIPPING */
 main { padding-top: var(--nav-height); }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
 /* NAV */
 nav { position: fixed; top: 0; width: 100%; height: var(--nav-height); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); z-index: 10000; display: flex; align-items: center; }
 .nav-flex { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.logo { font-weight: 800; letter-spacing: 3px; font-size: 0.9rem; text-decoration: none; color: #fff; }
+.logo { font-weight: 800; letter-spacing: 3px; text-decoration: none; color: #fff; font-size: 0.9rem; }
 .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; margin-left: 35px; transition: 0.3s; }
 .nav-links a:hover { color: var(--accent); }
 
-/* HERO */
+/* HERO & GRADIENT */
 .hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-h1 { font-size: clamp(3rem, 10vw, 7.5rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; margin-bottom: 25px; }
+h1 { font-size: clamp(3rem, 10vw, 7.5rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; }
 .gradient-text {
     background: linear-gradient(180deg, #ffffff 40%, rgba(255,255,255,0.3) 100%);
     -webkit-background-clip: text;
-    background-clip: text; /* STANDARD PROPERTY FOR COMPATIBILITY */
+    background-clip: text; /* Standard property for compatibility */
     -webkit-text-fill-color: transparent;
     color: transparent;
 }
-.hero-sub { font-size: 1.6rem; color: var(--text-dim); max-width: 650px; line-height: 1.4; }
+.hero-sub { font-size: 1.5rem; color: var(--text-dim); max-width: 650px; margin-top: 20px; }
 
-/* ECOSYSTEM GRID (4 FLAGS) */
-.section { padding: 120px 0; border-top: 1px solid var(--border); }
+/* GRID */
+.section { padding: 100px 0; border-top: 1px solid var(--border); }
 .neural-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
 .neural-card { background: var(--card); border: 1px solid var(--border); padding: 50px; border-radius: 35px; text-decoration: none; color: inherit; transition: 0.4s; }
 .neural-card:hover { transform: translateY(-7px); border-color: var(--accent); }
-.neural-card.highlight { border-color: rgba(41, 151, 255, 0.3); }
 
-.m-family { color: var(--blue); font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; display: block; margin-bottom: 20px; }
-h3 { font-size: 2rem; margin-bottom: 15px; }
-p { color: var(--text-dim); }
-.card-arrow { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+/* SPECS TABLE */
+.specs-table-wrapper { background: var(--card); border: 1px solid var(--border); border-radius: 30px; padding: 20px; overflow-x: auto; }
+.specs-table { width: 100%; border-collapse: collapse; text-align: left; }
+.specs-table th { padding: 25px; color: var(--accent); font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.specs-table td { padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text-dim); }
+.specs-table td:first-child { color: #fff; font-weight: 600; }
 
-/* BIOGRAPHY STICKY LAYOUT */
-.bio-grid { display: grid; grid-template-columns: 420px 1fr; gap: 100px; padding: 100px 0; align-items: start; }
-.sticky-side { position: sticky; top: 130px; }
-
-/* SMALL CROPPED IMAGE FRAME */
-.image-frame {
-    border-radius: 44px;
-    overflow: hidden;
-    background: #111;
-    border: 1px solid var(--border);
-    padding: 12px;
-}
-.founder-full-img, .image-frame img { 
-    width: 100%; 
-    display: block; 
-    border-radius: 32px;
-    filter: contrast(1.05); 
-}
-
-/* STATS CARD */
-.stat-card { background: var(--card); border: 1px solid var(--border); padding: 35px; border-radius: 28px; margin-top: 40px; }
-.stat-row { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.stat-label { color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-.stat-val { font-weight: 600; color: #fff; }
-
-/* TYPOGRAPHY */
-.section-tag { color: var(--accent); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 25px; display: block; }
-.role-subtitle { font-size: 1.8rem; color: #fff; font-weight: 500; margin-bottom: 60px; }
-.bio-p { font-size: 1.35rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 20px; }
-.bio-p strong { color: #fff; }
-
-/* ARCHIVE DIRECTORY */
-.model-directory { padding: 100px 0; border-top: 1px solid var(--border); }
+/* ARCHIVE */
 .directory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.directory-column h4 { font-size: 0.85rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+.directory-column h4 { font-size: 0.85rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; }
 .directory-column ul { list-style: none; }
 .directory-column li { margin-bottom: 12px; }
 .directory-column a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
 .directory-column a:hover { color: var(--accent); }
 
-footer { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+footer { padding: 80px 0; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border); }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-    .neural-grid, .directory-grid, .bio-grid { grid-template-columns: 1fr; gap: 40px; }
+    .neural-grid, .directory-grid { grid-template-columns: 1fr; }
     h1 { font-size: 4rem; }
-    .hero-sub { font-size: 1.3rem; }
-    .sticky-side { position: relative; top: 0; }
     .nav-links { display: none; }
 }
