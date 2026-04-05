@@ -1,10 +1,10 @@
 :root {
     --bg: #000000;
-    --card: #0a0a0c;
-    --blue: #0071e3;
-    --text: #f5f5f7;
+    --card: #0a0a0b;
+    --blue: #007aff;
+    --text: #ffffff;
     --text-dim: #86868b;
-    --border: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -12,94 +12,47 @@
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
-/* NAVIGATION */
-nav {
-    position: fixed;
-    top: 0; width: 100%;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    z-index: 1000;
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-}
-
-.menu { display: flex; gap: 40px; }
-.menu a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
-.menu a:hover { color: var(--text); }
-
 .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
+/* NAV */
+nav { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { font-weight: 800; letter-spacing: 2px; text-decoration: none; color: #fff; font-size: 1.2rem; }
+.nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 30px; font-size: 0.9rem; transition: 0.3s; }
+.nav-links a:hover { color: #fff; }
+
 /* HERO */
-.hero { padding: 220px 0 120px; text-align: left; }
-.hero-title {
-    font-size: 6.5rem;
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    background: linear-gradient(180deg, #fff 0%, #777 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 30px;
-}
-.hero-subtitle { font-size: 1.8rem; color: var(--text-dim); max-width: 800px; }
+.hero-page { padding: 140px 0 60px; }
+.hero-page h1 { font-size: 5.5rem; letter-spacing: -0.05em; margin-bottom: 20px; font-weight: 700; }
+.hero-page p { font-size: 1.6rem; color: var(--text-dim); max-width: 800px; }
+.tag { color: var(--blue); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 15px; }
 
-/* MISSION */
-.mission { padding: 140px 0; border-top: 1px solid var(--border); }
-.mission h2 { font-size: 3.5rem; margin-top: 20px; letter-spacing: -0.02em; line-height: 1.2; }
-.mission p { font-size: 1.4rem; color: var(--text-dim); margin-top: 30px; max-width: 900px; }
+/* GRID */
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 60px; }
+.card { background: var(--card); padding: 60px; border-radius: 40px; border: 1px solid var(--border); text-decoration: none; color: #fff; transition: 0.4s; }
+.card:hover { border-color: var(--blue); transform: translateY(-5px); }
+.card h3 { font-size: 2.2rem; margin-bottom: 10px; }
+.full-width { grid-column: span 2; }
 
-.eyebrow { font-size: 0.8rem; color: var(--blue); text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; }
+/* BIO & SPECS */
+.bio-content { display: flex; gap: 60px; margin-top: 60px; align-items: flex-start; }
+.stat-box { background: var(--card); padding: 40px; border-radius: 30px; border: 1px solid var(--blue); min-width: 250px; text-align: center; }
+.stat-box h2 { font-size: 4rem; color: var(--blue); }
+.bio-text { font-size: 1.2rem; color: var(--text-dim); line-height: 1.8; }
 
-/* BENTO GRID */
-.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 60px 0 140px; }
-.card { background: var(--card); padding: 50px; border-radius: 36px; border: 1px solid var(--border); transition: 0.5s; }
-.card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.2); }
-.card h3 { font-size: 1.8rem; margin-bottom: 5px; }
-.card .label { color: var(--blue); font-size: 0.8rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
-.card p { color: var(--text-dim); line-height: 1.5; }
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 60px; }
+.spec-card { background: var(--card); padding: 40px; border-radius: 30px; border: 1px solid var(--border); }
+.spec-card h4 { color: var(--blue); font-size: 0.8rem; margin-bottom: 10px; }
+.spec-card h3 { font-size: 2.5rem; margin-bottom: 10px; }
 
-.wide { grid-column: span 2; }
-.highlight { border-color: var(--blue); }
+footer { padding: 80px 0; text-align: center; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); }
 
-/* FOUNDER */
-.founder-card { background: var(--card); border-radius: 48px; padding: 80px; display: flex; align-items: center; gap: 80px; border: 1px solid var(--border); margin: 60px 0 160px;}
-.founder-img { width: 300px; height: 300px; border-radius: 60px; object-fit: cover; filter: grayscale(20%); border: 1px solid var(--border); }
-.founder-info h2 { font-size: 4rem; letter-spacing: -0.02em; }
-.founder-title { font-size: 1.4rem; color: var(--blue); margin-bottom: 30px; }
-.bio { font-size: 1.2rem; color: var(--text-dim); }
-
-/* FOOTER */
-footer { padding: 100px 0; border-top: 1px solid var(--border); text-align: center; }
-.footer-logo { font-weight: 800; font-size: 1.5rem; margin-bottom: 20px; }
-footer p { color: var(--text-dim); font-size: 0.85rem; }
-
-/* MOBILE */
-@media (max-width: 900px) {
-    .hero-title { font-size: 4rem; }
-    .bento-grid { grid-template-columns: 1fr; }
-    .wide { grid-column: span 1; }
-    .founder-card { flex-direction: column; padding: 40px; text-align: center; }
-    .founder-info h2 { font-size: 2.5rem; }
+@media (max-width: 850px) {
+    .hero-page h1 { font-size: 3.5rem; }
+    .grid, .spec-grid, .bio-content { grid-template-columns: 1fr; flex-direction: column; }
+    .full-width { grid-column: span 1; }
 }
