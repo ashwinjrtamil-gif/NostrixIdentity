@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Ashwin Karthikeyan | Founder, CEO & Chief Engineer | Nostrix AI</title>
+    <meta name="description" content="Official profile of Ashwin Karthikeyan, Founder of Nostrix AI. Architect of NNRM2 and native neural environments.">
+    <meta name="keywords" content="Ashwin Karthikeyan, Nostrix AI, CEO, Chief Engineer, NNRM2, RAGM3, AI Entrepreneur India">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ashwin Karthikeyan",
+      "alternateName": "Ashwin K",
+      "jobTitle": ["Founder", "CEO", "Chief Engineer"],
+      "image": "https://your-app.vercel.app/ashwin-ceo.jpg",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Nostrix AI",
+        "url": "https://your-app.vercel.app",
+        "logo": "https://your-app.vercel.app/logo.png"
+      },
+      "description": "Ashwin Karthikeyan is the Founder, CEO, and Chief Engineer of Nostrix AI, specializing in native neural architectures and NNRM2 modules.",
+      "knowsAbout": [
+        "Neural Networks", 
+        "Transformer Architecture", 
+        "Edge AI", 
+        "NNRM2", 
+        "NOSTRIXRAGM3"
+      ],
+      "sameAs": [
+        "https://github.com/your-username",
+        "https://linkedin.com/in/your-profile"
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #000000;
+            --card: #1c1c1e;
+            --blue: #0a84ff;
+            --text: #f5f5f7;
+            --text-dim: #86868b;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--text); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* HERO SECTION */
+        #home { padding: 180px 0 100px; text-align: center; }
+        
+        .hero-h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(180deg, #fff 0%, #666 100%);
+            -webkit-background-clip: text;
+            background-clip: text; /* Fixed for compatibility */
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .tagline { font-size: 1.6rem; color: var(--text-dim); max-width: 700px; margin: 0 auto; }
+
+        /* MODELS SECTION (BENTO GRID) */
+        #models { padding: 100px 0; }
+        .section-title { font-size: 0.8rem; color: var(--blue); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 40px; display: block; }
+
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 28px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--blue); }
+        .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; }
+
+        .wide { grid-column: span 2; }
+        .full { grid-column: span 3; text-align: center; }
+
+        /* FOUNDER SECTION */
+        #founder { padding: 100px 0 150px; }
+        
+        .founder-box {
+            background: var(--card);
+            border-radius: 40px;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            border: 1px solid var(--border);
+        }
+
+        .founder-img {
+            width: 260px;
+            height: 260px;
+            border-radius: 50px;
+            object-fit: cover;
+            border: 2px solid var(--blue);
+        }
+
+        .founder-info h2 { font-size: 3.5rem; letter-spacing: -0.02em; margin-bottom: 10px; }
+        .founder-info .role { color: var(--text-dim); font-size: 1.3rem; margin-bottom: 20px; font-weight: 500; }
+        .founder-info .bio { color: #d2d2d7; font-size: 1.1rem; max-width: 550px; }
+
+        /* FOOTER */
+        footer { padding: 60px; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; }
+
+        @media (max-width: 850px) {
+            .hero-h1 { font-size: 3rem; }
+            .bento { grid-template-columns: 1fr; }
+            .wide, .full { grid-column: span 1; }
+            .founder-box { flex-direction: column; text-align: center; padding: 40px 20px; }
+            .founder-img { width: 200px; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#models">Models</a>
+        <a href="#founder">Founder</a>
+    </nav>
+
+    <main class="container">
+        <section id="home">
+            <h1 class="hero-h1">Nostrix AI</h1>
+            <p class="tagline">Native Neural Architectures. Maximum Hardware Efficiency.</p>
+        </section>
+
+        <section id="models">
+            <span class="section-title">Product Ecosystem</span>
+            <div class="bento">
+                <div class="card" style="border-color: var(--blue);">
+                    <h3>NNRM2</h3>
+                    <p>Neural Network Response Module. Optimized for ultra-low latency edge devices.</p>
+                </div>
+                <div class="card">
+                    <h3>TERMINALM2</h3>
+                    <p>CLI-native integration for high-performance execution.</p>
+                </div>
+                <div class="card">
+                    <h3>RAGM2</h3>
+                    <p>Context-aware Retrieval Augmented Generation.</p>
+                </div>
+                <div class="card wide">
+                    <h3>NOSTRIXRAGM3</h3>
+                    <p>Our premier RAG architecture for complex neural knowledge synthesis.</p>
+                </div>
+                <div class="card full">
+                    <h3>NNRE</h3>
+                    <p>Neural Runtime Engine: The backbone allowing native AI without server-heavy reliance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="founder">
+            <span class="section-title">Leadership</span>
+            <div class="founder-box">
+                <img src="ashwin-ceo.jpg" alt="Ashwin Karthikeyan - Founder & CEO of Nostrix AI" class="founder-img">
+                <div class="founder-info">
+                    <h2>Ashwin Karthikeyan</h2>
+                    <p class="role">Founder • CEO • Chief Engineer</p>
+                    <p class="bio">
+                        Ashwin leads the vision at Nostrix AI, focusing on clockless NPU logic and transformer optimization. He is dedicated to building native ecosystems that prioritize speed, security, and hardware-level performance.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nostrix AI. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
