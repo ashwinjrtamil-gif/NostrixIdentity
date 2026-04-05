@@ -1,110 +1,57 @@
-/* NOSTRIX UNIFIED DESIGN SYSTEM v4.1 - FIXED SIZING */
+/* NOSTRIX V6.0 - THE DIRECTORY UPDATE */
 :root {
     --bg: #000000;
-    --blue: #2997ff;
-    --text: #f5f5f7;
+    --accent: #2997ff;
+    --text-main: #ffffff;
     --text-dim: #86868b;
-    --border: rgba(255, 255, 255, 0.06);
-    --nav-height: 80px; /* Offset for fixed header */
+    --border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255, 255, 255, 0.03);
+    --nav-height: 85px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text-main); font-family: -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
 
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-}
+/* FIX TOP START */
+main { padding-top: var(--nav-height); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
-/* FIX: Top Start Offset */
-main {
-    padding-top: var(--nav-height); 
-}
+/* NAV */
+nav { position: fixed; top: 0; width: 100%; height: var(--nav-height); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 1000; display: flex; align-items: center; }
+.nav-flex { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.logo { font-weight: 800; letter-spacing: 3px; text-decoration: none; color: #fff; font-size: 0.9rem; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; margin-left: 30px; }
 
-.container { 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    padding: 0 30px; 
-}
-
-/* --- NAVIGATION --- */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: var(--nav-height);
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-}
-
-.nav-container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
-}
-
-.nav-logo { font-weight: 800; letter-spacing: 2px; text-decoration: none; color: #fff; }
-.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; margin-left: 30px; }
-
-/* --- HERO & HEADERS --- */
-.hero-page, .bio-header {
-    padding: 100px 0 80px; /* Reduced top padding since main has offset */
-    text-align: center;
-}
-
-h1 {
-    font-size: clamp(3rem, 10vw, 6.5rem); /* Responsive sizing: won't overflow */
-    font-weight: 700;
-    letter-spacing: -0.05em;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.5) 100%);
+/* HERO & GRADIENT FIX */
+.hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; margin-bottom: 20px; }
+.gradient-text {
+    background: linear-gradient(180deg, #ffffff 40%, rgba(255,255,255,0.3) 100%);
     -webkit-background-clip: text;
+    background-clip: text; /* Standard Property */
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
+.hero-sub { font-size: 1.4rem; color: var(--text-dim); max-width: 600px; line-height: 1.4; }
 
-/* --- BIOGRAPHY LAYOUT --- */
-.bio-layout {
-    display: grid;
-    grid-template-columns: minmax(300px, 420px) 1fr;
-    gap: 60px;
-    padding-bottom: 100px;
-}
+/* GRID CARDS */
+.section { padding: 100px 0; border-top: 1px solid var(--border); }
+.neural-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+.neural-card { background: var(--glass); border: 1px solid var(--border); padding: 40px; border-radius: 30px; text-decoration: none; color: inherit; transition: 0.4s; }
+.neural-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+.section-tag { color: var(--accent); font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; display: block; margin-bottom: 20px; }
 
-.image-wrapper {
-    position: sticky;
-    top: 120px;
-    border-radius: 40px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-}
+/* MODEL DIRECTORY (The New List Page) */
+.model-directory { padding: 80px 0; border-top: 1px solid var(--border); }
+.directory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.directory-column h4 { font-size: 0.85rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+.directory-column ul { list-style: none; }
+.directory-column li { margin-bottom: 12px; }
+.directory-column a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+.directory-column a:hover { color: var(--accent); text-decoration: underline; }
 
-.founder-full-img { width: 100%; display: block; transition: 0.4s ease; }
+footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); font-size: 0.8rem; }
 
-.fact-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.fact-label { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; }
-.fact-value { font-weight: 600; color: #fff; }
-
-/* --- CONTENT --- */
-.bio-p { font-size: 1.25rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 25px; }
-
-/* --- MOBILE FIXES --- */
-@media (max-width: 900px) {
-    .bio-layout { grid-template-columns: 1fr; gap: 40px; }
-    .image-wrapper { position: relative; top: 0; }
-    .nav-links { display: none; }
+@media (max-width: 768px) {
+    .neural-grid, .directory-grid { grid-template-columns: 1fr; }
 }
