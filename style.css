@@ -1,173 +1,93 @@
-/* NOSTRIX UNIFIED DESIGN SYSTEM v4.0
-    Lead Architect: Ashwin Karthikeyan
-    Philosophy: High-Contrast Minimalism 
-*/
-
+/* NOSTRIX UNIFIED DESIGN SYSTEM v4.1 - FIXED SIZING */
 :root {
     --bg: #000000;
-    --card: #0a0a0c;
     --blue: #2997ff;
     --text: #f5f5f7;
     --text-dim: #86868b;
     --border: rgba(255, 255, 255, 0.06);
-    --glass: rgba(0, 0, 0, 0.8);
+    --nav-height: 80px; /* Offset for fixed header */
 }
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
 
 body {
     background-color: var(--bg);
     color: var(--text);
-    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    line-height: 1.5;
 }
 
-/* --- DYNAMIC NAVIGATION --- */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: var(--glass);
-    backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 18px 0;
+/* FIX: Top Start Offset */
+main {
+    padding-top: var(--nav-height); 
 }
 
-.nav-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-}
-
-.nav-logo {
-    font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    text-decoration: none;
-    color: #fff;
-}
-
-.nav-links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    font-size: 0.85rem;
-    margin-left: 30px;
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-links a:hover { color: #fff; }
-
-/* --- THE NEW LAYOUT ENGINE --- */
 .container { 
     max-width: 1100px; 
     margin: 0 auto; 
     padding: 0 30px; 
 }
 
-/* Hero & Page Headers */
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.nav-logo { font-weight: 800; letter-spacing: 2px; text-decoration: none; color: #fff; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; margin-left: 30px; }
+
+/* --- HERO & HEADERS --- */
 .hero-page, .bio-header {
-    padding: 220px 0 100px;
+    padding: 100px 0 80px; /* Reduced top padding since main has offset */
     text-align: center;
 }
 
 h1 {
-    font-size: 6.5rem;
+    font-size: clamp(3rem, 10vw, 6.5rem); /* Responsive sizing: won't overflow */
     font-weight: 700;
     letter-spacing: -0.05em;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 20px;
     background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.5) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.tagline, .role-subtitle {
-    font-size: 1.8rem;
-    color: var(--text-dim);
-    max-width: 800px;
-    margin: 0 auto;
-    font-weight: 500;
-}
-
-/* --- PRODUCT & BIOGRAPHY SECTIONS --- */
-.product-section, .bio-layout {
-    padding: 140px 0;
-    border-top: 1px solid var(--border);
-}
-
-.m-family {
-    color: var(--blue);
-    font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-    display: block;
-}
-
-h2 {
-    font-size: 3.8rem;
-    font-weight: 700;
-    margin-bottom: 25px;
-    letter-spacing: -0.03em;
-}
-
-.product-desc, .bio-p {
-    font-size: 1.4rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-    margin-bottom: 35px;
-}
-
-.apple-link {
-    color: var(--blue);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.apple-link:hover { opacity: 0.7; }
-
-/* --- BIOGRAPHY SPECIFIC UI --- */
+/* --- BIOGRAPHY LAYOUT --- */
 .bio-layout {
     display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 100px;
-    align-items: start;
+    grid-template-columns: minmax(300px, 420px) 1fr;
+    gap: 60px;
+    padding-bottom: 100px;
 }
 
 .image-wrapper {
     position: sticky;
     top: 120px;
-    border-radius: 44px;
+    border-radius: 40px;
     overflow: hidden;
-    background: #111;
     border: 1px solid var(--border);
 }
 
-.founder-full-img {
-    width: 100%;
-    display: block;
-    transition: 0.5s ease;
-}
-
-.image-wrapper:hover .founder-full-img {
-    transform: scale(1.03);
-}
-
-.quick-facts {
-    margin-top: 40px;
-}
+.founder-full-img { width: 100%; display: block; transition: 0.4s ease; }
 
 .fact-item {
     display: flex;
@@ -179,31 +99,12 @@ h2 {
 .fact-label { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; }
 .fact-value { font-weight: 600; color: #fff; }
 
-/* --- ANIMATIONS --- */
-.fade-in {
-    animation: reveal 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
+/* --- CONTENT --- */
+.bio-p { font-size: 1.25rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 25px; }
 
-@keyframes reveal {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- FOOTER --- */
-footer {
-    padding: 100px 0;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    color: var(--text-dim);
-    font-size: 0.85rem;
-}
-
-/* --- MOBILE OPTIMIZATION --- */
+/* --- MOBILE FIXES --- */
 @media (max-width: 900px) {
-    h1 { font-size: 3.8rem; }
-    h2 { font-size: 2.5rem; }
-    .tagline { font-size: 1.3rem; }
-    .bio-layout { grid-template-columns: 1fr; gap: 50px; }
-    .image-wrapper { position: relative; top: 0; border-radius: 30px; }
+    .bio-layout { grid-template-columns: 1fr; gap: 40px; }
+    .image-wrapper { position: relative; top: 0; }
     .nav-links { display: none; }
 }
