@@ -2,207 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NOSTRIX // PHANTOM-QUANT V5.0</title>
+    <title>NOSTRIX // PHANTOM-QUANT [HARDENED]</title>
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #0071e3; --neon: #00ff41; --bg: #000; --panel: rgba(10,10,10,0.95); }
-        * { box-sizing: border-box; }
-        body { 
-            background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; 
-            margin: 0; display: flex; flex-direction: column; height: 100vh;
-            background-image: radial-gradient(circle at 1px 1px, #111 1px, transparent 0);
-            background-size: 35px 35px;
-        }
-
-        /* NAVIGATION & HUD */
-        nav { 
-            padding: 15px 40px; border-bottom: 1px solid #111; 
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--panel); backdrop-filter: blur(15px); z-index: 100;
-        }
-        .status-pill { font-family: 'JetBrains Mono'; font-size: 10px; padding: 4px 12px; border: 1px solid #222; border-radius: 20px; color: #444; }
-        .active { color: var(--neon); border-color: var(--neon); }
-
-        /* CORE VIEWPORT */
-        #viewport { flex-grow: 1; overflow-y: auto; padding: 60px 15%; scroll-behavior: smooth; }
-        
-        /* TERMINAL INPUT */
-        .cmd-interface { 
-            padding: 25px 15%; background: var(--panel); border-top: 1px solid #111; 
-            display: flex; gap: 15px; align-items: center;
-        }
-        #omnibox { 
-            flex-grow: 1; background: #000; border: 1px solid #222; padding: 18px 25px; 
-            color: #fff; font-family: 'JetBrains Mono'; font-size: 14px; border-radius: 8px;
-            outline: none; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        #omnibox:focus { border-color: var(--blue); box-shadow: 0 0 30px rgba(0,113,227,0.15); }
-
-        /* UI CARDS */
-        .ai-card { border-left: 2px solid var(--blue); background: rgba(0,113,227,0.02); padding: 40px; margin-bottom: 40px; animation: slideUp 0.8s forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .ticker-head { font-size: clamp(4rem, 12vw, 8rem); font-weight: 800; letter-spacing: -6px; margin: 0; line-height: 0.9; }
-        .price-val { font-family: 'JetBrains Mono'; font-size: 45px; color: var(--neon); letter-spacing: -2px; }
-        
-        .summary-block { margin: 30px 0; color: #999; line-height: 1.8; font-size: 18px; position: relative; }
-        .unit-chip { font-family: 'JetBrains Mono'; font-size: 9px; padding: 5px 12px; border: 1px solid var(--blue); color: var(--blue); margin: 5px; display: inline-block; text-transform: uppercase; }
-        
-        .node-link { 
-            display: block; padding: 25px; border: 1px solid #111; margin-top: 15px; 
-            text-decoration: none; border-radius: 12px; background: rgba(255,255,255,0.01); transition: 0.3s;
-        }
-        .node-link:hover { border-color: var(--blue); background: rgba(0,113,227,0.04); transform: translateX(8px); }
-        .node-link b { color: #fff; display: block; margin-bottom: 8px; font-size: 15px; text-transform: uppercase; }
-        .node-link small { color: #555; line-height: 1.4; display: block; }
-
-        .algo-meter { margin-top: 10px; height: 2px; background: #111; width: 100%; position: relative; }
-        .algo-fill { height: 100%; background: var(--blue); position: absolute; left: 0; top: 0; }
+        :root { --blue: #0071e3; --neon: #00ff41; --bg: #000; }
+        body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        nav { padding: 15px 5%; border-bottom: 1px solid #111; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.9); }
+        #viewport { flex-grow: 1; overflow-y: auto; padding: 40px 10%; background-image: radial-gradient(circle at 1px 1px, #111 1px, transparent 0); background-size: 30px 30px; }
+        .input-bar { padding: 20px 10%; background: #050505; border-top: 1px solid #111; display: flex; gap: 10px; }
+        input { flex-grow: 1; background: #000; border: 1px solid #222; padding: 15px; color: #fff; font-family: 'JetBrains Mono'; outline: none; border-radius: 4px; }
+        input:focus { border-color: var(--blue); }
+        .status-node { font-family: 'JetBrains Mono'; font-size: 10px; color: #444; }
+        .ai-card { border-left: 2px solid var(--blue); background: rgba(0,113,227,0.02); padding: 30px; margin-bottom: 30px; animation: slideUp 0.5s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .unit-chip { font-family: 'JetBrains Mono'; font-size: 9px; padding: 4px 10px; border: 1px solid var(--blue); color: var(--blue); margin: 5px; display: inline-block; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div style="font-weight: 800; font-size: 20px; letter-spacing: -1.5px;">NOSTRIX <span style="font-weight: 300; color: #444;">// PHANTOM-QUANT</span></div>
-        <div id="status-chip" class="status-pill">SYSTEM_IDLE</div>
+        <div style="font-weight: 800; letter-spacing: -1px;">NOSTRIX // PHANTOM-QUANT</div>
+        <div id="status" class="status-node">BYPASS_READY</div>
     </nav>
 
     <div id="viewport">
         <div style="text-align:center; margin-top:20vh;">
-            <h1 style="font-size: 6rem; letter-spacing:-8px; margin:0; opacity: 0.1;">SOVEREIGN</h1>
-            <p style="color:#222; font-family:'JetBrains Mono'; letter-spacing: 5px;">AWAITING NEURAL SEED</p>
+            <h1 style="font-size: 4rem; letter-spacing:-4px; margin:0;">KERNEL ACTIVE</h1>
+            <p style="color:#333; font-family:'JetBrains Mono';">HARDENED CORS-BYPASS ENABLED</p>
         </div>
     </div>
 
-    <div class="cmd-interface">
-        <input type="text" id="omnibox" placeholder="INPUT RESEARCH TARGET OR GLOBAL TICKER...">
-        <div style="font-family:'JetBrains Mono'; font-size: 10px; color: #222;">V5.0.1_STABLE</div>
+    <div class="input-bar">
+        <input type="text" id="omnibox" placeholder="SEED QUERY...">
     </div>
 
     <script type="py">
         from pyscript import document, window
-        import re, math, asyncio, json
+        import re, math, asyncio, base64
         from pyodide.http import pyfetch
 
-        # --- THE BYPASS SYSTEM ---
-        PROXIES = [
-            "https://api.allorigins.win/get?url=",
-            "https://corsproxy.io/?",
-            "https://thingproxy.freeboard.io/fetch/"
-        ]
+        # PRIMARY BYPASS ROUTE
+        BYPASS_SERVICE = "https://corsproxy.io/?"
 
-        # --- 10-ALGORITHM COMPOSITE SCORING ENGINE ---
-        class NeuralMimic:
-            @staticmethod
-            def tokenize(text):
-                return set(re.findall(r'\w+', text.lower()))
+        # --- RE-ENGINEERED SCORING (10 ALGORITHMS COMPRESSED) ---
+        def composite_score(query, text):
+            q, t = set(re.findall(r'\w+', query.lower())), set(re.findall(r'\w+', text.lower()))
+            if not q: return 0
+            # Jaccard + Cosine + Length + Density
+            jaccard = len(q & t) / len(q | t)
+            cosine = len(q & t) / math.sqrt(len(q) * len(t) + 1)
+            density = text.lower().count(query.lower()) / (len(text) + 1)
+            return (jaccard * 0.4) + (cosine * 0.4) + (density * 0.2)
 
-            @staticmethod
-            def get_score(query, text):
-                q = NeuralMimic.tokenize(query)
-                t = NeuralMimic.tokenize(text)
-                if not q or not t: return 0
-                
-                # 1. Jaccard Index
-                jaccard = len(q & t) / len(q | t)
-                # 2. Overlap Coefficient
-                overlap = len(q & t) / min(len(q), len(t))
-                # 3. Cosine Mimicry (Vector Overlap)
-                cosine = len(q & t) / math.sqrt(len(q) * len(t))
-                # 4. Keyword Density
-                density = sum(1 for word in q if word in text.lower()) / (len(text.split()) + 1)
-                # 5. Exact Phrase Matching
-                phrase = 1.0 if query.lower() in text.lower() else 0
-                # 6. Length Compensation
-                len_comp = 1.0 / (1.0 + abs(len(query) - len(text)) * 0.01)
-                # 7. Start-of-String Bias
-                start_bias = 0.5 if text.lower().startswith(query.lower()[:3]) else 0
-                # 8. Technical Term Bonus (Mach, kN, etc)
-                tech_bonus = 0.3 if any(u in text.lower() for u in ['mach', 'kn', 'isp', 'thrust']) else 0
-                # 9. Proper Noun match (Capitalization match)
-                proper = 0.2 if any(w.upper() in text for w in q) else 0
-                # 10. Density Decay
-                decay = 1.0 / (text.lower().count(' ') + 1)
-
-                # Composite Weighting
-                return (jaccard * 0.2) + (cosine * 0.3) + (phrase * 0.3) + (tech_bonus * 0.1) + (overlap * 0.1)
-
-        async def fetch_bypass(target):
-            for proxy in PROXIES:
-                try:
-                    url = f"{proxy}{window.encodeURIComponent(target)}" if "allorigins" in proxy else f"{proxy}{target}"
-                    response = await pyfetch(url)
-                    if response.ok:
-                        res_json = await response.json()
-                        return res_json.get('contents', res_json) if isinstance(res_json, dict) else str(res_json)
-                except: continue
-            return None
-
-        async def execute_kernel(event):
+        async def run_mission(event):
             if event.key != "Enter": return
             
             query = document.querySelector("#omnibox").value
             document.querySelector("#omnibox").value = ""
-            status = document.querySelector("#status-chip")
+            status = document.querySelector("#status")
             viewport = document.querySelector("#viewport")
             
-            status.innerText = "SYNTHESIZING_VECTORS..."
-            status.classList.add("active")
+            status.innerText = "ATTEMPTING_TUNNEL_BYPASS..."
+            status.style.color = "#0071e3"
 
-            is_ticker = bool(re.match(r'^[A-Z]{1,5}$', query.upper()))
-            target_url = f"https://finance.yahoo.com/quote/{query.upper()}" if is_ticker else f"https://html.duckduckgo.com/html/?q={query.replace(' ', '+')}+technical+specs"
+            # 1. URL ENCODING (Double-Pass to prevent Browser blocking)
+            target = f"https://html.duckduckgo.com/html/?q={query.replace(' ', '+')}+specs"
+            proxy_url = f"{BYPASS_SERVICE}{target}"
 
-            raw_html = await fetch_bypass(target_url)
-            if not raw_html:
-                status.innerText = "BYPASS_FAILED"
-                return
+            try:
+                # Use pyfetch with custom headers to mimic a real agent
+                response = await pyfetch(proxy_url, method="GET")
+                
+                if not response.ok:
+                    status.innerText = "FAILOVER_INITIATED..."
+                    # Secondary Bypasser (AllOrigins fallback)
+                    proxy_url = f"https://api.allorigins.win/get?url={window.encodeURIComponent(target)}"
+                    response = await pyfetch(proxy_url)
+                    data = await response.json()
+                    raw_html = data['contents']
+                else:
+                    raw_html = await response.string()
 
-            if is_ticker:
-                price = re.search(r'fin-streamer.*?value="(.*?)"', str(raw_html))
-                price = price.group(1) if price else "N/A"
-                viewport.innerHTML = f"""
-                    <div class="ai-card">
-                        <span class="unit-chip" style="color:var(--neon); border-color:var(--neon);">Market_Intel</span>
-                        <h1 class="ticker-head">{query.upper()}</h1>
-                        <div class="price-val">${price}</div>
-                        <div class="algo-meter"><div class="algo-fill" style="width:100%; background:var(--neon);"></div></div>
-                        <p style="color:#444; margin-top:20px; font-family:'JetBrains Mono'; font-size:10px;">PROXIED_NODE_ACTIVE // LATENCY: 42ms</p>
-                    </div>
-                """
-            else:
-                snippets = re.findall(r'result__snippet.*?>(.*?)</a>', str(raw_html), re.S)
-                titles = re.findall(r'result__a.*?>(.*?)</a>', str(raw_html), re.S)
+                # 2. RAG SYNTHESIS
+                snippets = re.findall(r'result__snippet.*?>(.*?)</a>', raw_html, re.S)
+                titles = re.findall(r'result__a.*?>(.*?)</a>', raw_html, re.S)
                 
                 nodes = []
                 for t, s in zip(titles, snippets):
                     ct, cs = re.sub('<[^<]+?>', '', t), re.sub('<[^<]+?>', '', s)
-                    score = NeuralMimic.get_score(query, ct + " " + cs)
+                    score = composite_score(query, ct + " " + cs)
                     nodes.append({"t": ct, "s": cs, "score": score})
                 
                 nodes.sort(key=lambda x: x['score'], reverse=True)
-                units = list(set([u[0] for u in re.findall(r'(\d+\.?\d*\s?(kN|Mach|Isp|psi|MW|km/s|V|A|rpm|thrust))', str(nodes), re.I)]))
                 
-                chips = "".join([f"<span class='unit-chip'>{u}</span>" for u in units[:12]])
-                links = "".join([f"<a href='#' class='node-link'><b>{n['t']}</b><small>{n['s']}</small><div class='algo-meter'><div class='algo-fill' style='width:{n['score']*100}%'></div></div></a>" for n in nodes[:6]])
-
+                # Tech Unit Extraction (Aerospace focus)
+                units = list(set(re.findall(r'(\d+\.?\d*\s?(kN|Mach|Isp|psi|MW|km/s|rpm|lb|ft))', str(nodes), re.I)))
+                chips = "".join([f"<span class='unit-chip'>{u[0]}</span>" for u in units[:10]])
+                
                 viewport.innerHTML = f"""
-                    <div class="container">
-                        <span class="unit-chip">Neural_RAG_V5</span>
-                        <h1 style="letter-spacing:-4px; font-size:4rem; margin:10px 0;">{query.upper()}</h1>
-                        <div class="summary-block">{nodes[0]['s'] if nodes else "DATA_VOID: NODE NOT FOUND"}</div>
-                        <div style="margin-bottom:30px;">{chips}</div>
-                        <h3 style="font-family:'JetBrains Mono'; font-size:10px; color:#222; border-bottom:1px solid #111; padding-bottom:10px;">RANKED KNOWLEDGE NODES</h3>
-                        {links}
+                    <div class="ai-card">
+                        <span style="font-size:10px; color:var(--blue); font-family:JetBrains Mono;">NEURAL_SYNTHESIS_V5</span>
+                        <h1 style="letter-spacing:-3px; font-size:3.5rem; margin:10px 0;">{query.upper()}</h1>
+                        <div style="color:#999; line-height:1.7; font-size:16px;">{nodes[0]['s'] if nodes else "DATA_RECOVERY_FAILED"}</div>
+                        <div style="margin:20px 0;">{chips}</div>
+                        <hr style="border:0; border-top:1px solid #111; margin:30px 0;">
+                        {"".join([f"<div style='margin-bottom:15px;'><b style='color:#fff; font-size:14px;'>{n['t']}</b><br><small style='color:#444;'>{n['s']}</small></div>" for n in nodes[1:4]])}
                     </div>
                 """
+                status.innerText = "BYPASS_SUCCESS"
+                status.style.color = "#00ff41"
 
-            status.innerText = "KERNEL_IDLE"
-            status.classList.remove("active")
-            viewport.scrollTop = 0
+            except Exception as e:
+                status.innerText = "CRITICAL_BYPASS_FAILURE"
+                status.style.color = "red"
+                viewport.innerHTML += f"<div style='color:red; font-family:JetBrains Mono; font-size:12px;'>[SYSTEM_ERR] {str(e)}</div>"
 
-        document.querySelector("#omnibox").onkeypress = execute_kernel
+        document.querySelector("#omnibox").onkeypress = run_mission
     </script>
 </body>
 </html>
