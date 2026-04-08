@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>NOSTRIXAI | Sovereign Engineering Intelligence | Ashwin</title>
-    <meta name="description" content="Official home of NOSTRIXAI. Native unrestricted models (NNRM, M-Series, RAG) engineered by Ashwin for industrial-scale AI and aerospace synthesis.">
-    <meta name="keywords" content="NOSTRIXAI, Ashwin, NNRM3, NNR, M1 Turbo, RAG M3, Sovereign AI, Native Unrestricted, Pudupakkam AI">
+    <title>NOSTRIXAI | Sovereign Engineering | Ashwin</title>
+    <meta name="description" content="NOSTRIXAI: 4 Million Token Context Intelligence. Native, Unrestricted, and Sovereign. Engineered by Ashwin.">
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
@@ -15,7 +14,7 @@
             --bg: #000000; --text: #ffffff; --dim: #86868b;
             --blue: #0071e3; --red: #ff3b30;
             --grad: linear-gradient(90deg, #ff3b30, #0071e3, #5e5ce6);
-            --glass: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.02);
             --border: rgba(255, 255, 255, 0.1);
         }
 
@@ -26,8 +25,8 @@
         #cursor { width: 8px; height: 8px; background: #fff; border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
         #aura { width: 35px; height: 35px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: 0.1s; }
 
-        /* --- 📽️ SHUTTER --- */
-        #shutter { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.5s; }
+        /* --- 📽️ SHUTTER TRANSITION --- */
+        #shutter { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         #shutter h2 { font-family: 'JetBrains Mono'; font-size: 1.2rem; letter-spacing: 12px; color: var(--blue); text-transform: uppercase; }
 
         /* --- 📄 PAGE ENGINE --- */
@@ -40,25 +39,25 @@
         .big-h { font-size: clamp(3rem, 10vw, 8.5rem); font-weight: 800; letter-spacing: -6px; line-height: 0.85; }
         .grad-t { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; display: block; }
-        .para { font-size: 1.3rem; color: var(--dim); line-height: 1.6; max-width: 800px; margin-top: 30px; }
+        .para { font-size: 1.2rem; color: var(--dim); line-height: 1.6; max-width: 800px; margin-top: 30px; }
 
-        /* --- 👤 FOUNDER STYLING --- */
+        /* --- 👤 FOUNDER PAGE (NEW DESIGN) --- */
         .founder-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
         .f-img { width: 100%; border-radius: 40px; border: 1px solid var(--border); box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
         .badge { padding: 10px 20px; border: 1px solid var(--blue); border-radius: 40px; font-size: 11px; font-weight: 800; color: #fff; margin-right: 12px; background: rgba(0, 113, 227, 0.1); }
 
         /* --- 📊 MODEL SPECS --- */
-        .spec-box { background: var(--glass); border: 1px solid var(--border); padding: 50px; border-radius: 40px; backdrop-filter: blur(40px); }
-        .spec-box h3 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
+        .spec-box { background: var(--glass); border: 1px solid var(--border); padding: 60px; border-radius: 40px; backdrop-filter: blur(50px); border-left: 4px solid var(--blue); }
+        .spec-box h3 { font-size: 4rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -3px; }
 
         /* --- 📂 NAV --- */
         .nav { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 1000; }
-        .dot { width: 4px; height: 4px; background: #222; border-radius: 50%; margin: 12px 0; transition: 0.4s; }
-        .dot.active { background: #fff; transform: scale(3); box-shadow: 0 0 15px #fff; }
+        .dot { width: 4px; height: 4px; background: #222; border-radius: 50%; margin: 10px 0; transition: 0.4s; }
+        .dot.active { background: #fff; transform: scale(3.5); box-shadow: 0 0 15px #fff; }
 
+        /* --- ⌨️ FOOTER --- */
         footer { border-top: 1px solid var(--border); padding: 120px 0; text-align: center; background: #000; }
-        .footer-sig { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 12px; color: #333; line-height: 3.5; text-transform: uppercase; }
-        .logo-box { font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 40px; }
+        .footer-sig { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 12px; color: #444; line-height: 3.5; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -74,7 +73,7 @@
             <div class="content">
                 <h1 class="big-h">NOSTRIXAI</h1>
                 <h2 class="big-h grad-t">NATIVE UNRESTRICTED</h2>
-                <p class="para">The evolution of sovereign engineering intelligence. 14 models. One goal: Absolute hardware-software synergy.</p>
+                <p class="para">4 MILLION TOKENS PER QUERY. Sovereign intelligence. Localized execution.</p>
             </div>
         </section>
 
@@ -86,7 +85,7 @@
                     <div style="margin: 30px 0;">
                         <span class="badge">FOUNDER</span><span class="badge">CEO</span><span class="badge">CHIEF ENGINEER</span>
                     </div>
-                    <p class="para">Directing the transition to localized native intelligence. Architecting high-fidelity aerospace solutions and industrial-scale neural stacks from Pudupakkam.</p>
+                    <p class="para">Architecting the NOSTRIXAI ecosystem. Leading the transition to hardware-accelerated sovereign intelligence and aerospace synthesis.</p>
                 </div>
                 <img src="ashwin-ceo.jpg" alt="Ashwin Founder CEO Chief Engineer" class="f-img">
             </div>
@@ -94,184 +93,39 @@
 
         <section>
             <div class="content">
-                <span class="mono-tag">Mining Infrastructure</span>
-                <h2 class="big-h">4,000,000.</h2>
-                <h2 class="big-h grad-t">TOKENS MINED.</h2>
-                <p class="para">Localized ingestion of technical ore. NOSTRIXAI identifies and extracts critical physical constants and aerospace schematics without cloud exposure.</p>
+                <span class="mono-tag">Contextual Capacity</span>
+                <h2 class="big-h">4M Context.</h2>
+                <h2 class="big-h grad-t">PER QUERY.</h2>
+                <p class="para">Our NNRM3 engine digests 4 million tokens of raw engineering data in a single inference step. Total library ingestion without partitioning.</p>
             </div>
         </section>
 
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 01 // Mining</span>
-                    <h3>NNRM1</h3>
-                    <p class="para">High-speed sensor-telemetry miner. Optimized for sub-millisecond data extraction from real-time fluid dynamic simulations.</p>
-                </div>
-            </div>
-        </section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 01</span><h3>NNRM1</h3><p class="para">Sub-millisecond sensor stream miner for real-time telemetry.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 02</span><h3>NNRM2</h3><p class="para">Balanced structural miner for mechanical stress and thermal data.</p></div></div></section>
+        <section><div class="content"><div class="spec-box" style="border-left-color: var(--red);"><span class="mono-tag">MODEL 03 // APEX</span><h3>NNRM3</h3><p class="para">The 4M Token Ingestion Beast. Converts massive engineering vaults into weights.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 04</span><h3>NNR</h3><p class="para">Neural Network Reasoning. Interprets physical constraints and solves assemblies.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 05</span><h3>NNRE</h3><p class="para">Error Verification. Cross-checks logic against physical laws.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 06</span><h3>NOSTRIX{M1}</h3><p class="para">Unified coordinator for lower-tier generative drafting tasks.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 07</span><h3>M1 TURBO</h3><p class="para">High-velocity iteration engine for rapid mechanical prototyping.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 08</span><h3>M2</h3><p class="para">3D Synthesis Engine. Generates CAD-ready biomimetic aerospace parts.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 09</span><h3>M2LM</h3><p class="para">Large-scale 3D synthesis for massive hull and component assembly.</p></div></div></section>
+        <section><div class="content"><div class="spec-box" style="border-style: dashed; border-color: var(--red);"><span class="mono-tag">MODEL 10</span><h3>M3</h3><p class="para">UNDER PROGRESS. Full-physics digital twins and predictive failure analysis.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 11</span><h3>RAG M1</h3><p class="para">Technical document retrieval for ISO and engineering standards.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 12</span><h3>RAG M2</h3><p class="para">Codebase retrieval linking model logic to C++ and ONNX repositories.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 13</span><h3>RAG M3</h3><p class="para">Master Knowledge Graph connecting 4M tokens to the reasoning loop.</p></div></div></section>
+        <section><div class="content"><div class="spec-box"><span class="mono-tag">MODEL 14</span><h3>NOSTRIXRAG M1</h3><p class="para">Hybrid retrieval-mining engine for continuous engineering memory.</p></div></div></section>
 
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 02 // Mining</span>
-                    <h3>NNRM2</h3>
-                    <p class="para">The balanced industrial miner. Handles structural stress-test data ingestion and thermal-mechanical library synchronization.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 03 // Mining</span>
-                    <h3>NNRM3</h3>
-                    <p class="para">The Apex Miner. Ingests 4M+ token volumes of raw technical data. Our primary engine for converting PDF schematics into neural logic.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 04 // Reasoning</span>
-                    <h3>NNR</h3>
-                    <p class="para">Neural Network Reasoning. The core autoregressive engine that interprets multi-step engineering problems and physical constraints.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 05 // Verification</span>
-                    <h3>NNRE</h3>
-                    <p class="para">Error Verification Engine. Cross-checks every output from the NNR against known thermodynamic laws to ensure 100% engineering validity.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 06 // Unified</span>
-                    <h3>NOSTRIX{M1}</h3>
-                    <p class="para">The primary coordinator model. Orchestrates the lower-tier generative engines for simple technical tasks and drafting.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 07 // Gen-Speed</span>
-                    <h3>M1 TURBO</h3>
-                    <p class="para">Optimized for rapid design iteration. Generates high-volume variations of technical blueprints in seconds for mechanical comparison.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 08 // Gen-3D</span>
-                    <h3>M2</h3>
-                    <p class="para">3D Synthesis Engine. Generates full CAD-ready lattice structures and biomimetic parts based on stress-load requirements.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 09 // Large-Scale</span>
-                    <h3>M2LM</h3>
-                    <p class="para">Large-scale 3D synthesis. Handles massive assembly files and complex multi-component generative design for aerospace hulls.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box" style="border-color: var(--red);">
-                    <span class="mono-tag" style="color:var(--red)">Model 10 // Future</span>
-                    <h3>M3</h3>
-                    <p class="para">UNDER PROGRESS. Targeted for full-physics digital twins and predictive failure analysis for rocket engine clusters.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 11 // Retrieval</span>
-                    <h3>RAG M1</h3>
-                    <p class="para">Retrieval-Augmented Generation for documentation. Provides instant access to ISO standards and technical manuals.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 12 // Context</span>
-                    <h3>RAG M2</h3>
-                    <p class="para">Dynamic contextual sync for codebase retrieval. Links NOSTRIXAI output to existing C++ and Python repositories.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 13 // Knowledge</span>
-                    <h3>RAG M3</h3>
-                    <p class="para">The Master Engineering Knowledge Graph. Connects the 4M token library to the active reasoning loop for global retrieval.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <div class="spec-box">
-                    <span class="mono-tag">Model 14 // Hybrid</span>
-                    <h3>NOSTRIXRAG M1</h3>
-                    <p class="para">The hybrid retrieval engine. Merges real-time mining data with long-term memory for seamless engineering continuity.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <span class="mono-tag">GitHub Ecosystem // Part 1</span>
-                <h2 class="big-h">CODEBASE.</h2>
-                <p class="para">Sovereign C++ core utilizing ONNX-runtime for native execution. High-performance, low-latency deployment on MacBook Air M2/M3 hardware.</p>
-            </div>
-        </section>
+        <section><div class="content"><span class="mono-tag">Vault Part 1</span><h2 class="big-h">THE CORE.</h2><p class="para">Native C++ core with ONNX-runtime acceleration.</p></div></section>
+        <section><div class="content" style="text-align:center;"><span class="mono-tag">Vault Part 2</span><h2 class="big-h grad-t">REPOSITORY</h2><a href="https://github.com/ashwinjrtamil-gif/Nostrix" target="_blank" class="para" style="color:var(--blue); font-weight:800; text-decoration:none; display:block; margin-top:20px;">ashwinjrtamil-gif/Nostrix</a></div></section>
+        <section><div class="content"><span class="mono-tag">Vault Part 3</span><h2 class="big-h">OPTIMIZED.</h2><p class="para">Pruned architectures designed for local M-series silicon.</p></div></section>
 
         <section>
             <div class="content" style="text-align:center;">
-                <span class="mono-tag">GitHub Ecosystem // Part 2</span>
-                <h2 class="big-h grad-t">NOSTRIX</h2>
-                <a href="https://github.com/ashwinjrtamil-gif/Nostrix" target="_blank" class="para" style="display:block; text-decoration:none; color:var(--blue); font-weight:800;">ashwinjrtamil-gif/Nostrix</a>
-            </div>
-        </section>
-
-        <section>
-            <div class="content">
-                <span class="mono-tag">GitHub Ecosystem // Part 3</span>
-                <h2 class="big-h">OPTIMIZATION.</h2>
-                <p class="para">Weight pruning, quantization, and circular buffer management. Our models are engineered to fit on the edge without sacrificing performance.</p>
-            </div>
-        </section>
-
-        <section>
-            <div class="content" style="text-align:center;">
-                <div class="logo-box">NOSTRIXAI</div>
-                <div class="sig-text">FOUNDER CEO AND CHIEF ENGINEER ASHWIN</div>
-                <div class="sig-text">NOSTRIX SOVEREIGN INTELLIGENCE SYSTEMS</div>
-                <div class="sig-text">PUDUPAKKAM, TAMIL NADU // 2026</div>
-                <div class="sig-text" style="color:var(--dim); font-size:9px;">© ALL RIGHTS RESERVED. ONE AMONG THEM.</div>
+                <div style="font-size:3rem; font-weight:800; letter-spacing:-2px; margin-bottom:40px;">NOSTRIXAI</div>
+                <div class="footer-sig">ASHWIN</div>
+                <div class="footer-sig" style="color:var(--blue); font-size:12px; letter-spacing:8px;">FOUNDER // CEO // CHIEF ENGINEER</div>
+                <div class="footer-sig" style="color:var(--dim); font-size:10px; margin-top:40px;">© 2026 NOSTRIX SOVEREIGN SYSTEMS. ALL RIGHTS RESERVED.</div>
+                <div class="footer-sig" style="color:#222; letter-spacing:4px; font-size:9px;">ONE AMONG THEM.</div>
             </div>
         </section>
 
@@ -291,10 +145,8 @@
         const shutterText = document.getElementById('shutter-text');
         const sections = document.querySelectorAll('section');
         const nav = document.getElementById('dot-nav');
+        const titles = ["START", "ASHWIN", "4M TOKENS", "NNRM1", "NNRM2", "NNRM3", "NNR", "NNRE", "M1 CORE", "M1 TURBO", "M2 CORE", "M2LM", "M3 FUTURE", "RAG M1", "RAG M2", "RAG M3", "HYBRID RAG", "CORE", "GITHUB", "ONNX", "SIGNATURE"];
 
-        const sectionTitles = ["START", "ASHWIN", "MINING", "NNRM1", "NNRM2", "NNRM3", "NNR", "NNRE", "M1", "M1 TURBO", "M2", "M2LM", "M3 FUTURE", "RAG M1", "RAG M2", "RAG M3", "NOSTRIXRAG", "CODEBASE", "GITHUB", "ONNX", "SIGNATURE"];
-
-        // Create dots
         sections.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = 'dot';
@@ -309,7 +161,7 @@
             const idx = Math.round(container.scrollTop / window.innerHeight);
             if(idx !== lastIdx) {
                 lastIdx = idx;
-                if(sectionTitles[idx]) shutterText.innerText = sectionTitles[idx];
+                if(titles[idx]) shutterText.innerText = titles[idx];
                 shutter.style.opacity = '1';
                 setTimeout(() => shutter.style.opacity = '0', 500);
             }
