@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOSTRIX | ASHWIN</title>
-    
+    <title>NOSTRIX | TECHNICAL MANIFESTO</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg: #000000;
             --card: #0a0a0a;
             --accent: #00ff41;
             --text: #ffffff;
-            --text-dim: #86868b; /* Apple Style Dim */
+            --text-dim: #86868b;
             --border: #1d1d1f;
             --nav-height: 52px;
         }
@@ -21,164 +19,77 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; background: var(--bg); }
         body { 
-            background: var(--bg); 
-            color: var(--text); 
+            background: var(--bg); color: var(--text); 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 🛰️ MAC-STYLE NAV --- */
+        /* --- 🛰️ NAVIGATION --- */
         nav {
-            height: var(--nav-height);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
+            height: var(--nav-height); width: 100%; position: fixed; top: 0; z-index: 9999;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: saturate(180%) blur(20px);
             border-bottom: 1px solid var(--border);
         }
-
-        .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .nav-flex { display: flex; justify-content: space-between; align-items: center; height: 100%; }
-        
         .logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: #fff; letter-spacing: -0.5px; }
-        .nav-links { display: flex; gap: 24px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dim);
-            font-size: 12px;
-            transition: 0.3s;
-        }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 12px; margin-left: 24px; transition: 0.3s; }
         .nav-links a:hover { color: #fff; }
 
-        /* --- 🎬 ANIMATION CLASSES --- */
+        /* --- 🎬 REVEAL ENGINE --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- 🚀 HERO: THE GRADIENT --- */
+        /* --- 🚀 HERO --- */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #000 70%);
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center;
         }
-
         .gradient-title {
-            font-size: clamp(4rem, 12vw, 8rem);
-            font-weight: 900;
-            line-height: 0.9;
-            letter-spacing: -4px;
-            background: linear-gradient(180deg, #fff 0%, #555 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            font-size: clamp(4rem, 12vw, 8.5rem); font-weight: 900; line-height: 0.85; letter-spacing: -5px;
+            background: linear-gradient(180deg, #fff 0%, #444 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .unrestricted { color: var(--accent); letter-spacing: 5px; font-weight: 900; font-size: 0.9rem; margin-top: 20px; }
+
+        /* --- 👤 FOUNDER BLOCK --- */
+        .founder-block { padding: 120px 0; text-align: center; }
+        .founder-img {
+            width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--border); margin-bottom: 30px;
         }
 
-        .unrestricted { color: var(--accent); letter-spacing: 5px; font-weight: 900; font-size: 1rem; margin-top: 10px; }
+        /* --- 🏛️ THE TIERS: THE HEART OF NOSTRIX --- */
+        .tier-section { padding: 100px 0; border-top: 1px solid var(--border); }
+        .tier-header { margin-bottom: 60px; }
+        .tier-header h2 { font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; }
+        .tier-header p { color: var(--text-dim); font-size: 1.2rem; }
 
-        /* --- 👤 THE FOUNDER (APPLE COMPARISON STYLE) --- */
-        .founder-section {
-            padding: 150px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .tier-card {
+            background: var(--card); border: 1px solid var(--border);
+            padding: 40px; border-radius: 24px; transition: 0.4s;
         }
-
-        .founder-image-wrap {
-            width: 240px;
-            height: 240px;
-            border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(45deg, var(--accent), #004411);
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
-
-        .founder-image-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            filter: grayscale(20%);
-        }
-
-        .founder-name { font-size: 3rem; font-weight: 900; margin-bottom: 10px; }
-        .founder-title { color: var(--accent); font-family: 'JetBrains Mono'; font-size: 0.9rem; letter-spacing: 3px; }
-
-        /* --- ⚙️ ENGINE SPECS: THE COMPARISON GRID --- */
-        .specs-section { padding: 100px 0; background: #050505; }
+        .tier-card:hover { border-color: var(--accent); transform: scale(1.02); }
+        .tier-card h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--accent); font-family: 'JetBrains Mono'; }
         
-        .compare-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            overflow: hidden;
+        .spec-list { list-style: none; }
+        .spec-list li {
+            padding: 15px 0; border-bottom: 1px solid #111; color: var(--text-dim);
+            font-size: 14px; display: flex; justify-content: space-between;
         }
+        .spec-list li b { color: #fff; font-family: 'JetBrains Mono'; }
 
-        .compare-item {
-            background: var(--bg);
-            padding: 40px;
-            text-align: center;
-        }
+        /* --- 🖥️ SYSTEM SPECS GRID --- */
+        .system-specs { padding: 100px 0; background: #050505; }
+        .spec-box { text-align: left; padding: 40px; border-left: 1px solid var(--border); }
+        .spec-box h4 { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .spec-box p { font-size: 0.9rem; color: var(--text-dim); }
 
-        .spec-label { color: var(--text-dim); font-size: 14px; margin-bottom: 10px; display: block; }
-        .spec-value { font-size: 2.5rem; font-weight: 900; margin-bottom: 5px; }
-        .spec-sub { color: var(--accent); font-family: 'JetBrains Mono'; font-size: 10px; text-transform: uppercase; }
+        footer { padding: 100px 0; text-align: center; border-top: 1px solid var(--border); }
+        .signature { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 8px; color: #222; margin-top: 40px; text-transform: uppercase; }
 
-        /* --- 🏎️ SCROLL REVEAL CONTENT --- */
-        .feature-block {
-            padding: 150px 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            align-items: center;
-        }
-
-        .feature-content h2 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
-        .feature-content p { color: var(--text-dim); font-size: 1.2rem; line-height: 1.6; }
-
-        .feature-visual {
-            background: var(--card);
-            height: 400px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .visual-data { font-family: 'JetBrains Mono'; color: var(--accent); font-size: 0.8rem; }
-
-        /* --- ⌨️ SIGNATURE FOOTER --- */
-        footer {
-            padding: 100px 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .signature {
-            font-family: 'JetBrains Mono';
-            font-size: 10px;
-            letter-spacing: 10px;
-            color: #333;
-            margin-top: 50px;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-            .compare-grid, .feature-block { grid-template-columns: 1fr; }
-            .gradient-title { font-size: 3.5rem; }
-            .feature-block { gap: 40px; padding: 80px 0; }
-        }
+        @media (max-width: 768px) { .tier-grid { grid-template-columns: 1fr; } .gradient-title { font-size: 4rem; } }
     </style>
 </head>
 <body>
@@ -187,9 +98,9 @@
         <div class="container nav-flex">
             <a href="#" class="logo">NOSTRIX</a>
             <div class="nav-links">
-                <a href="#specs">Engine Specs</a>
-                <a href="#foundry">Founder</a>
-                <a href="#tech">Neural Stack</a>
+                <a href="#nnrm">NNRM Stack</a>
+                <a href="#nostrix-m">Core Engines</a>
+                <a href="#rag">RAG Tiers</a>
             </div>
         </div>
     </nav>
@@ -197,80 +108,89 @@
     <main>
         <section class="hero reveal">
             <h1 class="gradient-title">NATIVE.<br>UNRESTRICTED.</h1>
-            <div class="unrestricted">// NOSTRIX V14 // SOVEREIGN AI</div>
+            <div class="unrestricted">SOVEREIGN NEURAL ARCHITECTURE</div>
         </section>
 
-        <section id="foundry" class="founder-section container reveal">
-            <div class="founder-image-wrap">
-                <img src="ashwin-ceo.jpg" alt="Ashwin - CEO">
+        <section class="founder-block container reveal">
+            <img src="ashwin-ceo.jpg" alt="Ashwin" class="founder-img">
+            <h2 style="font-size: 3rem; font-weight: 900;">Ashwin</h2>
+            <p style="color: var(--accent); font-family: 'JetBrains Mono'; letter-spacing: 3px; font-size: 0.8rem;">CHIEF ENGINEER & FOUNDER</p>
+        </section>
+
+        <section id="nnrm" class="tier-section container reveal">
+            <div class="tier-header">
+                <h2>NNRM Stack</h2>
+                <p>The Ranker and Retriever ecosystem for technical data mapping.</p>
             </div>
-            <h2 class="founder-name">Ashwin</h2>
-            <span class="founder-title">FOUNDER • CEO • CHIEF ENGINEER</span>
-            <p style="color: var(--text-dim); max-width: 600px; text-align: center; margin-top: 20px;">
-                Directing the shift from centralized dependencies to localized industrial intelligence.
-            </p>
-        </section>
-
-        <section id="specs" class="specs-section">
-            <div class="container">
-                <div class="section-header reveal" style="margin-bottom: 60px;">
-                    <h2 style="font-size: 3rem;">Engine Capacity.</h2>
-                    <p style="color: var(--text-dim);">Performance scaled for industrial-grade generative design.</p>
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <h3>NNRM M1</h3>
+                    <ul class="spec-list">
+                        <li>Vector Ingestion <b>High Speed</b></li>
+                        <li>Search Depth <b>Surface</b></li>
+                        <li>Target <b>General Docs</b></li>
+                    </ul>
                 </div>
-
-                <div class="compare-grid reveal">
-                    <div class="compare-item">
-                        <span class="spec-label">Token Bandwidth</span>
-                        <div class="spec-value">4.2M</div>
-                        <div class="spec-sub">Technical Ore Ingested</div>
-                    </div>
-                    <div class="compare-item">
-                        <span class="spec-label">Latency Optimization</span>
-                        <div class="spec-value">0.12ms</div>
-                        <div class="spec-sub">NNRM3 Neural Ranker</div>
-                    </div>
-                    <div class="compare-item">
-                        <span class="spec-label">Iteration Velocity</span>
-                        <div class="spec-value">5,000+</div>
-                        <div class="spec-sub">Generative Cycles / Min</div>
-                    </div>
-                    <div class="compare-item">
-                        <span class="spec-label">Data Privacy</span>
-                        <div class="spec-value">100%</div>
-                        <div class="spec-sub">Zero-Retention Local</div>
-                    </div>
-                    <div class="compare-item">
-                        <span class="spec-label">Model Architecture</span>
-                        <div class="spec-value">14-S</div>
-                        <div class="spec-sub">Sovereign Neural Stack</div>
-                    </div>
-                    <div class="compare-item">
-                        <span class="spec-label">Hardware Logic</span>
-                        <div class="spec-value">M2X</div>
-                        <div class="spec-sub">Apple Silicon Optimized</div>
-                    </div>
+                <div class="tier-card">
+                    <h3>NNRM M2</h3>
+                    <ul class="spec-list">
+                        <li>Ranking Logic <b>Semantic</b></li>
+                        <li>Search Depth <b>Medium</b></li>
+                        <li>Target <b>Tech Journals</b></li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <h3>NNRM M3</h3>
+                    <ul class="spec-list">
+                        <li>Logic Flow <b>Cross-Encoder</b></li>
+                        <li>Search Depth <b>Absolute</b></li>
+                        <li>Target <b>Physics Nodes</b></li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <h3>NNR / NNRE</h3>
+                    <p style="color: var(--text-dim); margin-top: 15px;"><b>NNR:</b> Neural Network Retriever. <br><b>NNRE:</b> Neural Network Reasoning Engine. The final logic bridge for design decisions.</p>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <div class="feature-block reveal">
-                <div class="feature-content">
-                    <h2>M2LM Mining.<br>Deep Intelligence.</h2>
-                    <p>The M2LM engine extracts high-density physical constants from raw document volumes, bypassing summaries to ingest the actual engineering logic.</p>
+        <section id="nostrix-m" class="tier-section container reveal">
+            <div class="tier-header">
+                <h2>Nostrix M-Series</h2>
+                <p>The heavy-duty miners designed to extract industrial-grade information.</p>
+            </div>
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <h3>M1 / M1 TURBO</h3>
+                    <p>The M1 is our baseline miner. <b>Turbo</b> implements multi-threaded asynchronous mining, hitting 15,000 TPS on macOS local envs.</p>
                 </div>
-                <div class="feature-visual">
-                    <div class="visual-data">[INGESTING_VOLUME_F22_RAPTOR_ENG]</div>
+                <div class="tier-card">
+                    <h3>M1LM / M2LM</h3>
+                    <p><b>M1LM:</b> Light Miner for local edge processing. <br><b>M2LM:</b> Large Miner for deep-tissue research and multi-million token ingestion.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="feature-block reveal">
-                <div class="feature-visual" style="order: 2;">
-                    <div class="visual-data">[SIMULATING_FEA_STRAIN_MAP]</div>
+        <section id="rag" class="tier-section container reveal">
+            <div class="tier-header">
+                <h2>Nostrix RAG Tiers</h2>
+                <p>The synthesis layers where retrieved data becomes Engineering Intelligence.</p>
+            </div>
+            <div class="tier-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div class="tier-card">
+                    <span class="spec-label">Tier 01</span>
+                    <h3>RAG M1</h3>
+                    <p>Primary lookup. Scans local brain for keyword-density matches.</p>
                 </div>
-                <div class="feature-content" style="order: 1;">
-                    <h2>Virtual Twins.<br>Zero Physical Waste.</h2>
-                    <p>Predictive maintenance and CFD simulations allow you to design and test hardware in a purely digital sovereign environment before the first physical cut.</p>
+                <div class="tier-card">
+                    <span class="spec-label">Tier 02</span>
+                    <h3>RAG M2</h3>
+                    <p>Context-aware. Understands the relationship between material and cost constraints.</p>
+                </div>
+                <div class="tier-card">
+                    <span class="spec-label">Tier 03</span>
+                    <h3>RAG M3</h3>
+                    <p>The Executive Core. Full synthesis of 4M+ tokens for generative design output.</p>
                 </div>
             </div>
         </section>
@@ -279,28 +199,17 @@
     <footer>
         <div class="container">
             <h2 class="logo" style="font-size: 3rem;">NOSTRIX</h2>
-            <p style="color: var(--text-dim); margin-top: 20px;">Built for the Elite. Founded March 2026.</p>
+            <p style="color: var(--text-dim);">Founded March 2026. One Among Them.</p>
             <p style="color: var(--text-dim);">&copy; 2026 Engineered by Ashwin.</p>
             <div class="signature">FOUNDER CEO AND CE OF NOSTRIX AI ASHWIN</div>
         </div>
     </footer>
 
     <script>
-        const observerOptions = {
-            threshold: 0.1
-        };
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
