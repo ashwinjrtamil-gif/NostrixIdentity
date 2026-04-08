@@ -3,249 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOSTRIX | SOVEREIGN INTELLIGENCE</title>
+    <title>NOSTRIX | ASHWIN</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #000000;
-            --glass: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --accent: #9b51e0; /* Apple Intelligence Purple */
-            --accent-glow: rgba(155, 81, 224, 0.3);
-            --text: #ffffff;
-            --text-dim: #86868b;
+            /* APPLE TRI-COLOR PALETTE */
+            --bg: #ffffff;
+            --text: #000000;
+            --text-dim: #6e6e73;
+            --blue: #0066cc;
+            --red: #ff3b30;
+            --glass: rgba(255, 255, 255, 0.8);
+            --border: #d2d2d7;
             --nav-height: 52px;
             --sf-ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #000000;
+            --text: #ffffff;
+            --text-dim: #86868b;
+            --glass: rgba(22, 22, 23, 0.8);
+            --border: #1d1d1f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
         html { scroll-behavior: smooth; background: var(--bg); }
         body { 
             background: var(--bg); color: var(--text); 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
             overflow-x: hidden; -webkit-font-smoothing: antialiased;
+            transition: background 0.5s ease;
         }
 
-        /* --- 🍏 NAVIGATION: THE APPLE BAR --- */
+        /* --- 🛰️ NAVIGATION --- */
         nav {
             height: var(--nav-height); width: 100%; position: fixed; top: 0; z-index: 10000;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--glass-border);
+            background: var(--glass); backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
         }
-        .container { max-width: 1024px; margin: 0 auto; padding: 0 22px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
         .nav-flex { display: flex; justify-content: space-between; align-items: center; height: 100%; }
-        .logo { font-weight: 700; font-size: 1.1rem; text-decoration: none; color: #fff; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 12px; margin-left: 24px; transition: 0.2s; }
-        .nav-links a:hover { color: #fff; }
+        .logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .logo span { color: var(--blue); }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 12px; margin-left: 28px; font-weight: 600; transition: 0.2s; }
+        .nav-links a:hover { color: var(--blue); }
 
-        /* --- ✨ ANIMATION: FLUID MOTION --- */
-        .reveal { opacity: 0; transform: translateY(40px) scale(0.98); transition: all 1.2s var(--sf-ease); }
-        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+        /* --- ✨ ANIMATION LAYERS --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s var(--sf-ease); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- 🚀 HERO: THE LIQUID GLOW --- */
+        /* --- 🚀 HERO: TRI-COLOR MANIFESTO --- */
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; position: relative; overflow: hidden;
+            align-items: center; text-align: center; position: relative;
         }
-        .liquid-glow {
-            position: absolute; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            filter: blur(80px); z-index: -1; animation: pulse 10s infinite;
-        }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
-
-        .gradient-title {
-            font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 800; line-height: 1.05; letter-spacing: -3px;
-            background: linear-gradient(180deg, #fff 0%, #a1a1a1 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .sub-gradient {
-            margin-top: 10px; font-size: 1rem; font-weight: 600; letter-spacing: 4px;
-            background: linear-gradient(90deg, #9b51e0, #30cfd0);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .hero-bg-accent {
+            position: absolute; width: 40vw; height: 40vw; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
+            z-index: -1; filter: blur(60px); top: 10%; left: 50%; transform: translateX(-50%);
         }
 
-        /* --- 👤 ASHWIN PROFILE: THE FOUNDER --- */
-        .profile-section { padding: 120px 0; text-align: center; }
-        .ashwin-wrap {
-            position: relative; width: 180px; height: 180px; margin: 0 auto 30px;
+        .main-title {
+            font-size: clamp(4rem, 15vw, 10rem); font-weight: 800; line-height: 0.9; letter-spacing: -5px;
+            margin-bottom: 20px;
         }
-        .ashwin-wrap img {
-            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            border: 1px solid var(--glass-border);
-        }
-        .glow-ring {
-            position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border-radius: 50%; background: linear-gradient(45deg, #9b51e0, #30cfd0);
-            z-index: -1; opacity: 0.3; filter: blur(10px);
-        }
+        .blue-text { color: var(--blue); }
+        .red-text { color: var(--red); }
 
-        /* --- 🏛️ THE FOUNDRY: BENTO GRID --- */
-        .foundry-section { padding: 100px 0; }
+        .hero p { font-size: 1.5rem; color: var(--text-dim); max-width: 700px; font-weight: 500; }
+
+        /* --- 🏛️ THE TITLES: FOUNDER & CEO --- */
+        .title-section { padding: 150px 0; border-top: 1px solid var(--border); }
+        .title-card { text-align: center; margin-bottom: 100px; }
+        .title-card h2 { font-size: 5rem; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .title-card p { font-family: 'JetBrains Mono'; color: var(--blue); letter-spacing: 5px; text-transform: uppercase; font-size: 0.9rem; margin-top: 15px; }
+
+        /* --- 👤 ASHWIN PROFILE --- */
+        .ashwin-frame {
+            width: 250px; height: 250px; margin: 0 auto 50px; border-radius: 40px;
+            overflow: hidden; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            transform: rotate(-2deg); transition: 0.5s var(--sf-ease);
+        }
+        .ashwin-frame:hover { transform: rotate(0deg) scale(1.05); }
+        .ashwin-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- 🛠️ THE FOUNDRY: BENTO GRID --- */
         .bento-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-            grid-template-rows: auto auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px;
         }
-        .bento-card {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: 28px; padding: 35px; backdrop-filter: blur(10px);
-            transition: 0.4s var(--sf-ease); position: relative; overflow: hidden;
+        .bento-item {
+            background: var(--glass); border: 1px solid var(--border); border-radius: 32px;
+            padding: 40px; transition: 0.4s var(--sf-ease);
         }
-        .bento-card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-5px); }
-        .bento-card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 700; }
-        .bento-card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; }
-        .bento-large { grid-column: span 2; }
+        .bento-item:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .bento-item h3 { font-size: 1.8rem; margin-bottom: 15px; font-weight: 700; }
+        .bento-item p { color: var(--text-dim); line-height: 1.6; }
+        .bento-span-2 { grid-column: span 2; }
+        
+        .tag { display: inline-block; padding: 6px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
+        .tag-blue { background: rgba(0, 102, 204, 0.1); color: var(--blue); }
+        .tag-red { background: rgba(255, 59, 48, 0.1); color: var(--red); }
 
-        /* --- 🌀 INTERACTIVE MODEL SELECTOR --- */
-        .selector-wrap {
-            margin-top: 80px; background: var(--glass); border-radius: 30px;
-            border: 1px solid var(--glass-border); padding: 50px;
+        /* --- 🌀 INDUSTRIAL SIMULATION --- */
+        .sim-section { padding: 120px 0; background: #f5f5f7; color: #000; }
+        .sim-display {
+            background: #000; border-radius: 40px; padding: 60px; color: #fff;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
         }
-        .model-tabs { display: flex; gap: 10px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 10px; }
-        .tab-btn {
-            background: transparent; border: 1px solid var(--glass-border); color: #fff;
-            padding: 10px 20px; border-radius: 20px; font-size: 12px; cursor: pointer;
-            white-space: nowrap; transition: 0.3s;
-        }
-        .tab-btn.active { background: #fff; color: #000; border-color: #fff; }
+        .sim-data { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.8rem; }
 
-        /* --- 📂 REPOSITORY GATEWAY --- */
-        .repo-section {
-            padding: 100px 0; text-align: center;
-            background: linear-gradient(to bottom, #000, #080808);
+        /* --- 📂 GITHUB FOOTER --- */
+        .github-footer {
+            padding: 150px 0; text-align: center; background: #000; color: #fff;
         }
-        .repo-btn {
-            background: #fff; color: #000; padding: 20px 50px; border-radius: 40px;
-            text-decoration: none; font-weight: 700; font-size: 1.1rem;
-            display: inline-block; transition: 0.4s var(--sf-ease);
+        .github-btn {
+            background: #fff; color: #000; padding: 25px 60px; border-radius: 50px;
+            text-decoration: none; font-weight: 800; font-size: 1.2rem; display: inline-block;
+            transition: 0.3s;
         }
-        .repo-btn:hover { transform: scale(1.05); filter: brightness(0.9); box-shadow: 0 20px 40px rgba(255,255,255,0.1); }
+        .github-btn:hover { transform: scale(1.05); background: var(--blue); color: #fff; }
 
-        /* --- ⌨️ SIGNATURE & FOOTER --- */
-        footer { padding: 120px 0 60px; text-align: center; color: var(--text-dim); }
-        .footer-logo { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
-        .signature {
-            font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 12px;
-            color: #222; margin-top: 80px; text-transform: uppercase;
+        /* --- ⌨️ FINAL SIGNATURE --- */
+        footer { padding: 100px 0; border-top: 1px solid var(--border); text-align: center; }
+        .footer-logo { font-size: 4rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -3px; }
+        .signature-block { margin-top: 80px; }
+        .signature-text {
+            font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 15px;
+            color: var(--border); text-transform: uppercase; line-height: 2;
         }
 
-        @media (max-width: 768px) {
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-large { grid-column: span 1; }
-            .gradient-title { font-size: 3.2rem; }
+        @media (max-width: 900px) {
+            .bento-grid, .sim-display { grid-template-columns: 1fr; }
+            .bento-span-2 { grid-column: span 1; }
+            .main-title { font-size: 4rem; }
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
 
     <nav>
         <div class="container nav-flex">
-            <a href="#" class="logo">NOSTRIX</a>
+            <a href="#" class="logo">NOSTRIX<span>AI</span></a>
             <div class="nav-links">
                 <a href="#foundry">Foundry</a>
-                <a href="#ashwin">Ashwin</a>
-                <a href="https://github.com/Ashwin" target="_blank">GitHub</a>
+                <a href="#titles">The Titles</a>
+                <a href="https://github.com/Ashwin/Nostrix" target="_blank">Repository</a>
             </div>
         </div>
     </nav>
 
     <main>
         <section class="hero reveal">
-            <div class="liquid-glow"></div>
-            <h1 class="gradient-title">NATIVE.<br>UNRESTRICTED.</h1>
-            <div class="sub-gradient">INTELLIGENCE BEYOND THE CLOUD</div>
+            <div class="hero-bg-accent"></div>
+            <h1 class="main-title">NATIVE.<br><span class="blue-text">UNRESTRICTED.</span></h1>
+            <p>High-Velocity Industrial Intelligence. Engineered local. Sovereignty guaranteed.</p>
         </section>
 
-        <section id="ashwin" class="profile-section container reveal">
-            <div class="ashwin-wrap">
-                <div class="glow-ring"></div>
+        <section id="titles" class="title-section container">
+            <div class="ashwin-frame reveal">
                 <img src="ashwin-ceo.jpg" alt="Ashwin">
             </div>
-            <h2 style="font-size: 2.5rem; font-weight: 800;">Ashwin</h2>
-            <p style="color: var(--text-dim); margin-top: 10px; font-weight: 600; letter-spacing: 1px;">FOUNDER & CHIEF ENGINEER</p>
+            
+            <div class="title-card reveal">
+                <h2>Ashwin</h2>
+                <p>Founder & Chief Engineer</p>
+            </div>
+
+            <div class="title-card reveal">
+                <h2 class="blue-text">Nostrix</h2>
+                <p>Chief Executive Intelligence</p>
+            </div>
         </section>
 
-        <section id="foundry" class="foundry-section container reveal">
+        <section id="foundry" class="container reveal">
+            <h2 style="font-size: 4rem; font-weight: 800; margin-bottom: 40px; letter-spacing: -2px;">The Core Stack.</h2>
+            
             <div class="bento-grid">
-                <div class="bento-card bento-large">
-                    <h3>NNRM Stack (M1, M2, M3)</h3>
-                    <p>Our Neural Network Retrieval & Ranking system maps high-density physics nodes. From surface lookup (M1) to absolute Cross-Encoder logic (M3).</p>
-                    <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <span style="font-size: 10px; background: #222; padding: 4px 10px; border-radius: 10px;">Vector Ingestion</span>
-                        <span style="font-size: 10px; background: #222; padding: 4px 10px; border-radius: 10px;">97.4% Match</span>
+                <div class="bento-item bento-span-2" style="border-left: 8px solid var(--blue);">
+                    <div class="tag tag-blue">Sovereign Miner</div>
+                    <h3>NNRM3 Miner</h3>
+                    <p>The core industrial ingestion engine. NNRM3 operates as the primary miner, extracting high-density physical constants and engineering logic from 4M+ token raw volumes with absolute semantic precision.</p>
+                </div>
+
+                <div class="bento-item" style="border-left: 8px solid var(--red);">
+                    <div class="tag tag-red">Execution Tier</div>
+                    <h3>M3 Generation</h3>
+                    <p>The final synthesis layer. M3 transforms retrieved technical ore into generative design schematics, 3D lattices, and virtual prototypes.</p>
+                </div>
+
+                <div class="bento-item">
+                    <h3>M1LM & M2LM</h3>
+                    <p>Light and Large Mining variants optimized for edge hardware. Local ingestion without cloud bottlenecks.</p>
+                </div>
+
+                <div class="bento-item bento-span-2">
+                    <h3>Executive RAG (M1-M3)</h3>
+                    <p>Hierarchical Retrieval-Augmented Generation. From simple document lookup to complex engineering decision-making loops verified against physics constraints.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sim-section" style="margin-top: 150px;">
+            <div class="container">
+                <div class="sim-display reveal">
+                    <div>
+                        <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 20px;">Virtual Twins.</h2>
+                        <p style="color: #86868b;">Simulate Finite Element Analysis (FEA) and Computational Fluid Dynamics (CFD) in real-time. Designed to fail digitally so you succeed physically.</p>
+                    </div>
+                    <div class="sim-data">
+                        [NNRM3_MINING_SUCCESS]<br>
+                        [EXTRACTING_THERMAL_CONSTANTS]<br>
+                        [M3_GENERATING_NOZZLE_GEOMETRY]<br>
+                        [ITERATION_892_COMPLETE]
                     </div>
                 </div>
-                <div class="bento-card">
-                    <h3>NNR & NNRE</h3>
-                    <p>The reasoning bridge. NNRE validates every design decision against local physics constraints.</p>
-                </div>
-                <div class="bento-card">
-                    <h3>M1LM & M2LM</h3>
-                    <p>The Large Miner series. M2LM handles ingestion of 4M+ technical tokens with zero data retention.</p>
-                </div>
-                <div class="bento-card bento-large">
-                    <h3>Nostrix RAG Executive</h3>
-                    <p>Tiers M1 through M3. The final synthesis layer that transforms technical ore into generative hardware design and virtual prototypes.</p>
-                </div>
-            </div>
-
-            <div class="selector-wrap reveal">
-                <div class="model-tabs" id="tabs">
-                    <button class="tab-btn active" onclick="showSpec('m2lm')">M2LM Miner</button>
-                    <button class="tab-btn" onclick="showSpec('nnrm3')">NNRM3 Ranker</button>
-                    <button class="tab-btn" onclick="showSpec('ragm3')">RAG M3 Executive</button>
-                    <button class="tab-btn" onclick="showSpec('turbo')">M1 Turbo</button>
-                </div>
-                
-                <div id="spec-content">
-                    <h2 id="spec-title" style="font-size: 2.5rem; margin-bottom: 15px;">M2LM Large Miner</h2>
-                    <p id="spec-desc" style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.6;">The apex ingestion engine. Built to mine deep-tissue technical data from journals and blueprints. M2LM optimizes for 4M+ token volumes on Apple Silicon.</p>
-                </div>
             </div>
         </section>
 
-        <section class="repo-section reveal">
-            <div class="container">
-                <h2 style="font-size: 3rem; margin-bottom: 20px;">Open the Source.</h2>
-                <p style="color: var(--text-dim); margin-bottom: 50px; max-width: 600px; margin-inline: auto;">Nostrix is a sovereign response to centralized bottlenecks. Access the repositories and the 14-model neural stack on GitHub.</p>
-                <a href="https://github.com/Ashwin/Nostrix" class="repo-btn" target="_blank">Access Repository</a>
-            </div>
+        <section class="github-footer reveal">
+            <h2 style="font-size: 4rem; font-weight: 800; margin-bottom: 30px;">Open the Vault.</h2>
+            <p style="color: #86868b; margin-bottom: 60px; max-width: 600px; margin-inline: auto;">Access the 14-model neural stack and the industrial source code of Nostrix on GitHub.</p>
+            <a href="https://github.com/Ashwin/Nostrix" class="github-btn" target="_blank">Nostrix Repository</a>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-logo">NOSTRIX</div>
-            <p>&copy; 2026 Engineered by Ashwin. Built for the Elite.</p>
-            <div class="signature">FOUNDER CEO AND CE OF NOSTRIX AI ASHWIN</div>
+            <div class="footer-logo">NOSTRIX AI</div>
+            <p style="color: var(--text-dim);">Founded March 2026. One Among Them.</p>
+            <p style="color: var(--text-dim); margin-top: 10px;">&copy; 2026 Engineered by Ashwin.</p>
+            
+            <div class="signature-block">
+                <div class="signature-text">FOUNDER CEO AND CHIEF ENGINEER ASHWIN</div>
+                <div class="signature-text">NOSTRIX SOVEREIGN INTELLIGENCE SYSTEMS</div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // REVEAL ON SCROLL
+        // REVEAL OBSERVER
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // INTERACTIVE SPECS
-        const specs = {
-            m2lm: { title: "M2LM Large Miner", desc: "The apex ingestion engine. Built to mine deep-tissue technical data from journals and blueprints. M2LM optimizes for 4M+ token volumes on Apple Silicon." },
-            nnrm3: { title: "NNRM3 Ranker", desc: "Absolute Cross-Encoder logic. NNRM3 maps complex vector spaces to identify high-density physics nodes with 97.4% accuracy." },
-            ragm3: { title: "RAG M3 Executive", desc: "The generative decision core. RAG M3 synthesizes retrieved data into 3D schematics, FEA strain maps, and virtual prototypes." },
-            turbo: { title: "M1 Turbo", desc: "Asynchronous high-velocity scraper. Hits 15,000+ TPS for surface-level technical ore extraction in real-time." }
-        };
-
-        function showSpec(id) {
-            const content = specs[id];
-            document.getElementById('spec-title').innerText = content.title;
-            document.getElementById('spec-desc').innerText = content.desc;
-            
-            // Update Tab Style
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        // THEME TOGGLE (OPTIONAL FOR USER)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            document.body.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        });
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
         }
     </script>
 </body>
