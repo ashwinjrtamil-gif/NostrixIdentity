@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NOSTRIXAI | Sovereign Intelligence</title>
     
+    <title>NOSTRIXAI | Sovereign Engineering</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
@@ -19,11 +20,17 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        /* --- 📱 MOBILE-FIRST BASE --- */
+        /* --- 📱 BASE ADAPTIVE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; touch-action: none; }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow: hidden;
+            touch-action: none; /* Prevents bounce on mobile */
+        }
 
-        /* --- 🖱️ DESKTOP CURSOR (HIDDEN ON TOUCH) --- */
+        /* --- 🖱️ ADAPTIVE CURSOR (Hidden on Mobile) --- */
         #cursor, #aura { position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; display: none; }
         @media (pointer: fine) { #cursor, #aura { display: block; } }
         #cursor { width: 8px; height: 8px; background: #fff; border-radius: 50%; }
@@ -31,9 +38,9 @@
 
         /* --- 📽️ SHUTTER --- */
         #shutter { position: fixed; inset: 0; background: #000; z-index: 9998; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.5s; }
-        #shutter h2 { font-family: 'JetBrains Mono'; font-size: clamp(0.8rem, 4vw, 1.2rem); letter-spacing: 8px; color: var(--blue); text-transform: uppercase; text-align: center; }
+        #shutter h2 { font-family: 'JetBrains Mono'; font-size: clamp(0.8rem, 4vw, 1.2rem); letter-spacing: 8px; color: var(--blue); text-transform: uppercase; }
 
-        /* --- 📄 UNIVERSAL PAGE ENGINE --- */
+        /* --- 📄 UNIVERSAL ENGINE --- */
         .page-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
         section { height: 100vh; width: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 0 8%; position: relative; }
 
@@ -41,108 +48,74 @@
         .active .content { opacity: 1; transform: translateY(0); }
 
         /* --- 📏 FLUID TYPOGRAPHY --- */
-        .big-h { font-size: clamp(2.5rem, 9vw, 8rem); font-weight: 800; letter-spacing: -3px; line-height: 0.9; }
-        .mega-h { font-size: clamp(3.5rem, 18vw, 16rem); font-weight: 800; letter-spacing: -5px; line-height: 0.8; }
+        .big-h { font-size: clamp(2.2rem, 8vw, 8rem); font-weight: 800; letter-spacing: -2px; line-height: 0.9; }
+        .mega-h { font-size: clamp(3.2rem, 16vw, 15rem); font-weight: 800; letter-spacing: -4px; line-height: 0.8; }
         .grad-t { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: clamp(0.6rem, 2vw, 0.8rem); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .para { font-size: clamp(1rem, 3vw, 1.2rem); color: var(--dim); line-height: 1.5; max-width: 600px; margin-top: 20px; }
-
-        /* --- 🧭 RESPONSIVE NAV --- */
-        #nav-menu { position: fixed; top: 20px; right: 20px; z-index: 10001; display: flex; gap: 10px; }
-        .nav-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; padding: 10px 18px; border-radius: 30px; font-size: 9px; font-weight: 800; letter-spacing: 1px; text-decoration: none; backdrop-filter: blur(15px); }
-        @media (max-width: 600px) { .nav-btn:not(#install-btn) { display: none; } }
+        .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .para { font-size: clamp(0.95rem, 2.5vw, 1.2rem); color: var(--dim); line-height: 1.5; max-width: 600px; margin-top: 20px; }
 
         /* --- 👤 FOUNDER ADAPTIVE --- */
         .founder-grid { display: flex; flex-direction: column-reverse; gap: 30px; text-align: center; align-items: center; }
         @media (min-width: 1024px) { .founder-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; text-align: left; gap: 60px; } }
-        .f-img { width: 80%; max-width: 400px; border-radius: 30px; border: 1px solid var(--border); filter: grayscale(1); }
+        .f-img { width: 70%; max-width: 380px; border-radius: 30px; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
 
-        /* --- 📊 PERF GRID --- */
-        .perf-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 30px; }
-        @media (min-width: 768px) { .perf-grid { grid-template-columns: repeat(3, 1fr); } }
-        .perf-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 25px; border-radius: 24px; text-align: left; }
-        .perf-card h4 { color: var(--blue); font-family: 'JetBrains Mono'; margin-bottom: 8px; font-size: 11px; }
+        /* --- 📂 NAV --- */
+        .nav { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 1000; display: none; }
+        @media (min-width: 1024px) { .nav { display: block; } }
+        .dot { width: 4px; height: 4px; background: #333; border-radius: 50%; margin: 12px 0; transition: 0.4s; }
+        .dot.active { background: #fff; transform: scale(3); box-shadow: 0 0 10px #fff; }
 
-        /* --- 📍 DOTS --- */
-        .nav-dots { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); z-index: 1000; display: none; }
-        @media (min-width: 1024px) { .nav-dots { display: block; } }
-        .dot { width: 4px; height: 4px; background: #333; border-radius: 50%; margin: 12px 0; transition: 0.3s; }
-        .dot.active { background: #fff; transform: scale(2.5); }
+        /* --- 📱 INSTALL BUTTON --- */
+        #pwa-btn { position: fixed; top: 20px; right: 20px; z-index: 10001; background: var(--blue); color: #fff; padding: 10px 20px; border-radius: 40px; font-size: 10px; font-weight: 800; letter-spacing: 1px; display: none; border: none; }
 
-        footer { border-top: 1px solid var(--border); padding: 80px 20px; text-align: center; }
-        .footer-sig { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 6px; color: #444; line-height: 3; text-transform: uppercase; }
+        /* --- ⌨️ FOOTER --- */
+        .footer-sig { font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 6px; color: #444; line-height: 3; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div><div id="aura"></div>
     <div id="shutter"><h2 id="shutter-text">NOSTRIXAI</h2></div>
+    <button id="pwa-btn">INSTALL APP</button>
 
-    <div id="nav-menu">
-        <a href="#p-models" class="nav-btn">MODELS</a>
-        <a id="install-btn" class="nav-btn" style="background:var(--blue); border-color:var(--blue); display:none;">INSTALL APP</a>
-    </div>
-
-    <div class="nav-dots" id="dot-nav"></div>
+    <div class="nav" id="dot-nav"></div>
 
     <div class="page-container" id="main">
 
         <section class="active">
-            <div class="content" style="text-align:center;">
-                <span class="mono-tag">Sovereign Protocol v3.1</span>
+            <div class="content" style="text-align: center;">
                 <h1 class="big-h">NOSTRIXAI</h1>
                 <h2 class="big-h grad-t">UNRESTRICTED</h2>
-                <p class="para" style="margin-inline:auto;">Native intelligence. 4 Million Token Context. Localized on M-Series Silicon.</p>
+                <p class="para" style="margin: 20px auto;">4 Million Token Intelligence. Engineered by Ashwin.</p>
             </div>
         </section>
 
-        <section id="p-founder">
+        <section>
             <div class="content founder-grid">
                 <div>
-                    <span class="mono-tag">Core Architect</span>
+                    <span class="mono-tag">Executive Command</span>
                     <h2 class="big-h">Ashwin.</h2>
-                    <p class="para">Founder, CEO, & Chief Engineer. Leading the development of industrial-grade simulation engines and aerospace synthesis.</p>
+                    <p class="para">Founder, CEO, & Chief Engineer. Architecting the future of Edge AI and Aerospace Synthesis.</p>
                 </div>
                 <img src="ashwin-ceo.jpg" alt="Ashwin" class="f-img">
             </div>
         </section>
 
         <section>
-            <div class="content" style="text-align:center;">
-                <span class="mono-tag">Max Memory Ingestion</span>
+            <div class="content" style="text-align: center;">
+                <span class="mono-tag">Memory Density</span>
                 <h1 class="mega-h grad-t">4,000,000</h1>
                 <h2 class="big-h">TOKENS.</h2>
-                <p class="para" style="margin-inline:auto;">Total repository ingestion. Every line of code, every PDF, and every schematic—available in a single inference pass.</p>
-            </div>
-        </section>
-
-        <section id="p-models">
-            <div class="content">
-                <span class="mono-tag">Neural Features</span>
-                <h2 class="big-h">THE STACK</h2>
-                <div class="perf-grid">
-                    <div class="perf-card">
-                        <h4>AUTO-SYNC</h4>
-                        <p>Direct integration with local C++ and ONNX repos.</p>
-                    </div>
-                    <div class="perf-card">
-                        <h4>LOGIC MINER</h4>
-                        <p>Extracting mission-critical code from 4M token context.</p>
-                    </div>
-                    <div class="perf-card">
-                        <h4>PWA CORE</h4>
-                        <p>Run NOSTRIXAI as a standalone app on any device.</p>
-                    </div>
-                </div>
+                <p class="para" style="margin: 20px auto;">Localized ingestion. Native performance on M-Series Silicon.</p>
             </div>
         </section>
 
         <section>
             <div class="content" style="text-align:center;">
-                <div style="font-size:2rem; font-weight:800; letter-spacing:-1px; margin-bottom:20px;">NOSTRIXAI</div>
-                <div class="footer-sig">ASHWIN</div>
-                <div class="footer-sig" style="color:var(--blue); font-size:9px;">FOUNDER // CEO // CHIEF ENGINEER</div>
-                <div class="footer-sig" style="color:#222; margin-top:30px;">© 2026 SOVEREIGN SYSTEMS</div>
+                <div style="font-size:2rem; font-weight:800; margin-bottom:20px;">NOSTRIXAI</div>
+                <div class="footer-sig">ASHWIN // FOUNDER CEO</div>
+                <div class="footer-sig" style="color:var(--blue);">CHIEF ENGINEER</div>
+                <div class="footer-sig" style="color:#222; margin-top:20px;">© 2026 SOVEREIGN SYSTEMS</div>
             </div>
         </section>
 
@@ -153,8 +126,8 @@
         const shutter = document.getElementById('shutter');
         const shutterText = document.getElementById('shutter-text');
         const sections = document.querySelectorAll('section');
-        const navDots = document.getElementById('dot-nav');
-        const titles = ["START", "ASHWIN", "4,000,000", "FEATURES", "END"];
+        const nav = document.getElementById('dot-nav');
+        const titles = ["START", "ASHWIN", "4,000,000", "SIGNATURE"];
 
         // Cursor logic
         const cursor = document.getElementById('cursor');
@@ -164,9 +137,9 @@
             aura.style.left = e.clientX + 'px'; aura.style.top = e.clientY + 'px';
         });
 
-        // PWA Install Logic
+        // PWA Install Prompt
         let deferredPrompt;
-        const installBtn = document.getElementById('install-btn');
+        const installBtn = document.getElementById('pwa-btn');
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -181,16 +154,15 @@
             }
         });
 
-        // Dot Nav
+        // Navigation
         sections.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = 'dot';
             if (i === 0) dot.classList.add('active');
-            navDots.appendChild(dot);
+            nav.appendChild(dot);
         });
         const dots = document.querySelectorAll('.dot');
 
-        // Scroll & Shutter
         let lastIdx = 0;
         container.addEventListener('scroll', () => {
             const idx = Math.round(container.scrollTop / window.innerHeight);
@@ -203,6 +175,11 @@
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
             sections.forEach((s, i) => s.classList.toggle('active', i === idx));
         });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
+        }
     </script>
 </body>
 </html>
