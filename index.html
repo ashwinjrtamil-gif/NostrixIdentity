@@ -3,117 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOSTRIX V4.6 // WEB-STREAM REFINER</title>
+    <title>NOSTRIX // PHANTOM-QUANT</title>
     
-    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
-    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
     <style>
-        :root { --neon: #00ff41; --bg: #010101; --border: #111; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Consolas', monospace; margin: 0; padding: 20px; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
-        
-        #stats { font-size: 0.9rem; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
-        
-        #progress-container { width: 100%; height: 5px; background: #111; margin-bottom: 15px; }
-        #progress-bar { width: 0%; height: 100%; background: var(--neon); transition: 0.3s; }
+        :root {
+            --blue: #0071e3;
+            --neon: #00ff41;
+            --bg: #000000;
+            --glass: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.05);
+        }
 
-        #terminal { flex-grow: 1; background: #000; border: 1px solid var(--border); padding: 15px; overflow-y: auto; font-size: 13px; line-height: 1.6; margin-bottom: 15px; }
-        .log-entry { margin-bottom: 10px; border-left: 2px solid #222; padding-left: 10px; }
-        .status { color: #555; font-style: italic; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle at 1px 1px, #111 1px, transparent 0);
+            background-size: 30px 30px;
+        }
 
-        .input-area { display: flex; gap: 10px; }
-        input { flex-grow: 1; background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 12px; outline: none; }
-        button { background: var(--neon); color: #000; border: none; padding: 12px 25px; font-weight: bold; cursor: pointer; }
-        button:hover { opacity: 0.8; }
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+
+        .logo { font-weight: 800; letter-spacing: -2px; font-size: 1.2rem; }
+        
+        .search-container { flex-grow: 1; max-width: 600px; margin: 0 40px; position: relative; }
+        
+        input {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 12px 20px;
+            color: #fff;
+            font-family: 'JetBrains Mono';
+            font-size: 0.9rem;
+            border-radius: 4px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--blue); box-shadow: 0 0 15px rgba(0, 113, 227, 0.2); }
+
+        /* --- MAIN VIEWPORT --- */
+        #main-viewport {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 60px 10%;
+            scroll-behavior: smooth;
+        }
+
+        /* --- NEURAL UI COMPONENTS --- */
+        .container { opacity: 0; transform: translateY(20px); animation: neuralFade 0.8s forwards; }
+        @keyframes neuralFade { to { opacity: 1; transform: translateY(0); } }
+
+        .ticker { 
+            font-size: clamp(3rem, 12vw, 9rem); 
+            font-weight: 800; 
+            letter-spacing: -6px; 
+            line-height: 0.8;
+            background: linear-gradient(180deg, #fff, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .price { font-family: 'JetBrains Mono'; font-size: 2.5rem; color: var(--neon); margin-bottom: 30px; }
+        
+        .ai-badge { 
+            font-family: 'JetBrains Mono'; 
+            font-size: 10px; 
+            padding: 4px 12px; 
+            border: 1px solid var(--blue); 
+            color: var(--blue); 
+            border-radius: 20px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .summary-box { 
+            border-left: 2px solid var(--blue); 
+            padding: 20px 30px; 
+            margin: 40px 0; 
+            background: rgba(0, 113, 227, 0.03); 
+            font-size: 1.1rem; 
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .node-link {
+            display: block;
+            padding: 25px;
+            border: 1px solid #111;
+            margin-bottom: 15px;
+            text-decoration: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.01);
+            transition: 0.3s;
+        }
+
+        .node-link:hover { border-color: var(--blue); background: rgba(0, 113, 227, 0.05); transform: translateX(10px); }
+        .node-link b { color: #fff; font-size: 1rem; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .node-link small { color: #555; font-size: 0.85rem; }
+
+        /* --- SHUTTER --- */
+        #shutter {
+            position: fixed; inset: 0; background: #000; z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none; transition: 0.5s; opacity: 0;
+        }
     </style>
 </head>
 <body>
 
-    <div id="stats">TIV: 0 / 4,000,000 | TPS: 0 | STANDBY</div>
-    <div id="progress-container"><div id="progress-bar"></div></div>
-    
-    <div id="terminal">
-        <div class="log-entry status">>>> NOSTRIX V4.6 WEB_CORE BOOTED... READY FOR SEED.</div>
+    <div id="shutter">
+        <div style="font-family: 'JetBrains Mono'; color: var(--blue); letter-spacing: 10px;">SYNTHESIZING...</div>
     </div>
 
-    <div class="input-area">
-        <input type="text" id="seed-input" placeholder="INPUT SEED...">
-        <button id="engage-btn" py-click="engage">ENGAGE V4.6</button>
+    <nav>
+        <div class="logo">NOSTRIX AI</div>
+        <div class="search-container">
+            <input type="text" id="omnibox" placeholder="RESEARCH OR TICKER (e.g. TSLA or Rocket Engines)...">
+        </div>
+        <div style="font-size: 10px; color: #444; font-family: 'JetBrains Mono';">V4.6 // SOVEREIGN</div>
+    </nav>
+
+    <div id="main-viewport">
+        <div class="container" style="text-align: center; margin-top: 15vh;">
+            <h1 style="font-size: 5rem; font-weight: 800; letter-spacing: -4px;">PHANTOM-QUANT</h1>
+            <p style="color: #444; font-family: 'JetBrains Mono';">INITIATE SOVEREIGN SEARCH PROTOCOL</p>
+        </div>
     </div>
 
-    <py-config>
-        packages = ["beautifulsoup4"]
-    </py-config>
+    <script>
+        const omnibox = document.getElementById('omnibox');
+        const viewport = document.getElementById('main-viewport');
+        const shutter = document.getElementById('shutter');
 
-    <script type="py">
-        import re, collections, time, asyncio
-        from pyodide.http import pyfetch
-        from bs4 import BeautifulSoup
-        from pyscript import document
+        omnibox.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                executeMission(omnibox.value);
+            }
+        });
 
-        # --- RANKING LOGIC (PORTED FROM YOUR ORIGINAL) ---
-        class DynamicRanker:
-            def __init__(self):
-                self.priority_vocab = collections.Counter({"engine": 10, "specs": 8, "data": 5})
-                self.seen_words = collections.Counter()
-                self.total_docs = 0
+        async function executeMission(query) {
+            if (!query) return;
 
-            def update_vocabulary(self, text):
-                self.total_docs += 1
-                words = re.findall(r'\b[a-z]{5,15}\b', text.lower())
-                self.seen_words.update(words)
-                for word, count in self.seen_words.most_common(10):
-                    self.priority_vocab[word] = round(5 + (count / self.total_docs), 2)
-
-            def score_sentence(self, sentence):
-                score = sum(self.priority_vocab.get(w, 0) for w in sentence.lower().split())
-                if any(f in sentence.lower() for f in ["click", "subscribe", "cookies"]): score -= 50
-                return score
-
-        ranker = DynamicRanker()
-        tiv = 0
-        start_time = 0
-
-        def log(msg, type="data"):
-            term = document.querySelector("#terminal")
-            div = document.createElement("div")
-            div.className = "log-entry"
-            if type == "status": div.classList.add("status")
-            div.innerText = f">>> {msg}"
-            term.appendChild(div)
-            term.scrollTop = term.scrollHeight
-
-        async def engage(event):
-            global tiv, start_time
-            seed = document.querySelector("#seed-input").value
-            if not seed: return
+            // Trigger Shutter
+            shutter.style.opacity = '1';
             
-            tiv = 0
-            start_time = time.time()
-            log(f"PHASE 1: BOOTSTRAPPING '{seed.upper()}'", "status")
+            // Artificial delay for "Neural Processing" feel
+            await new Promise(r => setTimeout(r, 800));
+
+            const isTicker = /^[A-Z]{1,5}$/.test(query.toUpperCase());
             
-            # Note: Browser requests are CORS-restricted. 
-            # In a real tool, you'd use a proxy. Here we simulate the ingestion.
-            await run_mission(seed)
+            if (isTicker) {
+                renderFinance(query.toUpperCase());
+            } else {
+                renderResearch(query);
+            }
 
-        async def run_mission(seed):
-            global tiv
-            # SIMULATED INGESTION FLOW (Browser safe)
-            for i in range(1, 11):
-                await asyncio.sleep(0.5) # Simulate network latency
-                chunk_size = 400000 + (i * 1234)
-                tiv += chunk_size
-                
-                # Telemetry Update
-                elapsed = time.time() - start_time
-                tps = int(tiv / elapsed)
-                document.querySelector("#stats").innerText = f"TIV: {tiv:,} / 4,000,000 | TPS: {tps:,} | NODE_ACTIVE"
-                document.querySelector("#progress-bar").style.width = f"{(tiv/4000000)*100}%"
-                
-                log(f"[ALGO_LOCK] Found significant node for {seed} chunk {i}")
-                
-            log("4M MISSION COMPLETE. SOVEREIGN DATA SECURED.", "status")
+            shutter.style.opacity = '0';
+        }
 
+        function renderFinance(ticker) {
+            // Note: On a real site, you'd fetch from a price API here
+            viewport.innerHTML = `
+                <div class="container">
+                    <span class="ai-badge">Market Intel Node</span>
+                    <h1 class="ticker">${ticker}</h1>
+                    <div class="price">$---.--</div>
+                    <div class="summary-box">
+                        Sovereign retrieval for ${ticker} initiated. Data feed requires secure API bridge. 
+                        In local mode, the Phantom-Quant engine identifies this as a High-Priority Asset.
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderResearch(query) {
+            viewport.innerHTML = `
+                <div class="container">
+                    <span class="ai-badge">Neural Synthesis Node</span>
+                    <h1 style="font-size: 4rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px;">${query.toUpperCase()}</h1>
+                    <div class="summary-box">
+                        Analyzing technical specifications for "${query}". Processing semantic vectors across 4M token context. 
+                        Retrieving engineering standards and peer-reviewed nodes...
+                    </div>
+                    
+                    <h3 style="font-family: 'JetBrains Mono'; font-size: 12px; color: #333; margin: 40px 0 20px 0; border-bottom: 1px solid #111; padding-bottom: 10px;">KNOWLEDGE RECOVERY PATHS</h3>
+                    
+                    <a href="#" class="node-link">
+                        <b>Engineering Protocol Alpha</b>
+                        <small>Deep technical breakdown of structural constraints and thermal dynamics related to ${query}.</small>
+                    </a>
+                    <a href="#" class="node-link">
+                        <b>Standardization Node</b>
+                        <small>ISO compliance and safety synthesis for global deployment.</small>
+                    </a>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
