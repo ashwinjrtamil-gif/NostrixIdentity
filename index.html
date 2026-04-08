@@ -9,35 +9,35 @@
     <style>
         :root { --blue: #0071e3; --neon: #00ff41; --bg: #000; }
         body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background-image: radial-gradient(circle at 1px 1px, #111 1px, transparent 0); background-size: 30px 30px; }
-        nav { padding: 20px 5%; border-bottom: 1px solid #111; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+        nav { padding: 15px 5%; border-bottom: 1px solid #111; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 10; }
         #viewport { flex-grow: 1; overflow-y: auto; padding: 40px 10%; scroll-behavior: smooth; }
-        .input-bar { padding: 20px 10%; background: rgba(5,5,5,0.8); border-top: 1px solid #111; display: flex; gap: 10px; }
-        input { flex-grow: 1; background: #000; border: 1px solid #222; padding: 15px; color: #fff; font-family: 'JetBrains Mono'; outline: none; border-radius: 4px; }
-        input:focus { border-color: var(--blue); }
-        .ai-card { border-left: 2px solid var(--blue); background: rgba(0,113,227,0.02); padding: 30px; margin-bottom: 30px; animation: slideUp 0.6s ease-out; }
+        .input-bar { padding: 20px 10%; background: #050505; border-top: 1px solid #111; display: flex; gap: 10px; }
+        input { flex-grow: 1; background: #000; border: 1px solid #222; padding: 15px; color: #fff; font-family: 'JetBrains Mono'; outline: none; border-radius: 4px; transition: 0.3s; }
+        input:focus { border-color: var(--blue); box-shadow: 0 0 20px rgba(0,113,227,0.1); }
+        .ai-card { border-left: 2px solid var(--blue); background: rgba(0,113,227,0.02); padding: 30px; margin-bottom: 30px; animation: slideUp 0.5s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .ticker { font-size: 80px; font-weight: 800; letter-spacing: -5px; margin: 0; background: linear-gradient(180deg, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .unit-chip { font-family: 'JetBrains Mono'; font-size: 10px; padding: 4px 10px; border: 1px solid var(--blue); color: var(--blue); margin: 5px; display: inline-block; border-radius: 4px; }
-        .node-link { display: block; padding: 15px; border: 1px solid #111; margin-top: 10px; text-decoration: none; color: #777; border-radius: 5px; transition: 0.3s; }
-        .node-link:hover { border-color: var(--blue); background: rgba(0,113,227,0.05); color: #fff; }
+        .ticker { font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; letter-spacing: -4px; margin: 0; color: #fff; }
+        .unit-chip { font-family: 'JetBrains Mono'; font-size: 10px; padding: 4px 10px; border: 1px solid var(--blue); color: var(--blue); margin: 5px; display: inline-block; }
+        .node-link { display: block; padding: 20px; border: 1px solid #111; margin-top: 10px; text-decoration: none; color: #888; border-radius: 4px; }
+        .node-link b { color: var(--blue); text-transform: uppercase; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div style="font-weight: 800; letter-spacing: -1px;">NOSTRIX // PHANTOM-QUANT</div>
-        <div id="status-chip" style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">IDLE</div>
+        <div style="font-weight: 800; letter-spacing: -1px; font-size: 18px;">NOSTRIX // PHANTOM-QUANT</div>
+        <div id="status" style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">KERNEL_IDLE</div>
     </nav>
 
     <div id="viewport">
-        <div class="ai-card" style="text-align:center; border:none; background:none; margin-top:15vh;">
-            <h1 style="font-size: 4rem; letter-spacing:-3px;">SOVEREIGN KERNEL</h1>
-            <p style="color: #444; font-family: 'JetBrains Mono';">AWAITING INPUT COMMAND</p>
+        <div style="text-align:center; margin-top:20vh;">
+            <h1 style="font-size: 5rem; letter-spacing:-5px; margin:0;">SYSTEM READY.</h1>
+            <p style="color:#444; font-family:'JetBrains Mono';">INITIATE QUANTUM SEARCH OR TICKER SCAN</p>
         </div>
     </div>
 
     <div class="input-bar">
-        <input type="text" id="omnibox" placeholder="ENTER TICKER OR RESEARCH SEED...">
+        <input type="text" id="omnibox" placeholder="RESEARCH SEED (e.g. F-22 Raptor) OR TICKER (TSLA)...">
     </div>
 
     <script type="py">
@@ -45,85 +45,101 @@
         import re, math, asyncio
         from pyodide.http import pyfetch
 
-        # --- LIGHTWEIGHT SEMANTIC SCORER ---
-        # Replaces SentenceTransformers for browser-speed execution
-        def get_semantic_score(query, text):
-            query_set = set(re.findall(r'\w+', query.lower()))
-            text_set = set(re.findall(r'\w+', text.lower()))
-            intersection = query_set.intersection(text_set)
-            if not query_set: return 0
-            return len(intersection) / math.sqrt(len(query_set) * len(text_set) + 1)
+        # --- THE OMNI-BYPASS LIST ---
+        PROXIES = [
+            "https://api.allorigins.win/get?url=",
+            "https://corsproxy.io/?",
+            "https://thingproxy.freeboard.io/fetch/"
+        ]
 
-        async def execute_mission(event):
+        def light_semantic_score(query, text):
+            """Hyper-lightweight TF-IDF replacement for RAG ranking."""
+            q_terms = set(re.findall(r'\w+', query.lower()))
+            t_terms = set(re.findall(r'\w+', text.lower()))
+            if not q_terms: return 0
+            return len(q_terms & t_terms) / math.sqrt(len(q_terms) * len(t_terms) + 1)
+
+        async def fetch_with_failover(target_url):
+            """Attempts to bypass CORS using multiple proxy rotation."""
+            for proxy in PROXIES:
+                try:
+                    # Some proxies need encoding, some don't. AllOrigins needs encoding.
+                    url = f"{proxy}{window.encodeURIComponent(target_url)}" if "allorigins" in proxy else f"{proxy}{target_url}"
+                    response = await pyfetch(url)
+                    if response.ok:
+                        data = await response.json()
+                        # AllOrigins wraps content in 'contents', corsproxy returns raw
+                        return data.get('contents', data) if isinstance(data, dict) else str(data)
+                except:
+                    continue
+            return None
+
+        async def run_kernel(event):
             if event.key != "Enter": return
             
             query = document.querySelector("#omnibox").value
             document.querySelector("#omnibox").value = ""
-            status = document.querySelector("#status-chip")
+            status = document.querySelector("#status")
             viewport = document.querySelector("#viewport")
             
-            status.innerText = "SYNTHESIZING..."
+            status.innerText = "BYPASSING_RESTRICTIONS..."
             status.style.color = "#0071e3"
 
-            # 1. INTENT REDIRECTION
-            if re.match(r'^[A-Z]{1,5}$', query.upper()):
-                # SIMULATED QUANT FINANCE (Uses public proxy for real data)
-                ticker = query.upper()
+            is_ticker = bool(re.match(r'^[A-Z]{1,5}$', query.upper()))
+            
+            # 1. FETCH DATA
+            target = f"https://finance.yahoo.com/quote/{query.upper()}" if is_ticker else f"https://html.duckduckgo.com/html/?q={query.replace(' ', '+')}+specs"
+            raw_html = await fetch_with_failover(target)
+
+            if not raw_html:
+                status.innerText = "ERR_ALL_PROXIES_FAILED"
+                status.style.color = "red"
+                return
+
+            # 2. PROCESS & RENDER
+            if is_ticker:
+                price = re.search(r'fin-streamer.*?value="(.*?)"', str(raw_html))
+                price = price.group(1) if price else "N/A"
                 viewport.innerHTML = f"""
                     <div class="ai-card">
-                        <span style="font-family:JetBrains Mono; font-size:10px; color:var(--blue);">QUANT_INTEL_NODE</span>
-                        <h1 class="ticker">{ticker}</h1>
-                        <p style="font-family:JetBrains Mono; font-size:30px; color:var(--neon);">$---.--</p>
-                        <div style="color:#666; margin-top:20px;">Fetching liquidity data via CORS-Bridge...</div>
+                        <h1 class="ticker">{query.upper()}</h1>
+                        <div style="font-size:40px; color:var(--neon); font-family:'JetBrains Mono';">${price}</div>
+                        <p style="color:#555; margin-top:20px;">Data synthesized via Secure Proxy Tunnel.</p>
                     </div>
                 """
             else:
-                # RESEARCH RAG MODE
-                status.innerText = "SCRAPING_NODES..."
-                # Using a CORS proxy to bypass browser restrictions
-                search_url = f"https://api.allorigins.win/get?url={window.encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query + '+specs')}"
+                # RAG Extraction
+                snippets = re.findall(r'result__snippet.*?>(.*?)</a>', str(raw_html), re.S)
+                titles = re.findall(r'result__a.*?>(.*?)</a>', str(raw_html), re.S)
                 
-                try:
-                    response = await pyfetch(search_url)
-                    raw_data = await response.json()
-                    html_content = raw_data['contents']
-                    
-                    # Extract snippets via Regex (Lightweight BeautifulSoup alternative)
-                    snippets = re.findall(r'result__snippet.*?>(.*?)</a>', html_content, re.S)
-                    titles = re.findall(r'result__a.*?>(.*?)</a>', html_content, re.S)
-                    
-                    nodes = []
-                    for t, s in zip(titles, snippets):
-                        clean_t = re.sub('<[^<]+?>', '', t)
-                        clean_s = re.sub('<[^<]+?>', '', s)
-                        score = get_semantic_score(query, clean_t + " " + clean_s)
-                        nodes.append({"title": clean_t, "snippet": clean_s, "score": score})
-                    
-                    nodes.sort(key=lambda x: x['score'], reverse=True)
-                    
-                    # UI DRAW
-                    tech_units = re.findall(r'(\d+\.?\d*\s?(kN|lbf|kg|Mach|Isp|psi|pa|rpm|V|A|MW|km/s|m/s))', str(nodes), re.I)
-                    chips = "".join([f"<span class='unit-chip'>{u[0]}</span>" for u in list(set(tech_units))[:10]])
-                    links = "".join([f"<a href='#' class='node-link'><b>{n['title']}</b><br><small>{n['snippet'][:150]}...</small></a>" for n in nodes[:5]])
-                    
-                    viewport.innerHTML = f"""
-                        <div class="container">
-                            <h1 style="letter-spacing:-2px; font-size:3rem;">{query.upper()}</h1>
-                            <div class="summary-box" style="border-left:2px solid var(--blue); padding-left:20px; color:#aaa; margin:20px 0;">
-                                {nodes[0]['snippet'] if nodes else "No high-confidence data found."}
-                            </div>
-                            <div style="margin-bottom:30px;">{chips}</div>
-                            {links}
+                nodes = []
+                for t, s in zip(titles, snippets):
+                    ct, cs = re.sub('<[^<]+?>', '', t), re.sub('<[^<]+?>', '', s)
+                    score = light_semantic_score(query, ct + " " + cs)
+                    nodes.append({"t": ct, "s": cs, "score": score})
+                
+                nodes.sort(key=lambda x: x['score'], reverse=True)
+                units = list(set([u[0] for u in re.findall(r'(\d+\.?\d*\s?(kN|Mach|Isp|psi|MW|km/s))', str(nodes), re.I)]))
+                
+                chips = "".join([f"<span class='unit-chip'>{u}</span>" for u in units[:8]])
+                links = "".join([f"<div class='node-link'><b>{n['t']}</b><br><small>{n['s']}</small></div>" for n in nodes[:5]])
+
+                viewport.innerHTML = f"""
+                    <div class="container">
+                        <h1 style="letter-spacing:-3px; font-size:3rem;">{query.upper()}</h1>
+                        <div style="border-left:2px solid var(--blue); padding-left:20px; color:#aaa; margin:20px 0; line-height:1.6;">
+                            {nodes[0]['s'] if nodes else "System could not verify high-confidence nodes."}
                         </div>
-                    """
-                except Exception as e:
-                    viewport.innerHTML += f"<div class='ai-card' style='color:red;'>ERR: {str(e)}</div>"
+                        <div style="margin-bottom:20px;">{chips}</div>
+                        {links}
+                    </div>
+                """
 
-            status.innerText = "IDLE"
+            status.innerText = "KERNEL_IDLE"
             status.style.color = "#444"
+            viewport.scrollTop = 0
 
-        # Bind Event
-        document.querySelector("#omnibox").onkeypress = execute_mission
+        document.querySelector("#omnibox").onkeypress = run_kernel
     </script>
 </body>
 </html>
