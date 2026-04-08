@@ -3,112 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nostrix AI | Ashwin - Founder & Chief Engineer</title>
-    <meta name="description" content="Nostrix AI: Industrial-grade neural engines for generative design and high-velocity research. Founded by Ashwin.">
-    <link rel="stylesheet" href="style.css">
+    <title>NOSTRIX AI | ASHWIN - CHIEF ENGINEER</title>
+    <meta name="description" content="Nostrix AI: Industrial-grade neural engines for generative design. Founded by Ashwin.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #000;
-            --card: #0a0a0a;
+            --bg: #000000;
+            --card: #080808;
             --accent: #00ff41;
+            --accent-dim: #003310;
             --text: #ffffff;
-            --text-dim: #888;
-            --border: #222;
+            --text-dim: #777777;
+            --border: #1a1a1a;
+            --nav-height: 70px;
         }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .nav-flex { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-        .logo { font-weight: 900; letter-spacing: 2px; text-decoration: none; color: var(--accent); }
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
-        .hero { padding: 120px 0 60px; text-align: center; }
-        .gradient-text { font-size: 4rem; font-weight: 900; background: linear-gradient(to right, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .cta-button { background: var(--accent); color: #000; padding: 15px 35px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 30px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 50px; }
-        .card { background: var(--card); padding: 40px; border-radius: 20px; border: 1px solid var(--border); transition: 0.3s; }
-        .card:hover { border-color: var(--accent); }
-        .metric { font-size: 2.5rem; font-weight: 900; color: var(--accent); display: block; }
-        .step-box { text-align: center; padding: 20px; position: relative; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- 🛰️ NAVIGATION --- */
+        nav {
+            height: var(--nav-height);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; }
+        
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-weight: 900;
+            letter-spacing: -1px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span { color: var(--accent); margin-left: 5px; }
+
+        .nav-links { display: flex; gap: 30px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- 🚀 HERO SECTION --- */
+        .hero {
+            padding-top: calc(var(--nav-height) + 100px);
+            padding-bottom: 100px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-label {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1.glitch-text {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-dim);
+            font-size: 1.25rem;
+        }
+
+        .btn-group {
+            margin-top: 50px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2); }
+
+        .btn-secondary { border: 1px solid var(--border); color: #fff; }
+        .btn-secondary:hover { background: var(--border); }
+
+        /* --- 📊 INDUSTRIAL METRICS --- */
+        .metrics-bar {
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: #030303;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .metric-card h3 { font-size: 3rem; font-weight: 900; color: var(--text); margin-bottom: 5px; }
+        .metric-card p { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; }
+
+        /* --- ⚙️ DESIGN GALLERY & SPECS --- */
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; }
+        .section-header p { color: var(--text-dim); max-width: 600px; }
+
+        .specs-section { padding: 120px 0; }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .spec-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spec-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent);
+        }
+
+        .spec-item h4 {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .spec-item h3 { font-size: 1.8rem; margin-bottom: 20px; }
+
+        /* --- 🧪 GENERATIVE SHOWCASE --- */
+        .generative-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gen-box {
+            aspect-ratio: 1/1;
+            background: #111;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: 900;
+            border-radius: 10px;
+            transition: 0.4s;
+            cursor: crosshair;
+        }
+
+        .gen-box:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* --- 🛡️ TRUST & FOUNDER --- */
+        .founder-section {
+            padding: 120px 0;
+            background: linear-gradient(to bottom, #000, #0a0a0a);
+        }
+
+        .founder-card {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .founder-img {
+            height: 500px;
+            background: #111;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .founder-content h2 { font-size: 3rem; margin-bottom: 20px; }
+        .founder-tagline { color: var(--accent); font-weight: bold; margin-bottom: 20px; display: block; }
+
+        /* --- ⌨️ FOOTER --- */
+        footer {
+            padding: 100px 0 50px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 30px; display: block; text-decoration: none; color: #fff; }
+
+        .signature {
+            margin-top: 60px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            color: #222;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+            .specs-grid, .founder-card { grid-template-columns: 1fr; }
+            .generative-grid { grid-template-columns: 1fr; }
+            .founder-img { height: 300px; }
+        }
     </style>
 </head>
 <body>
+
     <nav>
         <div class="container nav-flex">
-            <a href="index.html" class="logo">NOSTRIX AI</a>
+            <a href="#" class="logo">NOSTRIX<span>AI</span></a>
             <div class="nav-links">
                 <a href="#solutions">Solutions</a>
-                <a href="specs.html">Specs</a>
-                <a href="biography.html">Founder</a>
-                <a href="#trust">Security</a>
+                <a href="#specs">Technical Specs</a>
+                <a href="#founder">Founder</a>
+                <a href="#security">Security</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <header class="hero container">
-            <h1 class="gradient-text">AUTONOMOUS ENGINEERING.<br>NOT JUST CHAT.</h1>
-            <p style="color: var(--text-dim); margin-top: 20px; font-size: 1.4rem; max-width: 800px; margin-inline: auto;">
-                Nostrix builds native, unrestricted neural engines that discover innovative structures and simulate physics in real-time. We don't build wrappers—we build the future of industrial design.
-            </p>
-            <a href="#solutions" class="cta-button">Engage V11 Engine</a>
-            
-            <div style="margin-top: 60px; border: 1px solid var(--border); border-radius: 15px; background: #111; height: 300px; display: flex; align-items: center; justify-content: center;">
-                <p style="color: #444;">[LIVE_TERMINAL_INTERFACE_PREVIEW_V11]</p>
+        <section class="hero container">
+            <span class="hero-label">FOUNDED MARCH 2026 // VERSION 12.0</span>
+            <h1 class="glitch-text">NATIVE ENGINES.<br>INDUSTRIAL DESIGN.</h1>
+            <p>We don't build wrappers. We build high-velocity neural engines for generative design, virtual prototyping, and digital twins.</p>
+            <div class="btn-group">
+                <a href="#specs" class="btn btn-primary">Engage Specs</a>
+                <a href="#founder" class="btn btn-secondary">Meet Ashwin</a>
             </div>
         </header>
 
-        <section class="container" style="text-align: center; padding: 60px 0;">
-            <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--text-dim);">Industrial Performance Metrics</p>
-            <div class="grid-3">
-                <div class="card"><span class="metric">35%</span><p>Reduction in Design Cycles</p></div>
-                <div class="card"><span class="metric">4M+</span><p>Technical Tokens Ingested</p></div>
-                <div class="card"><span class="metric">50%</span><p>Increase in Design Iterations</p></div>
-            </div>
-        </section>
-
-        <section id="solutions" class="container" style="padding: 100px 0;">
-            <h2 style="text-align: center; font-size: 2.5rem;">The Engineering Loop</h2>
-            <div style="display: flex; justify-content: space-around; margin-top: 50px; flex-wrap: wrap;">
-                <div class="step-box"><h3>1. Data Mining</h3><p>M2LM extracts technical ore.</p></div>
-                <div class="step-box"><h3>2. Neural RAG</h3><p>NNRM3 ranks for precision.</p></div>
-                <div class="step-box"><h3>3. Generation</h3><p>Physics-aware design output.</p></div>
-            </div>
-
-            <div class="grid-3" style="margin-top: 80px;">
-                <div class="card">
-                    <span style="color: var(--accent);">FLAGSHIP</span>
-                    <h3>NOSTRIXRAGM3</h3>
-                    <p>Massive-scale data synthesis utilizing custom miners for industrial RAG.</p>
+        <section class="metrics-bar">
+            <div class="container metrics-grid">
+                <div class="metric-card">
+                    <h3>35%</h3>
+                    <p>Faster Cycles</p>
                 </div>
-                <div class="card">
-                    <span style="color: var(--accent);">SIMULATION</span>
-                    <h3>VIRTUAL TWIN V1</h3>
-                    <p>Predict product behavior with AI-enhanced FEA and CFD simulation tools.</p>
+                <div class="metric-card">
+                    <h3>4M+</h3>
+                    <p>Training Tokens</p>
                 </div>
-                <div class="card">
-                    <span style="color: var(--accent);">SECURITY</span>
-                    <h3>ZERO-DATA PROMISE</h3>
-                    <p>No data retention. Your engineering proprietary data stays yours.</p>
+                <div class="metric-card">
+                    <h3>50%</h3>
+                    <p>More Iterations</p>
+                </div>
+                <div class="metric-card">
+                    <h3>0.0</h3>
+                    <p>Data Retention</p>
                 </div>
             </div>
         </section>
 
-        <section id="trust" class="container" style="padding: 80px; background: #050505; border-radius: 30px; border: 1px solid var(--border); text-align: center;">
-            <h2>Hardened for the Enterprise</h2>
-            <p style="color: var(--text-dim);">SOC2 Ready | End-to-End Encryption | Local Execution Support</p>
-            <p><strong>Privacy Policy:</strong> We do not use customer design data to train our base models. Period.</p>
+        <section id="solutions" class="specs-section container">
+            <div class="section-header">
+                <h2>The Sovereignty Stack</h2>
+                <p>Industrial-grade tools designed for the next generation of aerospace and hardware engineering.</p>
+            </div>
+            
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <h4>GEN_DESIGN</h4>
+                    <h3>Generative Optimization</h3>
+                    <p>AI algorithms create thousands of design options based on weight, material, and cost constraints. Discovering innovative structures that human designers overlook.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>PROTOTYPE_V</h4>
+                    <h3>Virtual Simulation</h3>
+                    <p>Enhanced FEA and CFD predictive modeling. Reduce the need for physical prototypes and improve accuracy by 30%.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>DIGITAL_TWIN</h4>
+                    <h3>Predictive Maintenance</h3>
+                    <p>Real-time simulation of manufacturing processes. Predict machinery failure before it happens, reducing downtime by 20-50%.</p>
+                </div>
+                <div class="spec-item">
+                    <h4>NEURAL_RAG</h4>
+                    <h3>M2LM & NNRM3</h3>
+                    <p>Fine-tuned engineering models utilizing industry-specific data for real-time edge processing and autonomous decision making.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" style="padding-bottom: 120px;">
+            <div class="section-header">
+                <h2>Design Iterations</h2>
+                <p>Real-time visualization of the generative core in action.</p>
+            </div>
+            <div class="generative-grid">
+                <div class="gen-box">ITER_001_LATTICE</div>
+                <div class="gen-box">ITER_042_MANIFOLD</div>
+                <div class="gen-box">ITER_892_NOZZLE</div>
+                <div class="gen-box">ITER_1024_SPAR</div>
+                <div class="gen-box">ITER_2056_TURBINE</div>
+                <div class="gen-box">ITER_4096_CHASSIS</div>
+            </div>
+        </section>
+
+        <section id="founder" class="founder-section">
+            <div class="container founder-card">
+                <div class="founder-img"></div>
+                <div class="founder-content">
+                    <span class="founder-tagline">CHIEF ENGINEER & CEO</span>
+                    <h2>ASHWIN</h2>
+                    <p style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 30px;">
+                        The architect behind the Nostrix ecosystem. Ashwin founded the firm to disrupt centralized AI bottlenecks, shifting the focus from "chatting" to "engineering." Under his leadership, Nostrix has evolved into a 14-model neural stack built for high-performance industrial applications.
+                    </p>
+                    <div style="background: var(--card); padding: 30px; border: 1px solid var(--border); border-radius: 10px;">
+                        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                            "We aren't building helpers. We are building the engines that will design the hardware of 2028."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="security" class="container" style="padding: 100px 0; text-align: center;">
+            <div style="border: 1px solid var(--accent); padding: 60px; border-radius: 40px; background: var(--accent-dim);">
+                <h2 style="color: var(--accent); margin-bottom: 20px;">Hardened for Industry</h2>
+                <p style="max-width: 800px; margin: 0 auto 30px;">SOC2 compliant architecture. We operate on a Zero-Data Retention policy. Your design secrets and proprietary physics data never leave your local environment.</p>
+                <a href="#" class="btn btn-primary" style="background: #fff; color: #000;">View Security Audit</a>
+            </div>
         </section>
     </main>
 
-    <footer style="padding: 100px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 100px;">
+    <footer>
         <div class="container">
-            <h2 class="logo">NOSTRIX AI</h2>
-            <p style="color: var(--text-dim); margin: 20px 0;">Founded March 2026. A disruptive response to centralized bottlenecks.</p>
-            <div class="nav-links" style="margin-bottom: 40px;">
-                <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact Ashwin</a>
+            <a href="#" class="footer-logo">NOSTRIX AI</a>
+            <div class="nav-links" style="justify-content: center; margin-bottom: 40px;">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Resources</a>
+                <a href="#">Documentation</a>
             </div>
-            <p style="color: var(--text-dim);">&copy; 2026 Nostrix AI. Engineered by Ashwin.</p>
-            <div style="margin-top: 30px; font-weight: bold; letter-spacing: 5px; color: #333;">FOUNDER, CEO AND CE OF NOSTRIX AI ASHWIN</div>
+            <p style="color: var(--text-dim); font-size: 0.8rem;">&copy; 2026 NOSTRIX AI. ALL RIGHTS RESERVED. ENGINEERED BY ASHWIN.</p>
+            <div class="signature">FOUNDER, CEO AND CHIEF ENGINEER OF NOSTRIX AI ASHWIN</div>
         </div>
     </footer>
+
 </body>
 </html>
