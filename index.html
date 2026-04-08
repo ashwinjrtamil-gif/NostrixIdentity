@@ -5,225 +5,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOSTRIX | ASHWIN</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #000000;
-            --text-dim: #6e6e73;
-            --blue: #0071e3;
-            --red: #ff3b30;
-            --glass: rgba(255, 255, 255, 0.7);
-            --border: #d2d2d7;
-            --sf-ease: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        [data-theme="dark"] {
             --bg: #000000;
             --text: #ffffff;
             --text-dim: #86868b;
-            --glass: rgba(22, 22, 23, 0.7);
-            --border: #1d1d1f;
+            --accent-blue: #0071e3;
+            --accent-red: #ff3b30;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --sf-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
-        html { scroll-behavior: smooth; background: var(--bg); }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; background: var(--bg); overflow-x: hidden; }
         body { 
             background: var(--bg); color: var(--text); 
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 🛰️ NAVIGATION --- */
+        /* --- 🎨 ABSTRACT BACKGROUND CANVAS --- */
+        #canvas-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #000 100%);
+        }
+        .nebula {
+            position: absolute; width: 600px; height: 600px; border-radius: 50%;
+            filter: blur(120px); opacity: 0.15; z-index: -1; pointer-events: none;
+            transition: transform 0.3s ease-out;
+        }
+        .blue-nebula { background: var(--accent-blue); top: -10%; right: -10%; }
+        .red-nebula { background: var(--accent-red); bottom: -10%; left: -10%; }
+
+        /* --- 🖱️ CUSTOM INTERACTIVE CURSOR --- */
+        #cursor {
+            width: 20px; height: 20px; background: #fff; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 10001;
+            mix-blend-mode: difference; transition: transform 0.1s;
+        }
+
+        /* --- 🛰️ NAV --- */
         nav {
-            height: 52px; width: 100%; position: fixed; top: 0; z-index: 10000;
-            background: var(--glass); backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--border);
+            height: 60px; width: 100%; position: fixed; top: 0; z-index: 10000;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
         }
-        .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
         .nav-flex { display: flex; justify-content: space-between; align-items: center; height: 100%; }
-        .logo { font-weight: 800; font-size: 1rem; text-decoration: none; color: var(--text); letter-spacing: -0.5px; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 11px; margin-left: 25px; font-weight: 600; }
+        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; }
 
-        /* --- ✨ ANIMATION --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s var(--sf-ease); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* --- ✨ MOTION --- */
+        .reveal { opacity: 0; transform: translateY(50px) scale(0.95); transition: all 1.2s var(--sf-ease); }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
-        /* --- 🚀 HERO: THE FOUNDER'S VISION --- */
+        /* --- 🚀 HERO: THE RE-IMAGINED START --- */
         .hero {
-            height: 90vh; display: flex; flex-direction: column; justify-content: center;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
             align-items: center; text-align: center;
         }
+        .abstract-tag {
+            font-family: 'JetBrains Mono'; font-size: 0.7rem; letter-spacing: 5px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-red));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 20px; text-transform: uppercase;
+        }
         .hero h1 {
-            font-size: clamp(3.5rem, 12vw, 8.5rem); font-weight: 800; line-height: 0.9; letter-spacing: -4px;
-        }
-        .hero p {
-            font-size: 1.4rem; color: var(--text-dim); margin-top: 20px; font-weight: 500;
+            font-size: clamp(3rem, 12vw, 9rem); font-weight: 800; letter-spacing: -6px;
+            line-height: 0.85; margin-bottom: 20px;
         }
 
-        /* --- 🏛️ THE TITLES: TRIPLE THREAT --- */
-        .titles-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-            padding: 100px 0; border-top: 1px solid var(--border);
+        /* --- 🏛️ FOUNDER PORTAL --- */
+        .founder-grid {
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px;
+            padding: 100px 0; align-items: center;
         }
-        .title-box { text-align: center; padding: 40px 20px; }
-        .title-box h2 { font-size: 0.8rem; font-family: 'JetBrains Mono'; letter-spacing: 4px; color: var(--blue); text-transform: uppercase; margin-bottom: 10px; }
-        .title-box p { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        .founder-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 60px; border-radius: 40px; backdrop-filter: blur(40px);
+        }
+        .founder-card h2 { font-size: 4rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
+        .role-pill { 
+            display: inline-block; padding: 6px 15px; border-radius: 20px; 
+            border: 1px solid var(--accent-blue); color: var(--accent-blue);
+            font-family: 'JetBrains Mono'; font-size: 10px; margin-right: 10px;
+        }
 
-        /* --- 👤 FOUNDER IMAGE --- */
-        .ashwin-hero {
-            width: 100%; display: flex; justify-content: center; padding-bottom: 100px;
+        .founder-img-wrap { position: relative; }
+        .founder-img {
+            width: 100%; border-radius: 40px; filter: grayscale(100%);
+            transition: 0.8s var(--sf-ease); border: 1px solid var(--glass-border);
         }
-        .ashwin-img {
-            width: 320px; height: 400px; object-fit: cover; border-radius: 40px;
-            border: 1px solid var(--border); filter: grayscale(20%); transition: 0.5s;
-        }
-        .ashwin-img:hover { filter: grayscale(0%); transform: scale(1.02); }
+        .founder-img:hover { filter: grayscale(0%); transform: translateY(-10px); }
 
-        /* --- 🛠️ THE MODELS: UNIQUE UI --- */
-        .stack-section { padding: 100px 0; background: #f5f5f7; }
-        .model-card {
-            background: #fff; border: 1px solid var(--border); border-radius: 30px;
-            padding: 50px; margin-bottom: 30px; position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: space-between;
-            min-height: 400px;
+        /* --- 🛠️ BENTO ROADMAP: M-SERIES --- */
+        .bento-section { padding: 120px 0; }
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
         }
+        .bento-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 34px; padding: 40px; backdrop-filter: blur(20px);
+            transition: 0.4s var(--sf-ease); position: relative; overflow: hidden;
+        }
+        .bento-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-5px); }
+        .bento-card.large { grid-column: span 2; }
         
-        .m1-card { border-left: 10px solid var(--blue); }
-        .m2-card { border-left: 10px solid var(--text); }
-        .m3-card { border-left: 10px solid var(--red); background: #fafafa; }
+        .card-label { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--text-dim); margin-bottom: 20px; display: block; }
+        .card-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
+        .card-p { color: var(--text-dim); line-height: 1.5; font-size: 1rem; }
 
-        .marketing-line { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px; }
-        .model-specs { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--blue); text-transform: uppercase; }
-        .status-tag { 
-            position: absolute; top: 30px; right: 30px; padding: 8px 16px; 
-            border-radius: 20px; font-size: 10px; font-weight: 800; border: 1px solid var(--border);
+        /* --- 🌀 PERFORMANCE CONSOLE --- */
+        .console {
+            background: #050505; border: 1px solid var(--glass-border);
+            border-radius: 30px; padding: 40px; font-family: 'JetBrains Mono';
+            font-size: 0.8rem; color: var(--accent-blue); margin-top: 40px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
         }
 
-        /* --- 📂 REPOSITORY --- */
-        .repo-bar {
-            padding: 80px 0; text-align: center; background: #000; color: #fff;
+        /* --- 📂 REPO FOOTER --- */
+        .repo-link-wrap {
+            padding: 150px 0; text-align: center;
         }
         .repo-btn {
-            color: #fff; text-decoration: none; font-size: 2rem; font-weight: 800;
-            border-bottom: 4px solid var(--blue); padding-bottom: 5px; transition: 0.3s;
+            font-size: 3.5rem; font-weight: 800; color: #fff; text-decoration: none;
+            letter-spacing: -2px; transition: 0.3s;
         }
-        .repo-btn:hover { color: var(--blue); }
+        .repo-btn:hover { color: var(--accent-red); }
 
-        /* --- ⌨️ THE SIGNATURE FOOTER --- */
-        footer { padding: 100px 0; text-align: center; }
-        .signature-wrap { margin-top: 50px; }
-        .sig-text { font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 12px; color: #d2d2d7; margin-bottom: 10px; }
+        footer { padding: 100px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+        .sig-box { margin-top: 60px; }
+        .sig { font-family: 'JetBrains Mono'; font-size: 12px; letter-spacing: 12px; color: #333; text-transform: uppercase; line-height: 2.5; }
 
-        @media (max-width: 768px) {
-            .titles-grid { grid-template-columns: 1fr; }
-            .marketing-line { font-size: 2.2rem; }
+        @media (max-width: 800px) {
+            .founder-grid, .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.large { grid-column: span 1; }
+            .hero h1 { font-size: 4rem; }
         }
     </style>
 </head>
-<body data-theme="light">
+<body>
+
+    <div id="canvas-bg">
+        <div class="nebula blue-nebula"></div>
+        <div class="nebula red-nebula"></div>
+    </div>
+    <div id="cursor"></div>
 
     <nav>
         <div class="container nav-flex">
-            <a href="#" class="logo">NOSTRIX</a>
+            <div class="logo">NOSTRIX</div>
             <div class="nav-links">
-                <a href="#ashwin">Founder</a>
-                <a href="#stack">Neural Stack</a>
-                <a href="https://github.com/ashwinjrtamil-gif/Nostrix" target="_blank">GitHub</a>
+                <a href="https://github.com/ashwinjrtamil-gif/Nostrix" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700;">GITHUB REPO</a>
             </div>
         </div>
     </nav>
 
-    <main>
+    <main class="container">
         <section class="hero reveal">
-            <h1>GOATED.<br><span style="color:var(--blue)">SOVEREIGN.</span></h1>
-            <p>The transition from cloud dependence to localized industrial mastery.</p>
+            <span class="abstract-tag">Sovereign Decision Engine</span>
+            <h1>NOSTRIX<br><span style="opacity: 0.4;">V21.</span></h1>
+            <p>High-fidelity industrial intelligence for the next era of engineering.</p>
         </section>
 
-        <section id="ashwin" class="container reveal">
-            <div class="titles-grid">
-                <div class="title-box"><h2>Establishment</h2><p>Founder</p></div>
-                <div class="title-box"><h2>Executive</h2><p>CEO</p></div>
-                <div class="title-box"><h2>Engineering</h2><p>CE</p></div>
+        <section id="founder" class="founder-grid reveal">
+            <div class="founder-card">
+                <div style="margin-bottom: 20px;">
+                    <span class="role-pill">FOUNDER</span>
+                    <span class="role-pill">CEO</span>
+                    <span class="role-pill">CHIEF ENGINEER</span>
+                </div>
+                <h2>Ashwin</h2>
+                <p style="color: var(--text-dim); font-size: 1.2rem; line-height: 1.6;">Directing the convergence of deep-tissue data mining and generative hardware synthesis.</p>
+                <div class="console">
+                    > INITIALIZING NOSTRIX_CORE...<br>
+                    > STATUS: GOATED<br>
+                    > SYSTEMS: NATIVE_LOCAL
+                </div>
             </div>
-            
-            <div class="ashwin-hero reveal">
-                <img src="ashwin-ceo.jpg" alt="Ashwin" class="ashwin-img">
-            </div>
-        </section>
-
-        <section id="stack" class="stack-section">
-            <div class="container">
-                
-                <div class="model-card m1-card reveal">
-                    <div class="status-tag">ACTIVE_CORE</div>
-                    <div class="model-specs">NNRM3 // INDUSTRIAL MINER</div>
-                    <h2 class="marketing-line">Deep-Tissue Ingestion.<br>Zero Waste.</h2>
-                    <p style="color: var(--text-dim); font-size: 1.1rem; max-width: 500px;">
-                        NNRM3 is the apex miner of the Nostrix ecosystem. It identifies and extracts physics-based nodes from 4M+ token datasets with surgical precision.
-                    </p>
-                </div>
-
-                <div class="model-card m2-card reveal">
-                    <div class="status-tag">ACTIVE_GEN</div>
-                    <div class="model-specs">M1 // GENERATION ENGINE</div>
-                    <h2 class="marketing-line">Velocity Meets<br>Schematics.</h2>
-                    <p style="color: var(--text-dim); font-size: 1.1rem; max-width: 500px;">
-                        Our goated baseline. M1 transforms technical ore into 2D blueprints and CAD-ready logic in milliseconds.
-                    </p>
-                </div>
-
-                <div class="model-card m2-card reveal">
-                    <div class="status-tag">PERFORMANCE_X</div>
-                    <div class="model-specs">M2 // HIGH-PERFORMANCE GEN</div>
-                    <h2 class="marketing-line">The 3D Sovereign<br>Architect.</h2>
-                    <p style="color: var(--text-dim); font-size: 1.1rem; max-width: 500px;">
-                        M2 elevates generation into the third dimension. Full lattice structures and biomimetic optimization built for hardware production.
-                    </p>
-                </div>
-
-                <div class="model-card m3-card reveal" style="opacity: 0.8;">
-                    <div class="status-tag" style="color: var(--red); border-color: var(--red);">UNDER_ENGINEERING</div>
-                    <div class="model-specs" style="color: var(--red);">M3 // THE APEX FUTURE</div>
-                    <h2 class="marketing-line" style="color: #999;">The God of<br>Digital Twins.</h2>
-                    <p style="color: #999; font-size: 1.1rem; max-width: 500px;">
-                        Coming soon. M3 is currently being engineered to handle full-scale multi-physics digital twin simulations.
-                    </p>
-                </div>
-
+            <div class="founder-img-wrap">
+                <img src="ashwin-ceo.jpg" alt="Ashwin" class="founder-img">
             </div>
         </section>
 
-        <section class="repo-bar reveal">
-            <div class="container">
-                <p style="margin-bottom: 20px; font-family: 'JetBrains Mono'; color: var(--blue);">OPEN SOURCE SOVEREIGNTY</p>
-                <a href="https://github.com/ashwinjrtamil-gif/Nostrix" class="repo-btn" target="_blank">Access the Repository</a>
+        <section class="bento-section">
+            <div class="bento-grid">
+                <div class="bento-card large reveal">
+                    <span class="card-label">INGESTION ENGINE</span>
+                    <h3 class="card-title">NNRM3 Miner</h3>
+                    <p class="card-p">The core of Nostrix. A sovereign miner engineered to extract physical constants and engineering logic from 4M+ token datasets with absolute precision.</p>
+                </div>
+
+                <div class="bento-card reveal">
+                    <span class="card-label">GOATED METRICS</span>
+                    <h3 class="card-title">15k TPS</h3>
+                    <p class="card-p">Low-latency mining and retrieval, optimized for local M-series silicon.</p>
+                </div>
+
+                <div class="bento-card reveal">
+                    <span class="card-label">GENERATION ENGINE V1</span>
+                    <h3 class="card-title">M1 Engine</h3>
+                    <p class="card-p">Our goated baseline for 2D schematic generation and technical drafting.</p>
+                </div>
+
+                <div class="bento-card reveal">
+                    <span class="card-label">GENERATION ENGINE V2</span>
+                    <h3 class="card-title">M2 Engine</h3>
+                    <p class="card-p">High-performance 3D lattice synthesis and biomimetic structural optimization.</p>
+                </div>
+
+                <div class="bento-card reveal" style="border: 1px dashed var(--accent-red);">
+                    <span class="card-label" style="color: var(--accent-red);">FUTURE STACK</span>
+                    <h3 class="card-title">M3 Apex</h3>
+                    <p class="card-p">Under Engineering. Targeted for full-scale multi-physics digital twin simulation.</p>
+                </div>
             </div>
+        </section>
+
+        <section class="repo-link-wrap reveal">
+            <p style="font-family: 'JetBrains Mono'; font-size: 0.7rem; letter-spacing: 5px; color: var(--text-dim); margin-bottom: 20px;">ACCESS THE SOURCE</p>
+            <a href="https://github.com/ashwinjrtamil-gif/Nostrix" class="repo-btn">Open GitHub</a>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <h2 style="font-size: 3rem; font-weight: 800; letter-spacing: -2px;">NOSTRIX</h2>
-            <p style="color: var(--text-dim); margin-top: 10px;">&copy; 2026 Engineered by Ashwin. Pudupakkam, TN.</p>
-            
-            <div class="signature-wrap">
-                <div class="sig-text">FOUNDER CEO AND CHIEF ENGINEER ASHWIN</div>
-                <div class="sig-text">NOSTRIX SOVEREIGN INTELLIGENCE SYSTEMS</div>
+            <h2 style="font-size: 2rem; font-weight: 800; letter-spacing: -1px;">NOSTRIX</h2>
+            <div class="sig-box">
+                <div class="sig">FOUNDER CEO AND CHIEF ENGINEER ASHWIN</div>
+                <div class="sig">NOSTRIX SOVEREIGN INTELLIGENCE SYSTEMS</div>
             </div>
+            <p style="color: #222; font-size: 10px; margin-top: 40px; letter-spacing: 2px;">EST. 2026 // ONE AMONG THEM</p>
         </div>
     </footer>
 
     <script>
+        // MOUSE FOLLOWER
+        const cursor = document.getElementById('cursor');
+        const nebulas = document.querySelectorAll('.nebula');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+            
+            // Abstract Background Reactivity
+            const xMove = (e.clientX / window.innerWidth) * 50;
+            const yMove = (e.clientY / window.innerHeight) * 50;
+            nebulas[0].style.transform = `translate(${xMove}px, ${yMove}px)`;
+            nebulas[1].style.transform = `translate(${-xMove}px, ${-yMove}px)`;
+        });
+
+        // REVEAL ON SCROLL
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.setAttribute('data-theme', 'dark');
-        }
     </script>
 </body>
 </html>
