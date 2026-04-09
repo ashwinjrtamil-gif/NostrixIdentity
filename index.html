@@ -32,11 +32,15 @@
     box-sizing:border-box;
 }
 
+html {
+    scroll-behavior:smooth;
+}
+
 body {
     font-family:'Plus Jakarta Sans',sans-serif;
     background:var(--bg);
     color:var(--text);
-    transition:0.4s ease;
+    transition:background 0.4s ease, color 0.4s ease;
     overflow:hidden;
 }
 
@@ -83,6 +87,12 @@ p {
     padding:50px;
     border-radius:30px;
     backdrop-filter:blur(30px);
+    transition:transform 0.4s ease, border 0.4s ease;
+}
+
+.card:hover {
+    transform:translateY(-5px);
+    border-color:var(--blue);
 }
 
 /* Top bar */
@@ -101,6 +111,11 @@ p {
     color:var(--text);
     font-family:'JetBrains Mono';
     cursor:pointer;
+    transition:0.3s;
+}
+
+.toggle:hover {
+    border-color:var(--blue);
 }
 
 /* Navigation dots */
@@ -118,11 +133,13 @@ p {
     background:var(--border);
     margin:10px 0;
     transition:0.3s;
+    cursor:pointer;
 }
 
 .dot.active {
     background:var(--text);
     transform:scale(2.5);
+    box-shadow:0 0 10px var(--blue);
 }
 
 /* Founder */
@@ -137,13 +154,19 @@ img {
     width:100%;
     border-radius:20px;
     border:1px solid var(--border);
+    transition:0.6s;
+    filter:grayscale(1);
+}
+
+.active img {
+    filter:grayscale(0);
 }
 
 /* Smooth fade */
 .fade {
     opacity:0;
     transform:translateY(40px);
-    transition:0.8s ease;
+    transition:0.8s cubic-bezier(0.2,1,0.3,1);
 }
 
 .active .fade {
@@ -156,14 +179,13 @@ img {
 <body>
 
 <div class="topbar">
-    <button class="toggle" onclick="toggleTheme()">Toggle Mode</button>
+    <button class="toggle" onclick="toggleTheme()" id="themeBtn">LIGHT_MODE</button>
 </div>
 
 <div class="nav" id="nav"></div>
 
 <div class="page" id="page">
 
-<!-- HERO -->
 <section class="active">
     <div class="fade">
         <h1>NOSTRIXAI</h1>
@@ -172,7 +194,6 @@ img {
     </div>
 </section>
 
-<!-- FOUNDER -->
 <section>
     <div class="grid fade">
         <div>
@@ -183,7 +204,6 @@ img {
     </div>
 </section>
 
-<!-- TECH -->
 <section>
     <div class="card fade">
         <h1>4M Context</h1>
@@ -214,15 +234,24 @@ img {
 const page = document.getElementById('page');
 const sections = document.querySelectorAll('section');
 const nav = document.getElementById('nav');
+const themeBtn = document.getElementById('themeBtn');
 
-/* Create nav dots */
+/* Create nav dots + click scroll */
 sections.forEach((_, i) => {
     const d = document.createElement('div');
     d.className = 'dot' + (i === 0 ? ' active' : '');
+
+    d.addEventListener('click', () => {
+        page.scrollTo({
+            top: i * window.innerHeight,
+            behavior: 'smooth'
+        });
+    });
+
     nav.appendChild(d);
 });
 
-/* Scroll logic */
+/* Scroll logic (more stable) */
 page.addEventListener('scroll', () => {
     const index = Math.round(page.scrollTop / window.innerHeight);
 
@@ -232,7 +261,7 @@ page.addEventListener('scroll', () => {
     });
 });
 
-/* Theme toggle with persistence */
+/* Theme toggle */
 function toggleTheme() {
     const root = document.documentElement;
     const current = root.getAttribute('data-theme');
@@ -240,12 +269,20 @@ function toggleTheme() {
 
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+
+    updateButton(next);
+}
+
+/* Update button text */
+function updateButton(theme) {
+    themeBtn.innerText = theme === 'dark' ? 'LIGHT_MODE' : 'DARK_MODE';
 }
 
 /* Load saved theme */
 (function () {
-    const saved = localStorage.getItem('theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateButton(saved);
 })();
 </script>
 
