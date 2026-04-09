@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOSTRIXAI | Sovereign Engineering | Ashwin</title>
+    <title>NOSTRIXAI | 20-PAGE SOVEREIGN CORE | ASHWIN</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <style>
@@ -11,132 +11,148 @@
             --bg: #000000; --text: #ffffff; --dim: #86868b;
             --blue: #0071e3; --red: #ff3b30;
             --grad: linear-gradient(90deg, #ff3b30, #0071e3, #5e5ce6);
-            --glass: rgba(255, 255, 255, 0.02);
+            --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
 
-        /* --- 🕹️ UI ESSENTIALS (NIELSEN NORMAN COMPLIANT) --- */
-        #header-bar { position: fixed; top: 0; width: 100%; padding: 30px 12%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; mix-blend-mode: difference; }
-        .logo-text { font-family: 'Plus Jakarta Sans'; font-weight: 800; letter-spacing: 4px; font-size: 1.2rem; }
-        .nav-links { font-family: 'JetBrains Mono'; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; display: flex; gap: 40px; }
-        .nav-links a { color: var(--text); text-decoration: none; opacity: 0.5; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; }
-
-        /* --- 🖱️ INTERACTIVE --- */
+        /* --- 🖱️ INTERACTIVE ELEMENTS --- */
         #cursor { width: 8px; height: 8px; background: #fff; border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
         #aura { width: 35px; height: 35px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: 0.1s; }
 
-        /* --- ⚡ HERO & CTA --- */
-        .cta-btn { display: inline-block; margin-top: 40px; padding: 18px 45px; border-radius: 50px; background: #fff; color: #000; text-decoration: none; font-weight: 800; font-size: 0.9rem; transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1); }
-        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
-        .cta-secondary { background: transparent; border: 1px solid var(--border); color: #fff; margin-left: 20px; }
-
-        /* --- 📄 PAGE ENGINE --- */
+        /* --- 🏗️ LAYOUT ENGINE --- */
+        #header { position: fixed; top: 0; width: 100%; padding: 30px 10%; display: flex; justify-content: space-between; align-items: center; z-index: 2000; mix-blend-mode: difference; }
+        .logo { font-weight: 800; letter-spacing: 6px; font-size: 1.1rem; }
+        
         .page-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
-        section { height: 100vh; width: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 0 12%; position: relative; }
-        .content { opacity: 0; transform: translateY(60px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); width: 100%; }
+        section { height: 100vh; width: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 0 10%; position: relative; }
+        
+        .content { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; }
         .active .content { opacity: 1; transform: translateY(0); }
 
-        .big-h { font-size: clamp(3rem, 10vw, 8.5rem); font-weight: 800; letter-spacing: -6px; line-height: 0.85; }
+        /* --- Typography --- */
+        .big-h { font-size: clamp(2.5rem, 8vw, 8rem); font-weight: 800; letter-spacing: -5px; line-height: 0.9; }
         .grad-t { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; display: block; }
-        .para { font-size: 1.2rem; color: var(--dim); line-height: 1.6; max-width: 800px; margin-top: 30px; }
+        .mono { font-family: 'JetBrains Mono'; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; display: block; }
+        .para { font-size: 1.1rem; color: var(--dim); line-height: 1.6; max-width: 700px; margin-top: 25px; }
 
-        /* --- 📊 SPECS & FOUNDER --- */
-        .spec-box { background: var(--glass); border: 1px solid var(--border); padding: 60px; border-radius: 40px; backdrop-filter: blur(50px); border-left: 4px solid var(--blue); }
-        .spec-box h3 { font-size: 4rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -3px; }
-        .founder-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-        .f-img { width: 100%; border-radius: 40px; filter: grayscale(1); border: 1px solid var(--border); transition: 0.5s; }
-        .f-img:hover { filter: grayscale(0); transform: scale(1.02); }
-        .badge { padding: 10px 20px; border: 1px solid var(--border); border-radius: 40px; font-size: 11px; font-weight: 800; color: #fff; margin-right: 12px; }
+        /* --- 🛰️ NAVIGATION (20-DOT SCALING) --- */
+        #dot-nav { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 8px; }
+        .dot { width: 3px; height: 3px; background: #333; border-radius: 50%; transition: 0.4s; position: relative; }
+        .dot.active { background: #fff; transform: scale(4); box-shadow: 0 0 10px #fff; }
+        .dot-label { position: absolute; right: 20px; top: -5px; color: #fff; font-size: 10px; opacity: 0; transition: 0.3s; pointer-events: none; white-space: nowrap; font-family: 'JetBrains Mono'; }
+        .dot:hover .dot-label { opacity: 0.4; right: 25px; }
 
-        #dot-nav { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 1000; }
-        .dot { width: 4px; height: 4px; background: #222; border-radius: 50%; margin: 10px 0; transition: 0.4s; }
-        .dot.active { background: #fff; transform: scale(3.5); box-shadow: 0 0 15px #fff; }
+        /* --- 📊 UI BLOCKS --- */
+        .spec-box { background: var(--glass); border: 1px solid var(--border); padding: 50px; border-radius: 30px; border-left: 3px solid var(--blue); backdrop-filter: blur(20px); }
+        .badge { padding: 8px 18px; border: 1px solid var(--border); border-radius: 50px; font-size: 10px; font-weight: 700; margin-right: 10px; color: var(--dim); }
+        .btn { display: inline-block; margin-top: 30px; padding: 15px 40px; border-radius: 50px; background: #fff; color: #000; text-decoration: none; font-weight: 800; font-size: 0.8rem; transition: 0.3s; }
+        .btn:hover { background: var(--blue); color: #fff; }
+
+        /* --- 📽️ FOUNDER GRID --- */
+        .founder-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .f-img { width: 100%; border-radius: 30px; border: 1px solid var(--border); filter: grayscale(1); transition: 0.6s; }
+        .active .f-img { filter: grayscale(0); }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div><div id="aura"></div>
 
-    <header id="header-bar">
-        <div class="logo-text">NOSTRIXAI</div>
-        <nav class="nav-links">
-            <a href="#main">Intelligence</a>
-            <a href="#ashwin">Founder</a>
-            <a href="https://github.com/ashwinjrtamil-gif/Nostrix">Repository</a>
-        </nav>
+    <header id="header">
+        <div class="logo">NOSTRIXAI</div>
+        <div class="mono" style="color:var(--dim)">[ APEX CORE V18.0 ]</div>
     </header>
 
-    <div id="dot-nav"></div>
+    <nav id="dot-nav"></nav>
 
     <div class="page-container" id="main">
-
-        <section class="active">
-            <div class="content">
-                <span class="mono-tag">Model 2026 Ready</span>
-                <h1 class="big-h">NOSTRIXAI</h1>
-                <h2 class="big-h grad-t">NATIVE UNRESTRICTED</h2>
-                <p class="para">4 MILLION TOKENS PER QUERY. Sovereign intelligence. Localized execution on M-Series Silicon.</p>
-                <div class="cta-wrapper">
-                    <a href="https://github.com/ashwinjrtamil-gif/Nostrix" class="cta-btn">Initialize Repository</a>
-                    <a href="#ashwin" class="cta-btn cta-secondary">Meet the Architect</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="ashwin">
-            <div class="content founder-grid">
-                <div>
-                    <span class="mono-tag">Executive Command</span>
-                    <h2 class="big-h">Ashwin.</h2>
-                    <div style="margin: 30px 0;">
-                        <span class="badge" style="border-color: var(--blue);">FOUNDER</span>
-                        <span class="badge">CEO</span>
-                        <span class="badge">CHIEF ENGINEER</span>
-                    </div>
-                    <p class="para">Architecting the NOSTRIXAI ecosystem. Leading the transition to hardware-accelerated sovereign intelligence and aerospace synthesis.</p>
-                </div>
-                <img src="ashwin-ceo.jpg" alt="Ashwin Founder" class="f-img">
-            </div>
-        </section>
-
-        <section><div class="content"><div class="spec-box" style="border-left-color: var(--red);"><span class="mono-tag">MODEL 03 // APEX</span><h3>NNRM3</h3><p class="para">The 4M Token Ingestion Beast. Converts massive engineering vaults into localized weights.</p></div></div></section>
-        
-        <section>
-            <div class="content" style="text-align:center;">
-                <div style="font-size:3rem; font-weight:800; letter-spacing:-2px; margin-bottom:40px;">NOSTRIXAI</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 12px; color: #444; text-transform: uppercase;">ASHWIN</div>
-                <p class="para" style="margin: 40px auto; font-size: 0.8rem;">© 2026 NOSTRIX SOVEREIGN SYSTEMS. <br> ENGINEERED FOR ABSOLUTE PRIVACY.</p>
-            </div>
-        </section>
-
-    </div>
+        </div>
 
     <script>
-        const cursor = document.getElementById('cursor');
-        const aura = document.getElementById('aura');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
-            aura.style.left = e.clientX + 'px'; aura.style.top = e.clientY + 'px';
-            aura.style.transform = 'translate(-50%, -50%)';
-        });
+        // --- 📊 20-PAGE DATA VAULT ---
+        const vault = [
+            { type: 'hero', h1: 'NOSTRIXAI', h2: 'SOVEREIGN CORE', p: 'The 4 Million Token Context Giant. Engineered for Native Silicon execution.', mono: 'SYSTEMS INITIALIZED' },
+            { type: 'founder', h1: 'Ashwin.', h2: 'FOUNDER & CEO', p: 'Architect of the NNRM architecture. Driving the future of aerospace synthesis.', mono: 'EXECUTIVE COMMAND' },
+            { type: 'spec', h1: '4M CONTEXT', h2: 'SINGLE INFERENCE', p: 'Native handling of massive document vaults without partitioning or RAG fragmentation.', mono: 'CAPACITY' },
+            { type: 'spec', h1: 'NNRM1', h2: 'TELEMETRY MINER', p: 'Sub-millisecond real-time sensor processing for industrial feedback loops.', mono: 'MODEL 01' },
+            { type: 'spec', h1: 'NNRM2', h2: 'STRUCTURAL MINER', p: 'Deep analysis of mechanical stress and high-frequency vibration data.', mono: 'MODEL 02' },
+            { type: 'spec', h1: 'NNRM3', h2: 'THE BEAST', p: 'The 4M context flagship. Total ingestion of engineering standards.', mono: 'MODEL 03' },
+            { type: 'spec', h1: 'NNR', h2: 'NEURAL REASONING', p: 'Logical solver for complex physical assemblies and hardware constraints.', mono: 'MODEL 04' },
+            { type: 'spec', h1: 'NNRE', h2: 'VERIFICATION', p: 'Zero-hallucination auditor cross-checking outputs against physical laws.', mono: 'MODEL 05' },
+            { type: 'spec', h1: 'M1 TURBO', h2: 'ITERATION HUB', p: 'High-speed drafting and prototyping engine for rapid mechanical cycles.', mono: 'MODEL 06' },
+            { type: 'spec', h1: 'M2 SYNTH', h2: '3D GENERATION', p: 'Generates CAD-ready aerospace geometry using biomimetic principles.', mono: 'MODEL 07' },
+            { type: 'spec', h1: 'M2LM', h2: 'LARGE ASSEMBLY', p: '3D synthesis specialized in massive scale hull and chassis integration.', mono: 'MODEL 08' },
+            { type: 'spec', h1: 'M3 FUTURE', h2: 'PHYSICS TWINS', p: 'UNDER DEVELOPMENT: Full-physics digital twins with predictive failure.', mono: 'MODEL 09' },
+            { type: 'spec', h1: 'RAG M1', h2: 'STANDARDS HUB', p: 'Direct retrieval of ISO, ASTM, and global aerospace standards.', mono: 'MODEL 10' },
+            { type: 'spec', h1: 'RAG M2', h2: 'CODE SYNC', p: 'Connects model reasoning to live C++, Rust, and ONNX repositories.', mono: 'MODEL 11' },
+            { type: 'spec', h1: 'RAG M3', h2: 'KNOWLEDGE GRAPH', p: 'Connecting 4M tokens to a multi-dimensional engineering graph.', mono: 'MODEL 12' },
+            { type: 'spec', h1: 'HYBRID RAG', h2: 'MEMORY LOOP', p: 'Continuous learning engine that updates weights based on new RAG data.', mono: 'MODEL 13' },
+            { type: 'spec', h1: 'C++ CORE', h2: 'ONNX NATIVE', p: 'Zero-latency execution using quantized weights on local hardware.', mono: 'VAULT 01' },
+            { type: 'spec', h1: 'SOVEREIGN', h2: 'ZERO CLOUD', p: '100% Privacy. All intelligence remains inside your local silicon perimeter.', mono: 'VAULT 02' },
+            { type: 'hero', h1: 'REPOSITORY', h2: 'OPEN ACCESS', p: 'Access the core Nostrix libraries on GitHub.', mono: 'VAULT 03', btn: 'GITHUB CORE' },
+            { type: 'hero', h1: 'NOSTRIXAI', h2: 'ASHWIN 2026', p: 'The journey to sovereign intelligence is absolute.', mono: 'FINAL SIGNATURE' }
+        ];
 
         const container = document.getElementById('main');
-        const sections = document.querySelectorAll('section');
         const nav = document.getElementById('dot-nav');
 
-        sections.forEach((_, i) => {
+        // --- 🏗️ GENERATION ENGINE ---
+        vault.forEach((data, i) => {
+            const section = document.createElement('section');
+            if (i === 0) section.classList.add('active');
+            
+            let html = '';
+            if(data.type === 'hero' || data.type === 'spec') {
+                html = `
+                    <div class="content">
+                        <span class="mono">${data.mono}</span>
+                        <h1 class="big-h">${data.h1}</h1>
+                        <h1 class="big-h grad-t">${data.h2}</h1>
+                        <p class="para">${data.p}</p>
+                        ${data.btn ? `<a href="#" class="btn">${data.btn}</a>` : ''}
+                    </div>`;
+            } else if(data.type === 'founder') {
+                html = `
+                    <div class="content founder-grid">
+                        <div>
+                            <span class="mono">${data.mono}</span>
+                            <h1 class="big-h">${data.h1}</h1>
+                            <h2 class="big-h grad-t" style="font-size: 3.5rem;">${data.h2}</h2>
+                            <p class="para">${data.p}</p>
+                            <div style="margin-top:30px">
+                                <span class="badge">CHIEF ENGINEER</span><span class="badge">M-SERIES OPTIMIZED</span>
+                            </div>
+                        </div>
+                        <img src="ashwin-ceo.jpg" class="f-img">
+                    </div>`;
+            }
+            
+            section.innerHTML = html;
+            container.appendChild(section);
+
+            // Nav dots
             const dot = document.createElement('div');
             dot.className = 'dot';
-            if (i === 0) dot.classList.add('active');
+            if(i===0) dot.classList.add('active');
+            dot.innerHTML = `<span class="dot-label">${data.h1}</span>`;
             nav.appendChild(dot);
         });
 
+        // --- 🕹️ INTERACTION ENGINE ---
         const dots = document.querySelectorAll('.dot');
+        const sections = document.querySelectorAll('section');
+        const cursor = document.getElementById('cursor');
+        const aura = document.getElementById('aura');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = aura.style.left = e.clientX + 'px';
+            cursor.style.top = aura.style.top = e.clientY + 'px';
+            aura.style.transform = 'translate(-50%, -50%)';
+        });
+
         container.addEventListener('scroll', () => {
             const idx = Math.round(container.scrollTop / window.innerHeight);
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
