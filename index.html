@@ -32,49 +32,26 @@ body{
     background:var(--bg);
     color:var(--text);
     transition:0.4s;
+    overflow:hidden;
 }
 
-/* HEADER */
-header{
-    position:fixed;
-    top:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    padding:20px 8%;
-    backdrop-filter:blur(20px);
-    z-index:1000;
+.page{
+    height:100vh;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
 }
 
-.logo{
-    font-weight:800;
-    letter-spacing:2px;
-}
-
-nav a{
-    margin-left:20px;
-    text-decoration:none;
-    color:var(--dim);
-    font-size:14px;
-}
-
-nav a:hover{color:var(--text)}
-
-.toggle{
-    margin-left:20px;
-    cursor:pointer;
-}
-
-/* HERO */
-.hero{
+section{
     height:100vh;
     display:flex;
-    flex-direction:column;
+    align-items:center;
     justify-content:center;
-    padding:0 8%;
+    padding:0 10%;
+    scroll-snap-align:start;
+    text-align:center;
 }
 
-.hero h1{
+h1{
     font-size:clamp(3rem,9vw,8rem);
     line-height:0.9;
 }
@@ -85,78 +62,48 @@ nav a:hover{color:var(--text)}
     -webkit-text-fill-color:transparent;
 }
 
-.hero p{
+p{
     margin-top:20px;
     color:var(--dim);
-    max-width:600px;
+    max-width:700px;
 }
 
-/* SECTION */
-.section{
-    padding:120px 8%;
+/* NAV DOTS */
+.nav{
+    position:fixed;
+    right:25px;
+    top:50%;
+    transform:translateY(-50%);
 }
 
-.section h2{
-    font-size:2.5rem;
-    margin-bottom:20px;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-}
-
-.card{
-    border:1px solid var(--border);
-    padding:30px;
-    border-radius:20px;
-}
-
-/* FEATURE (APPLE STYLE) */
-.feature{
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:0 15%;
-}
-
-.feature h1{
-    font-size:clamp(3rem,8vw,7rem);
-}
-
-/* CTA */
-.cta{
-    text-align:center;
-    padding:120px 8%;
-}
-
-button{
-    padding:15px 30px;
-    border:none;
-    border-radius:30px;
-    background:var(--blue);
-    color:#fff;
+.dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--border);
+    margin:10px 0;
     cursor:pointer;
 }
 
-/* FOOTER */
-footer{
-    padding:60px 8%;
-    border-top:1px solid var(--border);
-    font-size:14px;
-    color:var(--dim);
+.dot.active{
+    background:var(--text);
+    transform:scale(2.5);
 }
 
-/* SMALL */
-.tag{
-    font-family:'JetBrains Mono';
-    font-size:12px;
-    letter-spacing:3px;
-    color:var(--blue);
+/* TOP BAR */
+.topbar{
+    position:fixed;
+    top:20px;
+    right:30px;
+}
+
+button{
+    padding:10px 18px;
+    border-radius:30px;
+    border:1px solid var(--border);
+    background:none;
+    color:var(--text);
+    cursor:pointer;
 }
 </style>
 
@@ -164,90 +111,116 @@ footer{
 
 <body>
 
-<header>
-    <div class="logo">NOSTRIXAI</div>
-    <nav>
-        <a href="#">Models</a>
-        <a href="#">Technology</a>
-        <a href="#">Docs</a>
-        <a href="#">GitHub</a>
-        <span class="toggle" onclick="toggleTheme()">MODE</span>
-    </nav>
-</header>
+<div class="topbar">
+    <button onclick="toggleTheme()">MODE</button>
+</div>
 
-<!-- HERO -->
+<div class="nav" id="nav"></div>
 
-<section class="hero">
-    <span class="tag">SOVEREIGN ENGINEERING</span>
-    <h1>NOSTRIXAI</h1>
-    <h1 class="gradient">NATIVE UNRESTRICTED</h1>
-    <p>4M token reasoning. Local execution. Aerospace-grade intelligence systems.</p>
-</section>
+<div class="page" id="page">
 
-<!-- MODELS GRID -->
+<!-- 1 -->
 
-<section class="section">
-    <h2>Models</h2>
-    <div class="grid">
-        <div class="card"><h3>NNRM3</h3><p>4M token context engine.</p></div>
-        <div class="card"><h3>NNR Core</h3><p>Real-world reasoning.</p></div>
-        <div class="card"><h3>NNRE</h3><p>Verification system.</p></div>
-        <div class="card"><h3>M1</h3><p>Coordination engine.</p></div>
-        <div class="card"><h3>M2</h3><p>3D generation.</p></div>
-        <div class="card"><h3>M3</h3><p>Digital twin.</p></div>
-    </div>
-</section>
+<section><div><h1>NOSTRIXAI</h1><h1 class="gradient">NATIVE UNRESTRICTED</h1><p>Sovereign intelligence platform.</p></div></section>
 
-<!-- APPLE STYLE FEATURE -->
+<!-- 2 -->
 
-<section class="feature">
-    <div>
-        <h1>NNRM3</h1>
-        <h1 class="gradient">4M TOKENS</h1>
-        <p>No limits. Full context reasoning.</p>
-    </div>
-</section>
+<section><div><h1>VISION</h1><p>Redefining intelligence without limits.</p></div></section>
 
-<section class="feature">
-    <div>
-        <h1>NNR</h1>
-        <h1 class="gradient">REASONING</h1>
-        <p>Understands physics and engineering.</p>
-    </div>
-</section>
+<!-- 3 -->
 
-<!-- FOUNDER -->
+<section><div><h1>MISSION</h1><p>Build autonomous reasoning systems for real-world engineering.</p></div></section>
 
-<section class="section">
-    <h2>Founder</h2>
-    <p>Ashwin — Founder, CEO, Chief Engineer. Architecting sovereign AI systems.</p>
-</section>
+<!-- 4 -->
 
-<!-- TECH -->
+<section><div><h1>NNRM3</h1><p>Massive context intelligence engine.</p></div></section>
 
-<section class="section">
-    <h2>Technology</h2>
-    <div class="grid">
-        <div class="card">C++ Core</div>
-        <div class="card">ONNX Runtime</div>
-        <div class="card">Local Execution</div>
-        <div class="card">Hybrid RAG</div>
-    </div>
-</section>
+<!-- 5 -->
 
-<!-- CTA -->
+<section><div><h1>NNR CORE</h1><p>True reasoning system.</p></div></section>
 
-<section class="cta">
-    <h2>Build with NOSTRIXAI</h2>
-    <p>Access sovereign intelligence systems.</p>
-    <button>Get Access</button>
-</section>
+<!-- 6 -->
 
-<footer>
-    <p>NOSTRIXAI © 2026 — Native Unrestricted</p>
-</footer>
+<section><div><h1>NNRE</h1><p>Verification and truth engine.</p></div></section>
+
+<!-- 7 -->
+
+<section><div><h1>M1</h1><p>Coordination layer.</p></div></section>
+
+<!-- 8 -->
+
+<section><div><h1>M2</h1><p>3D generation intelligence.</p></div></section>
+
+<!-- 9 -->
+
+<section><div><h1>M3</h1><p>Digital twin systems.</p></div></section>
+
+<!-- 10 -->
+
+<section><div><h1>ARCHITECTURE</h1><p>Multi-layer intelligence stack.</p></div></section>
+
+<!-- 11 -->
+
+<section><div><h1>MEMORY</h1><p>Persistent engineering cognition.</p></div></section>
+
+<!-- 12 -->
+
+<section><div><h1>RETRIEVAL</h1><p>Dynamic knowledge access.</p></div></section>
+
+<!-- 13 -->
+
+<section><div><h1>SECURITY</h1><p>Sovereign encrypted systems.</p></div></section>
+
+<!-- 14 -->
+
+<section><div><h1>LOCAL EXECUTION</h1><p>Runs without external dependency.</p></div></section>
+
+<!-- 15 -->
+
+<section><div><h1>PERFORMANCE</h1><p>High-speed reasoning cycles.</p></div></section>
+
+<!-- 16 -->
+
+<section><div><h1>FOUNDER</h1><p>Ashwin — Founder & Chief Engineer.</p></div></section>
+
+<!-- 17 -->
+
+<section><div><h1>RESEARCH</h1><p>Continuous innovation pipeline.</p></div></section>
+
+<!-- 18 -->
+
+<section><div><h1>FUTURE</h1><p>Next-gen intelligence evolution.</p></div></section>
+
+<!-- 19 -->
+
+<section><div><h1>ACCESS</h1><p>Join the sovereign AI ecosystem.</p></div></section>
+
+<!-- 20 -->
+
+<section><div><h1>START BUILDING</h1><h1 class="gradient">NOW</h1></div></section>
+
+</div>
 
 <script>
+const page=document.getElementById('page');
+const sections=document.querySelectorAll('section');
+const nav=document.getElementById('nav');
+
+/* create dots */
+sections.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.onclick=()=>page.scrollTo({top:i*window.innerHeight,behavior:'smooth'});
+    nav.appendChild(d);
+});
+
+/* scroll sync */
+page.addEventListener('scroll',()=>{
+    const index=Math.round(page.scrollTop/window.innerHeight);
+    [...nav.children].forEach((d,i)=>d.classList.toggle('active',i===index));
+});
+
+/* theme */
 function toggleTheme(){
     const root=document.documentElement;
     const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
