@@ -3,48 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOSTRIXAI | Sovereign Interface</title>
+    <title>NOSTRIXAI | Sovereign Architecture</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg: #000000; --text: #ffffff; --dim: #8e8e93;
             --blue: #0071e3; --red: #ff3b30;
-            /* Exact match for the vertical gradient found in the screenshot */
-            --grad: linear-gradient(180deg, #ffffff 0%, #ff3b30 40%, #0071e3 100%);
-            --border: rgba(255, 255, 255, 0.1);
+            /* PRO-LEVEL HORIZONTAL GRADIENT */
+            --grad: linear-gradient(90deg, #ff3b30 0%, #0071e3 50%, #5e5ce6 100%);
+            --glass: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
 
         /* --- 🖱️ INTERACTIVE --- */
-        #cursor { width: 6px; height: 6px; background: #fff; border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; }
-        #aura { width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: 0.1s; }
+        #cursor { width: 6px; height: 6px; background: #fff; border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
+        #aura { width: 35px; height: 35px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: 0.1s; }
 
-        /* --- 🏗️ THE ENGINE --- */
+        /* --- 🏗️ CORE PAGE ENGINE --- */
         .page-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
         section { height: 100vh; width: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 0 10%; position: relative; }
         
-        .content { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); width: 100%; }
+        .content { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; }
         .active .content { opacity: 1; transform: translateY(0); }
 
-        /* --- 🖼️ FIRST PAGE (LOCKED TO SCREENSHOT) --- */
-        .hero-h { font-size: clamp(4rem, 12vw, 9.5rem); font-weight: 800; letter-spacing: -6px; line-height: 0.82; text-transform: uppercase; }
-        .hero-grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
-        .hero-sub { font-size: 1.1rem; color: var(--dim); letter-spacing: 1px; margin-top: 50px; font-weight: 400; opacity: 0.9; }
+        /* --- 🖼️ TYPOGRAPHY --- */
+        .hero-h { font-size: clamp(3rem, 10vw, 8.5rem); font-weight: 800; letter-spacing: -5px; line-height: 0.85; text-transform: uppercase; }
+        .hero-grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-sub { font-size: 1.1rem; color: var(--dim); letter-spacing: 1px; margin-top: 40px; font-weight: 400; max-width: 600px; }
 
-        /* --- 📄 MODULE PAGES --- */
-        .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; display: block; }
-        .page-h { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; letter-spacing: -3px; line-height: 1; }
-        .para { font-size: 1.25rem; color: var(--dim); line-height: 1.6; max-width: 800px; margin-top: 30px; }
+        .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; display: block; }
+        .page-h { font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .para { font-size: 1.2rem; color: var(--dim); line-height: 1.6; max-width: 750px; margin-top: 25px; }
+
+        /* --- 🛡️ SECURITY UPDATES BOX --- */
+        .sec-box { background: var(--glass); border: 1px solid var(--border); border-left: 2px solid var(--red); padding: 30px; border-radius: 20px; margin-top: 30px; display: inline-block; }
+        .sec-item { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .dot-pulse { width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* --- 🔘 NAVIGATION --- */
-        #dot-nav { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 12px; }
-        .dot { width: 4px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 50%; transition: 0.4s; position: relative; }
-        .dot.active { background: #fff; transform: scale(3); }
-        .dot-label { position: absolute; right: 25px; top: -5px; color: #fff; font-size: 10px; opacity: 0; transition: 0.3s; pointer-events: none; white-space: nowrap; font-family: 'JetBrains Mono'; }
-        .dot:hover .dot-label { opacity: 0.5; right: 30px; }
+        #dot-nav { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
+        .dot { width: 4px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: 0.4s; position: relative; }
+        .dot.active { background: #fff; transform: scale(3.5); box-shadow: 0 0 15px var(--blue); }
+        .dot-label { position: absolute; right: 30px; top: -5px; color: #fff; font-size: 9px; opacity: 0; transition: 0.3s; pointer-events: none; white-space: nowrap; font-family: 'JetBrains Mono'; }
+        .dot:hover .dot-label { opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -53,61 +60,70 @@
     <nav id="dot-nav"></nav>
 
     <div class="page-container" id="main">
-        <section class="active">
-            <div class="content">
-                <h1 class="hero-h">NOSTRIXAI</h1>
-                <h1 class="hero-h hero-grad">NATIVE</h1>
-                <h1 class="hero-h hero-grad">UNRESTRICTED</h1>
-                <p class="hero-sub">4 MILLION TOKENS PER QUERY. Sovereign intelligence. Localized execution.</p>
-            </div>
-        </section>
-    </div>
+        </div>
 
     <script>
-        const uiModules = [
-            { t: "CORE DASHBOARD", d: "Centralized interface for real-time system monitoring." },
-            { t: "TERMINAL ACCESS", d: "Direct command-line control for localized node execution." },
-            { t: "DATA VAULTS", d: "Secure, air-gapped management for proprietary engineering libraries." },
-            { t: "CONTEXT EXPLORER", d: "Visual mapping of the 4 million token inference window." },
-            { t: "NODE TOPOLOGY", d: "Resource allocation across local hardware clusters." },
-            { t: "EDGE MONITORING", d: "Telemetry processing for remote industrial and aerospace sensors." },
-            { t: "SECURITY PERIMETER", d: "Privacy enforcement and zero-telemetry protocol settings." },
-            { t: "SYSTEM INTEGRITY", d: "Hardware health metrics and silicon utilization tracking." },
-            { t: "KNOWLEDGE GRAPH", d: "Relational mapping of multi-domain technical standards." },
-            { t: "VERSION CONTROL", d: "Local deployment history and sovereign update management." },
-            { t: "ACCESS GATEWAY", d: "Encrypted, permission-based user authentication." },
-            { t: "ANALYTICS HUB", d: "Statistical breakdown of system throughput and inference speeds." },
-            { t: "RESOURCE ALLOCATOR", d: "Dynamic thread priority and memory buffer management." },
-            { t: "USER PREFERENCES", d: "Interface scaling and environmental customization." },
-            { t: "DOCUMENT INGESTION", d: "Pipeline for feeding mass technical data into the context giant." },
-            { t: "COLLABORATION HUB", d: "Sovereign data transfer and node-to-node synchronization." },
-            { t: "SYSTEM ARCHIVE", d: "Long-term storage for validated logic and verified outputs." },
-            { t: "INTEGRITY AUDIT", d: "Continuous verification of localized reasoning paths." },
-            { t: "FINAL SIGNATURE", d: "Founder executive sign-off and system-wide lockdown." }
+        const vault = [
+            { type: 'hero', h1: 'NOSTRIXAI', h2: 'SOVEREIGN', h3: 'CORE', sub: 'Native local execution for aerospace and industrial intelligence. Engineered by Ashwin Karthikeyan.' },
+            { type: 'model', tag: 'FOUNDER MODULE', h1: 'ASHWIN.', p: 'Chief Engineer. Architect of the sovereign context stack. 2026 Systems Deployment.', sec: ['ENCRYPTED SESSION', 'FOUNDER AUTHENTICATED'] },
+            { type: 'model', tag: 'MODEL STACK 01', h1: 'NNRM1', p: 'Primary Neural Node Retrieval Miner. High-velocity telemetry processing for engine cluster diagnostics.', sec: ['LOCAL WEIGHTS LOADED', 'AIR-GAP ACTIVE'] },
+            { type: 'model', tag: 'MODEL STACK 02', h1: 'NNRM2', p: 'Structural miner for localized mechanical analysis and fluid dynamic reasoning.', sec: ['ZERO CLOUD HANDSHAKE', 'SHA-256 VERIFIED'] },
+            { type: 'model', tag: 'MODEL STACK 03', h1: 'NNRM3', p: 'The 4 Million Token Context Giant. Full-spectrum engineering ingestion without data leakage.', sec: ['CONTEXT ISOLATION: ON', 'TAMPER DETECTION: ACTIVE'] },
+            { type: 'model', tag: 'LOGIC ENGINE', h1: 'NNR CORE', p: 'Neural Reasoning interface. The bridge between raw telemetry and physical aerospace constraints.', sec: ['LOGIC INTEGRITY CHECKED'] },
+            { type: 'model', tag: 'AUDITOR NODE', h1: 'NNRE V1', p: 'Verification engine. Real-time auditing of generated outputs against physical law constants.', sec: ['PHYSICS PARAMS LOADED'] },
+            { type: 'model', tag: 'FAST ITERATION', h1: 'M1 TURBO', p: 'Rapid-cycle drafting module for aerospace hardware and propulsion system components.', sec: ['SECURE BUFFER CLEAR'] },
+            { type: 'model', tag: 'GEOMETRY GEN', h1: 'M2 SYNTH', p: 'Localized 3D synthesis for biomimetic engineering and manufacturing-ready geometry.', sec: ['LOCAL RENDER MODE'] },
+            { type: 'model', tag: 'SCALE UNIT', h1: 'M2LM EDGE', p: 'Large-model scaling for heterogeneous engine cluster integration and hull structural twins.', sec: ['CLUSTER SYNC: PRIVATE'] },
+            { type: 'model', tag: 'DATA RETRIEVAL', h1: 'RAG ARCH', p: 'Sovereign technical document ingestion. Linking localized engineering graphs to live inference.', sec: ['INTELLECTUAL PROPERTY LOCK'] },
+            { type: 'model', tag: 'RELIABILITY', h1: 'SYSTEMS GUARD', p: 'Continuous monitoring of NPU/Silicon health and neural execution throughput.', sec: ['EDGE PROTECTION V4'] },
+            { type: 'model', tag: 'DEPLOYMENT', h1: 'PRUNED EXPORT', p: 'Optimized model distribution via localized ONNX and TensorRT backends.', sec: ['EXPORT ENCRYPTION ACTIVE'] },
+            { type: 'model', tag: 'SENSORY', h1: 'TELEMETRY HUB', p: 'Inbound stream management for chemical, plasma, and hybrid rocket engine data.', sec: ['FEED SECURE'] },
+            { type: 'model', tag: 'PRIVACY LAYER', h1: 'ZERO TELEMETRY', p: 'Strict enforcement of air-gapped processing. No metadata or weight updates leave the local perimeter.', sec: ['PRIVACY SHIELD ENGAGED'] },
+            { type: 'model', tag: 'INTEGRITY', h1: 'VAULT LOCK', p: 'Long-term storage and archival of validated engineering logic and validated physics models.', sec: ['WRITE-ONLY ARCHIVE'] },
+            { type: 'model', tag: 'USER GATEWAY', h1: 'ACCESS CORE', p: 'Encrypted multi-factor localized authentication for executive control.', sec: ['BIO-GATE SECURE'] },
+            { type: 'model', tag: 'RESOURCES', h1: 'BUFFER MGMT', p: 'High-level memory allocation for massive context window stability on localized silicon.', sec: ['M-SERIES OPTIMIZED'] },
+            { type: 'model', tag: 'SOURCE', h1: 'REPOSITORY', p: 'Sovereign repository management. Proprietary C++ and Rust codebases.', sec: ['REPO INTEGRITY: 100%'] },
+            { type: 'hero', h1: 'NOSTRIXAI', h2: 'ABSOLUTE', h3: 'SECURITY', sub: 'THE JOURNEY TO SOVEREIGN INTELLIGENCE IS UNRESTRICTED. ASHWIN 2026.' }
         ];
 
         const container = document.getElementById('main');
         const nav = document.getElementById('dot-nav');
 
-        // Initial Dot
-        const startDot = document.createElement('div');
-        startDot.className = 'dot active';
-        startDot.innerHTML = '<span class="dot-label">START</span>';
-        nav.appendChild(startDot);
-
-        uiModules.forEach((mod, i) => {
+        vault.forEach((data, i) => {
             const section = document.createElement('section');
-            section.innerHTML = `
-                <div class="content">
-                    <span class="mono-tag">MODULE ${String(i+1).padStart(2, '0')}</span>
-                    <h2 class="page-h">${mod.t}</h2>
-                    <p class="para">${mod.d}</p>
-                </div>`;
+            if(i === 0) section.classList.add('active');
+            
+            let html = '';
+            if(data.type === 'hero') {
+                html = `
+                    <div class="content">
+                        <h1 class="hero-h">${data.h1}</h1>
+                        <h1 class="hero-h hero-grad">${data.h2}</h1>
+                        <h1 class="hero-h hero-grad">${data.h3}</h1>
+                        <p class="hero-sub">${data.sub}</p>
+                    </div>`;
+            } else {
+                html = `
+                    <div class="content">
+                        <span class="mono-tag">${data.tag}</span>
+                        <h2 class="page-h">${data.h1}</h2>
+                        <p class="para">${data.p}</p>
+                        <div class="sec-box">
+                            ${data.sec.map(s => `
+                                <div class="sec-item">
+                                    <div class="dot-pulse"></div> [ STATUS: ${s} ]
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+            }
+            section.innerHTML = html;
             container.appendChild(section);
 
             const dot = document.createElement('div');
             dot.className = 'dot';
-            dot.innerHTML = `<span class="dot-label">${mod.t}</span>`;
+            if(i===0) dot.classList.add('active');
+            dot.innerHTML = `<span class="dot-label">${data.h1}</span>`;
             nav.appendChild(dot);
         });
 
