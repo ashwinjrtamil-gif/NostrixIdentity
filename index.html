@@ -3,145 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOSTRIXAI | 20-PAGE SOVEREIGN CORE | ASHWIN</title>
+    <title>NOSTRIXAI | Sovereign Interface</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #000000; --text: #ffffff; --dim: #86868b;
+            --bg: #000000; --text: #ffffff; --dim: #8e8e93;
             --blue: #0071e3; --red: #ff3b30;
-            --grad: linear-gradient(90deg, #ff3b30, #0071e3, #5e5ce6);
-            --glass: rgba(255, 255, 255, 0.03);
+            /* Exact match for the vertical gradient found in the screenshot */
+            --grad: linear-gradient(180deg, #ffffff 0%, #ff3b30 40%, #0071e3 100%);
             --border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
 
-        /* --- 🖱️ INTERACTIVE ELEMENTS --- */
-        #cursor { width: 8px; height: 8px; background: #fff; border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
-        #aura { width: 35px; height: 35px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: 0.1s; }
+        /* --- 🖱️ INTERACTIVE --- */
+        #cursor { width: 6px; height: 6px; background: #fff; border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; }
+        #aura { width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: 0.1s; }
 
-        /* --- 🏗️ LAYOUT ENGINE --- */
-        #header { position: fixed; top: 0; width: 100%; padding: 30px 10%; display: flex; justify-content: space-between; align-items: center; z-index: 2000; mix-blend-mode: difference; }
-        .logo { font-weight: 800; letter-spacing: 6px; font-size: 1.1rem; }
-        
+        /* --- 🏗️ THE ENGINE --- */
         .page-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
         section { height: 100vh; width: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 0 10%; position: relative; }
         
-        .content { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; }
+        .content { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); width: 100%; }
         .active .content { opacity: 1; transform: translateY(0); }
 
-        /* --- Typography --- */
-        .big-h { font-size: clamp(2.5rem, 8vw, 8rem); font-weight: 800; letter-spacing: -5px; line-height: 0.9; }
-        .grad-t { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .mono { font-family: 'JetBrains Mono'; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; display: block; }
-        .para { font-size: 1.1rem; color: var(--dim); line-height: 1.6; max-width: 700px; margin-top: 25px; }
+        /* --- 🖼️ FIRST PAGE (LOCKED TO SCREENSHOT) --- */
+        .hero-h { font-size: clamp(4rem, 12vw, 9.5rem); font-weight: 800; letter-spacing: -6px; line-height: 0.82; text-transform: uppercase; }
+        .hero-grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+        .hero-sub { font-size: 1.1rem; color: var(--dim); letter-spacing: 1px; margin-top: 50px; font-weight: 400; opacity: 0.9; }
 
-        /* --- 🛰️ NAVIGATION (20-DOT SCALING) --- */
-        #dot-nav { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 8px; }
-        .dot { width: 3px; height: 3px; background: #333; border-radius: 50%; transition: 0.4s; position: relative; }
-        .dot.active { background: #fff; transform: scale(4); box-shadow: 0 0 10px #fff; }
-        .dot-label { position: absolute; right: 20px; top: -5px; color: #fff; font-size: 10px; opacity: 0; transition: 0.3s; pointer-events: none; white-space: nowrap; font-family: 'JetBrains Mono'; }
-        .dot:hover .dot-label { opacity: 0.4; right: 25px; }
+        /* --- 📄 MODULE PAGES --- */
+        .mono-tag { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; display: block; }
+        .page-h { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; letter-spacing: -3px; line-height: 1; }
+        .para { font-size: 1.25rem; color: var(--dim); line-height: 1.6; max-width: 800px; margin-top: 30px; }
 
-        /* --- 📊 UI BLOCKS --- */
-        .spec-box { background: var(--glass); border: 1px solid var(--border); padding: 50px; border-radius: 30px; border-left: 3px solid var(--blue); backdrop-filter: blur(20px); }
-        .badge { padding: 8px 18px; border: 1px solid var(--border); border-radius: 50px; font-size: 10px; font-weight: 700; margin-right: 10px; color: var(--dim); }
-        .btn { display: inline-block; margin-top: 30px; padding: 15px 40px; border-radius: 50px; background: #fff; color: #000; text-decoration: none; font-weight: 800; font-size: 0.8rem; transition: 0.3s; }
-        .btn:hover { background: var(--blue); color: #fff; }
-
-        /* --- 📽️ FOUNDER GRID --- */
-        .founder-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
-        .f-img { width: 100%; border-radius: 30px; border: 1px solid var(--border); filter: grayscale(1); transition: 0.6s; }
-        .active .f-img { filter: grayscale(0); }
+        /* --- 🔘 NAVIGATION --- */
+        #dot-nav { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 12px; }
+        .dot { width: 4px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 50%; transition: 0.4s; position: relative; }
+        .dot.active { background: #fff; transform: scale(3); }
+        .dot-label { position: absolute; right: 25px; top: -5px; color: #fff; font-size: 10px; opacity: 0; transition: 0.3s; pointer-events: none; white-space: nowrap; font-family: 'JetBrains Mono'; }
+        .dot:hover .dot-label { opacity: 0.5; right: 30px; }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div><div id="aura"></div>
-
-    <header id="header">
-        <div class="logo">NOSTRIXAI</div>
-        <div class="mono" style="color:var(--dim)">[ APEX CORE V18.0 ]</div>
-    </header>
-
     <nav id="dot-nav"></nav>
 
     <div class="page-container" id="main">
-        </div>
+        <section class="active">
+            <div class="content">
+                <h1 class="hero-h">NOSTRIXAI</h1>
+                <h1 class="hero-h hero-grad">NATIVE</h1>
+                <h1 class="hero-h hero-grad">UNRESTRICTED</h1>
+                <p class="hero-sub">4 MILLION TOKENS PER QUERY. Sovereign intelligence. Localized execution.</p>
+            </div>
+        </section>
+    </div>
 
     <script>
-        // --- 📊 20-PAGE DATA VAULT ---
-        const vault = [
-            { type: 'hero', h1: 'NOSTRIXAI', h2: 'SOVEREIGN CORE', p: 'The 4 Million Token Context Giant. Engineered for Native Silicon execution.', mono: 'SYSTEMS INITIALIZED' },
-            { type: 'founder', h1: 'Ashwin.', h2: 'FOUNDER & CEO', p: 'Architect of the NNRM architecture. Driving the future of aerospace synthesis.', mono: 'EXECUTIVE COMMAND' },
-            { type: 'spec', h1: '4M CONTEXT', h2: 'SINGLE INFERENCE', p: 'Native handling of massive document vaults without partitioning or RAG fragmentation.', mono: 'CAPACITY' },
-            { type: 'spec', h1: 'NNRM1', h2: 'TELEMETRY MINER', p: 'Sub-millisecond real-time sensor processing for industrial feedback loops.', mono: 'MODEL 01' },
-            { type: 'spec', h1: 'NNRM2', h2: 'STRUCTURAL MINER', p: 'Deep analysis of mechanical stress and high-frequency vibration data.', mono: 'MODEL 02' },
-            { type: 'spec', h1: 'NNRM3', h2: 'THE BEAST', p: 'The 4M context flagship. Total ingestion of engineering standards.', mono: 'MODEL 03' },
-            { type: 'spec', h1: 'NNR', h2: 'NEURAL REASONING', p: 'Logical solver for complex physical assemblies and hardware constraints.', mono: 'MODEL 04' },
-            { type: 'spec', h1: 'NNRE', h2: 'VERIFICATION', p: 'Zero-hallucination auditor cross-checking outputs against physical laws.', mono: 'MODEL 05' },
-            { type: 'spec', h1: 'M1 TURBO', h2: 'ITERATION HUB', p: 'High-speed drafting and prototyping engine for rapid mechanical cycles.', mono: 'MODEL 06' },
-            { type: 'spec', h1: 'M2 SYNTH', h2: '3D GENERATION', p: 'Generates CAD-ready aerospace geometry using biomimetic principles.', mono: 'MODEL 07' },
-            { type: 'spec', h1: 'M2LM', h2: 'LARGE ASSEMBLY', p: '3D synthesis specialized in massive scale hull and chassis integration.', mono: 'MODEL 08' },
-            { type: 'spec', h1: 'M3 FUTURE', h2: 'PHYSICS TWINS', p: 'UNDER DEVELOPMENT: Full-physics digital twins with predictive failure.', mono: 'MODEL 09' },
-            { type: 'spec', h1: 'RAG M1', h2: 'STANDARDS HUB', p: 'Direct retrieval of ISO, ASTM, and global aerospace standards.', mono: 'MODEL 10' },
-            { type: 'spec', h1: 'RAG M2', h2: 'CODE SYNC', p: 'Connects model reasoning to live C++, Rust, and ONNX repositories.', mono: 'MODEL 11' },
-            { type: 'spec', h1: 'RAG M3', h2: 'KNOWLEDGE GRAPH', p: 'Connecting 4M tokens to a multi-dimensional engineering graph.', mono: 'MODEL 12' },
-            { type: 'spec', h1: 'HYBRID RAG', h2: 'MEMORY LOOP', p: 'Continuous learning engine that updates weights based on new RAG data.', mono: 'MODEL 13' },
-            { type: 'spec', h1: 'C++ CORE', h2: 'ONNX NATIVE', p: 'Zero-latency execution using quantized weights on local hardware.', mono: 'VAULT 01' },
-            { type: 'spec', h1: 'SOVEREIGN', h2: 'ZERO CLOUD', p: '100% Privacy. All intelligence remains inside your local silicon perimeter.', mono: 'VAULT 02' },
-            { type: 'hero', h1: 'REPOSITORY', h2: 'OPEN ACCESS', p: 'Access the core Nostrix libraries on GitHub.', mono: 'VAULT 03', btn: 'GITHUB CORE' },
-            { type: 'hero', h1: 'NOSTRIXAI', h2: 'ASHWIN 2026', p: 'The journey to sovereign intelligence is absolute.', mono: 'FINAL SIGNATURE' }
+        const uiModules = [
+            { t: "CORE DASHBOARD", d: "Centralized interface for real-time system monitoring." },
+            { t: "TERMINAL ACCESS", d: "Direct command-line control for localized node execution." },
+            { t: "DATA VAULTS", d: "Secure, air-gapped management for proprietary engineering libraries." },
+            { t: "CONTEXT EXPLORER", d: "Visual mapping of the 4 million token inference window." },
+            { t: "NODE TOPOLOGY", d: "Resource allocation across local hardware clusters." },
+            { t: "EDGE MONITORING", d: "Telemetry processing for remote industrial and aerospace sensors." },
+            { t: "SECURITY PERIMETER", d: "Privacy enforcement and zero-telemetry protocol settings." },
+            { t: "SYSTEM INTEGRITY", d: "Hardware health metrics and silicon utilization tracking." },
+            { t: "KNOWLEDGE GRAPH", d: "Relational mapping of multi-domain technical standards." },
+            { t: "VERSION CONTROL", d: "Local deployment history and sovereign update management." },
+            { t: "ACCESS GATEWAY", d: "Encrypted, permission-based user authentication." },
+            { t: "ANALYTICS HUB", d: "Statistical breakdown of system throughput and inference speeds." },
+            { t: "RESOURCE ALLOCATOR", d: "Dynamic thread priority and memory buffer management." },
+            { t: "USER PREFERENCES", d: "Interface scaling and environmental customization." },
+            { t: "DOCUMENT INGESTION", d: "Pipeline for feeding mass technical data into the context giant." },
+            { t: "COLLABORATION HUB", d: "Sovereign data transfer and node-to-node synchronization." },
+            { t: "SYSTEM ARCHIVE", d: "Long-term storage for validated logic and verified outputs." },
+            { t: "INTEGRITY AUDIT", d: "Continuous verification of localized reasoning paths." },
+            { t: "FINAL SIGNATURE", d: "Founder executive sign-off and system-wide lockdown." }
         ];
 
         const container = document.getElementById('main');
         const nav = document.getElementById('dot-nav');
 
-        // --- 🏗️ GENERATION ENGINE ---
-        vault.forEach((data, i) => {
+        // Initial Dot
+        const startDot = document.createElement('div');
+        startDot.className = 'dot active';
+        startDot.innerHTML = '<span class="dot-label">START</span>';
+        nav.appendChild(startDot);
+
+        uiModules.forEach((mod, i) => {
             const section = document.createElement('section');
-            if (i === 0) section.classList.add('active');
-            
-            let html = '';
-            if(data.type === 'hero' || data.type === 'spec') {
-                html = `
-                    <div class="content">
-                        <span class="mono">${data.mono}</span>
-                        <h1 class="big-h">${data.h1}</h1>
-                        <h1 class="big-h grad-t">${data.h2}</h1>
-                        <p class="para">${data.p}</p>
-                        ${data.btn ? `<a href="#" class="btn">${data.btn}</a>` : ''}
-                    </div>`;
-            } else if(data.type === 'founder') {
-                html = `
-                    <div class="content founder-grid">
-                        <div>
-                            <span class="mono">${data.mono}</span>
-                            <h1 class="big-h">${data.h1}</h1>
-                            <h2 class="big-h grad-t" style="font-size: 3.5rem;">${data.h2}</h2>
-                            <p class="para">${data.p}</p>
-                            <div style="margin-top:30px">
-                                <span class="badge">CHIEF ENGINEER</span><span class="badge">M-SERIES OPTIMIZED</span>
-                            </div>
-                        </div>
-                        <img src="ashwin-ceo.jpg" class="f-img">
-                    </div>`;
-            }
-            
-            section.innerHTML = html;
+            section.innerHTML = `
+                <div class="content">
+                    <span class="mono-tag">MODULE ${String(i+1).padStart(2, '0')}</span>
+                    <h2 class="page-h">${mod.t}</h2>
+                    <p class="para">${mod.d}</p>
+                </div>`;
             container.appendChild(section);
 
-            // Nav dots
             const dot = document.createElement('div');
             dot.className = 'dot';
-            if(i===0) dot.classList.add('active');
-            dot.innerHTML = `<span class="dot-label">${data.h1}</span>`;
+            dot.innerHTML = `<span class="dot-label">${mod.t}</span>`;
             nav.appendChild(dot);
         });
 
-        // --- 🕹️ INTERACTION ENGINE ---
         const dots = document.querySelectorAll('.dot');
         const sections = document.querySelectorAll('section');
         const cursor = document.getElementById('cursor');
