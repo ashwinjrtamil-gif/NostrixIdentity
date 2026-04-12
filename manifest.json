@@ -1,15 +1,11 @@
 {
-  "name": "NOSTRIXAI",
-  "short_name": "NOSTRIX",
+  "name": "NOSTRIX OMNI",
+  "short_name": "Nostrix",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "ashwin-ceo.jpg", "sizes": "512x512", "type": "image/jpeg" }
   ]
 }
